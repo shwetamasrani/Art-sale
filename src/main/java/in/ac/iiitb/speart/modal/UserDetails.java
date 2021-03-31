@@ -26,6 +26,9 @@ public class UserDetails {
     private String address;
     @Column
     private String user_category;
+    @Column
+    private boolean log_status = false;
+
 
     @Override
     public String toString() {
@@ -38,6 +41,7 @@ public class UserDetails {
                 ", contact_no=" + contact_no +
                 ", address='" + address + '\'' +
                 ", user_category='" + user_category + '\'' +
+                ", log_status=" + log_status +
                 '}';
     }
 
@@ -104,4 +108,13 @@ public class UserDetails {
     public void setUser_category(String user_category) {
         this.user_category = user_category;
     }
+
+    public boolean isLog_status() {
+        return log_status;
+    }
+
+    public void setLog_status(boolean log_status) {
+        this.log_status = log_status;
+    }
+
 }

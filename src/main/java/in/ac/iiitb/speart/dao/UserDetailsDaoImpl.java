@@ -19,9 +19,8 @@ public class UserDetailsDaoImpl implements UserDetailsDao{
     @Override
     public List<UserDetails> get() {
         Session currSession = entityManager.unwrap(Session.class);
-        Query<UserDetails> query = currSession.createNativeQuery("select * from user_details");
+        Query<UserDetails> query = currSession.createNativeQuery("select * from user_details", UserDetails.class);
         List<UserDetails> list = query.getResultList();
-
         return list;
     }
 
