@@ -1,7 +1,10 @@
-package in.ac.iiitb.speart.modal;
+package in.ac.iiitb.speart.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
 
 //Added datasource
@@ -10,8 +13,9 @@ import java.sql.Date;
 public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name="user_id")
     private Integer user_id;
+
     @Column
     private String first_name;
     @Column
@@ -29,6 +33,12 @@ public class UserDetails {
     @Column
     private boolean log_status = false;
 
+    @JsonIgnoreProperties(value = {"users"})
+    @ManyToMany(mappedBy = "users")
+    Set<PaintingRepoDetails> painting;
+
+//    @OneToMany(mappedBy = "userMO")
+//    List<ArtCustomizationDetails> artCustomizationDetails;
 
     @Override
     public String toString() {
@@ -117,4 +127,12 @@ public class UserDetails {
         this.log_status = log_status;
     }
 
+
+    public Set<PaintingRepoDetails> getPainting() {
+        return painting;
+    }
+
+    public void setPainting(Set<PaintingRepoDetails> painting) {
+        this.painting = painting;
+    }
 }

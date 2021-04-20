@@ -1,7 +1,7 @@
 package in.ac.iiitb.speart.service;
 
 import in.ac.iiitb.speart.dao.UserDetailsDao;
-import in.ac.iiitb.speart.modal.UserDetails;
+import in.ac.iiitb.speart.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     @Override
     public void save(UserDetails userDetails) {
+
         userDetailsDao.save(userDetails);
     }
 
@@ -36,4 +37,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public void delete(int id) {
         userDetailsDao.delete(id);
     }
+
+
+
+
 }

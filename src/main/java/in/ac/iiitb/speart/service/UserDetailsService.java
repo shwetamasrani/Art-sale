@@ -1,6 +1,6 @@
 package in.ac.iiitb.speart.service;
 
-import in.ac.iiitb.speart.modal.UserDetails;
+import in.ac.iiitb.speart.model.UserDetails;
 
 import java.util.List;
 
