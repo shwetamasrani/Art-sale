@@ -1,8 +1,11 @@
 package in.ac.iiitb.speart.controller;
 
+import in.ac.iiitb.speart.model.PaintingBuyerMM;
 import in.ac.iiitb.speart.model.PaintingRepoDetails;
+import in.ac.iiitb.speart.service.PaintingBuyerMMService;
 import in.ac.iiitb.speart.service.PaintingRepoDetailsService;
 import in.ac.iiitb.speart.utils.ResponseFile;
+import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,8 @@ public class PaintingRepoController {
 
     @Autowired
     PaintingRepoDetailsService paintingRepoDetailsService;
+    @Autowired
+    PaintingBuyerMMService paintingBuyerMMService;
 
 //    @GetMapping("/getAllPaint")
 //    public List<PaintingRepoDetails> getAll(){
@@ -69,39 +74,36 @@ public class PaintingRepoController {
     public ResponseEntity<Resource> getFile(@PathVariable String pname, HttpServletResponse response) {
         PaintingRepoDetails fileDB = paintingRepoDetailsService.get(pname);
         String contentType = null;
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.IMAGE_PNG)
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getPainting_name() + "\"")
-//                .body(new ByteArrayResource(fileDB.getPainting_image()));
-        // Response type: byte[]
+
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getPainting_name()+ "\"")
                 .body(new ByteArrayResource(fileDB.getPainting_image()));
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-//        response.setHeader("Content-Disposition", "attachment; filename=" + fileDB.getPainting_name());
-//
-//        return new HttpEntity<byte[]>(fileDB.getPainting_image(), headers);
-//        Document doc = documentDao.get(documentId);
-//        try {
-//            response.setHeader("Content-Disposition", "inline;filename=\"" +doc.getFilename()+ "\"");
-//            OutputStream out = response.getOutputStream();
-//            response.setContentType(doc.getContentType());
-//            IOUtils.copy(doc.getContent().getBinaryStream(), out);
-//            out.flush();
-//            out.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+
     }
 
     //Add for bidding changes.
 
 
+    @RequestMapping(value = "/bidAnArtPiece", method = RequestMethod.POST)
+    public ResponseEntity<PaintingRepoDetails> bidAnArtPiece(@RequestParam Integer buyer_id,
+                                                             @RequestParam Integer p_id){
+        paintingRepoDetailsService.bidArtPieceByUser(buyer_id, p_id);
+        return null;
+    }
+
+    @RequestMapping(value="/getArtBiddingDetails/{painting_id}", method = RequestMethod.GET)
+    public ResponseEntity<?> artBiddingDetails(@PathVariable Integer painting_id){
+        Object obj = paintingRepoDetailsService.getBiddingDetailsArtPiece(painting_id);
+        return new ResponseEntity<>(obj, HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/postBiddingRequestBuyer", method = RequestMethod.POST)
+    @ApiOperation(value = "Logs user out.", response = PaintingBuyerMM.class)
+    public ResponseEntity<?> getBiddingRequestBuyer(@RequestParam(value = "painting_id", required = false) Integer painting_id,
+                                                    @RequestParam(value = "bidder_price", required = false) Float bidder_price,
+                                                    @RequestParam(value = "bidder_id", required = false) Integer bidder_id){
+        PaintingBuyerMM paintingRepoDetails = paintingBuyerMMService.postBiddingReqBuyerPrice(painting_id, bidder_price, bidder_id);
+        return new ResponseEntity<>(paintingRepoDetails, HttpStatus.ACCEPTED);
+    }
 }

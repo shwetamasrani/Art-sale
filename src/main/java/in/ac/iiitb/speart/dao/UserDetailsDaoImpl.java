@@ -119,11 +119,13 @@ public class UserDetailsDaoImpl implements UserDetailsDao{
 
 
     @Override
-    public Integer getID(String name) {
+    public Integer getID(String email) {
         Session currSession = entityManager.unwrap(Session.class);
-        UserDetails emp = currSession.get(UserDetails.class, name);
-        System.out.println(emp.getUser_id());
-        return emp.getUser_id();
+//        UserDetails emp = currSession.get(UserDetails.class, name);
+        Query query = currSession.createNativeQuery("select artist_user_id from user_details, artist_details where email_address =:name and user_details.user_id = artist_details.artist_id", UserDetails.class);
+        query.setParameter("name", email);
+        System.out.println(query.getSingleResult());
+        return (Integer) query.getSingleResult();
     }
 
 

@@ -4,6 +4,8 @@ import in.ac.iiitb.speart.model.ArtCustomizationComments;
 import in.ac.iiitb.speart.model.ArtCustomizationCommentsTrial;
 import in.ac.iiitb.speart.service.RequestCommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,10 +37,16 @@ public class RequestCommentsController {
         requestCommentsService.updateStatusAsApproved(artist_id, customization_id);
     }
 
-    //Check why it is doing for all records.
+    //Check why it is doing for all records. Checked
     @RequestMapping(value = "/approveCustRequestStatusTrial/{comm_id}", method = RequestMethod.PUT)
     public void approveRequestByUserTrial(
     @PathVariable Integer comm_id){
         requestCommentsService.putUpdateReqApproved(comm_id);
     }
+
+//    @RequestMapping(value = "/getCommentIdWithBuyerArtist", method = RequestMethod.GET)
+//    public ResponseEntity<Integer> getCommIDWithBuyerArtistID(){
+//        int commentID = requestCommentsService.getCommentID(buyer);
+//        return new ResponseEntity<Integer>(commentID, HttpStatus.ACCEPTED);
+//    }
 }

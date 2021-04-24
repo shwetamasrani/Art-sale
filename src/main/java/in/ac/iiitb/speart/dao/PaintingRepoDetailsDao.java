@@ -1,9 +1,8 @@
 package in.ac.iiitb.speart.dao;
 
+import in.ac.iiitb.speart.model.PaintingBuyerMM;
 import in.ac.iiitb.speart.model.PaintingRepoDetails;
-import in.ac.iiitb.speart.model.UserDetails;
 
-import java.util.Arrays;
 import java.util.List;
 
 public interface PaintingRepoDetailsDao {
@@ -18,5 +17,12 @@ public interface PaintingRepoDetailsDao {
 
     List<PaintingRepoDetails> getAllDashboardDetails();
 
-    public String getArtistName(int id);
+    String getArtistName(int id);
+
+    void bidAnArtPieceByUser(Integer buyer_id, Integer p_id);
+
+    Object getBiddingDetailsArtPiece(Integer painting_id);
+
+    PaintingRepoDetails getPaintingDetailsByArtistId(Integer artist_id);
+
 }
