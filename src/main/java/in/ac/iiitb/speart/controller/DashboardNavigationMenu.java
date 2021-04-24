@@ -5,6 +5,7 @@ import in.ac.iiitb.speart.service.ArtCustomizationService;
 import in.ac.iiitb.speart.service.ReqStatusService;
 import in.ac.iiitb.speart.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,7 +64,7 @@ public class DashboardNavigationMenu {
         return artCustomizationService.get(artistId);
     }
 
-    //Check this
+    //Check this --> Not needed
     @RequestMapping(value = "/updateReqStatus/{custom_id}", method = RequestMethod.PUT)
     public List<CustomizedRequestStatusTrial> updateReqStatus(@PathVariable Integer custom_id){
         List<CustomizedRequestStatusTrial> list = reqStatusService.getAll(custom_id);

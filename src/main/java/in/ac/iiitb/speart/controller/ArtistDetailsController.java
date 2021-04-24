@@ -22,7 +22,7 @@ import java.util.List;
 @Api(value="Artist Repository", description = "Operations pertaining to artists.")
 public class ArtistDetailsController {
 
-    private static final Logger logger = LogManager.getLogger(ArtistDetailsController.class);
+    private static final Logger logger = LogManager.getLogger(UserDetailsController.class);
 
     @Autowired
     private ArtistDetailsService artistDetailsService;
@@ -31,8 +31,7 @@ public class ArtistDetailsController {
     @ApiOperation(value = "Views a list of available artists.", response = List.class)
     public List<ArtistDetails> get() {
         List<ArtistDetails> list = artistDetailsService.get();
-        System.out.println(list);
-        logger.info("List of all artists is:"+list);
+        logger.info("List of all artists is:", list);
         return list;
     }
 

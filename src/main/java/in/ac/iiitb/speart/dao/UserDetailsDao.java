@@ -14,7 +14,7 @@ public interface UserDetailsDao {
 
     void delete(int id);
 
-    public Integer getArtistID(String emailAddress);
+    Integer getArtistID(String emailAddress);
 
-    public Integer getID(String name) ;
+    Integer getID(String email) ;
 }

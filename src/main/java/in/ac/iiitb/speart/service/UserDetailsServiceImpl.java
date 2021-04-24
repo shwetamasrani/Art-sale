@@ -38,7 +38,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userDetailsDao.delete(id);
     }
 
-
+    @Override
+    public Integer getUserID(String email) {
+        return userDetailsDao.getID(email);
+    }
 
 
 }

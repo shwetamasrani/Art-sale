@@ -52,7 +52,7 @@ public class RequestCommentsServiceImpl implements RequestCommentsService{
             else{
                 ArtCustomizationCommentsTrial update = requestCommentsDao.findCommId(comm_id);
                 update.setReqStatus(ReqStatus.APPROVED);
-                requestCommentsDao.saveCommentsByArtist(update);
+//                requestCommentsDao.saveCommentsByArtist(update);
                 requestCommentsDao.updateStatusApproved(comm_id);
             }
         } catch (Exception e){

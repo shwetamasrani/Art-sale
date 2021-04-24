@@ -13,4 +13,6 @@ public interface UserDetailsService {
 
     void delete(int id);
 
+    Integer getUserID(String email);
+
 }

@@ -2,6 +2,7 @@ package in.ac.iiitb.speart.controller;
 
 import in.ac.iiitb.speart.model.ArtistDetails;
 import in.ac.iiitb.speart.model.PaintingRepoDetails;
+import in.ac.iiitb.speart.model.UserArtistAPI;
 import in.ac.iiitb.speart.model.UserDetails;
 import in.ac.iiitb.speart.service.ArtistDetailsService;
 import in.ac.iiitb.speart.service.PaintingRepoDetailsService;
@@ -44,48 +45,61 @@ public class UserDetailsController {
 //    @PostMapping("/userDetails")
     @RequestMapping(value = "/userDetails",method = RequestMethod.POST)
     @ApiOperation(value = "Saves details of a user.", response = UserDetails.class)
-    public UserDetails save(UserDetails userDetails, @RequestParam(value = "file", required = false) MultipartFile file, @RequestParam(value="category_taught", required = false) String category,
-                            @RequestParam(value="eerience", required = false) Integer exp, @RequestParam(value="sample_img_nm", required = false) String name,
-                            @RequestParam(value="type_art", required = false) String type,
-                            @RequestParam(value="price", required = false) Float price,
-                            @RequestParam(value="painting_category", required = false) String painting_category) throws IOException {
-        System.out.println("Fname:"+ userDetails.getFirst_name());
-        logger.info("Userdetails are:"+ userDetails);
+    public UserArtistAPI save(
+                            @RequestBody UserArtistAPI userArtistAPI
+    ) throws IOException {
+//        System.out.println("Fname:"+ userDetails1.getFirst_name());
+//        logger.info("Userdetails are:"+ userDetails1);
         //unique check pending
+        UserDetails userDetails = new UserDetails(userArtistAPI.getFirst_name(), userArtistAPI.getLast_name(), userArtistAPI.getEmail_address(),
+                userArtistAPI.getPassword(), userArtistAPI.getContact_no(), userArtistAPI.getAddress(), userArtistAPI.getUser_category());
         userDetailsService.save(userDetails);
         if(userDetails.getUser_category().equals("artist")) {
             ArtistDetails artistDetails = new ArtistDetails();
             PaintingRepoDetails paintingRepoDetails = new PaintingRepoDetails();
             artistDetails.setUser(userDetails);
-            artistDetails.setCategory_taught(category);
-            artistDetails.setExperience(exp);
-            artistDetails.setType_of_art(type);
-            artistDetails.setSample_image_name(name);
-//            artistDetails.setSample_images(file.getBytes());
+            artistDetails.setCategory_taught(userArtistAPI.getCategory_taught());
+            artistDetails.setExperience(userArtistAPI.getExperience());
+            artistDetails.setType_of_art(userArtistAPI.getType_of_art());
+            artistDetails.setSample_image_name(userArtistAPI.getSample_image_name());
             System.out.println(artistDetails.getCategory_taught());
             artistDetailsService.save(artistDetails);
-            paintingRepoDetails.setPainting_image(file.getBytes());
-            paintingRepoDetails.setPainting_name(name);
+            paintingRepoDetails.setPainting_image(userArtistAPI.getPainting_image());
+            paintingRepoDetails.setPainting_name(userArtistAPI.getSample_image_name());
             paintingRepoDetails.setArtistDetails(artistDetails);
             HashSet<UserDetails> hs1 = new HashSet<>();
             hs1.add(userDetails);
             paintingRepoDetails.setUsers(hs1);
-            paintingRepoDetails.setPrice(price);
-            paintingRepoDetails.setCategory(painting_category);
-            paintingRepoDetails.setContentType(file.getContentType());
+            paintingRepoDetails.setPrice(userArtistAPI.getPrice());
+            paintingRepoDetails.setCategory(userArtistAPI.getCategory());
+            paintingRepoDetails.setPainting_image(userArtistAPI.getPainting_image());
+            paintingRepoDetails.setContentType("image/png");
             String str="2015-03-31";
             Date date=Date.valueOf(str);//converting string into sql date
             paintingRepoDetails.setDate_of_purchase(date);
-            paintingRepoDetailsService.save(paintingRepoDetails);
+            if(Status.SUCCESS.equals(paintingRepoDetailsService.save(paintingRepoDetails))){
+                int artist_user_id = userDetailsService.getUserID(userArtistAPI.getEmail_address());
+                userArtistAPI.setArtist_id(artist_user_id);
+                return userArtistAPI;
+            }
         }
 
-        return userDetails;
+        return userArtistAPI;
+    }
+
+    @RequestMapping(value = "/saveArtistSampleImage", method = RequestMethod.POST)
+    public Status saveArtistSampleImage(@RequestParam("file") MultipartFile file, @RequestParam("artist_id") Integer artist_id) throws IOException {
+        PaintingRepoDetails paintingRepoDetails = paintingRepoDetailsService.getPaintingByArtistID(artist_id);
+        System.out.println(paintingRepoDetails.getPainting_name());
+        paintingRepoDetails.setPainting_image(file.getBytes());
+        paintingRepoDetailsService.save(paintingRepoDetails);
+        return Status.SUCCESS;
     }
 
     //Retn user details, response entity
     @RequestMapping(value="/login", method = RequestMethod.POST)
     @ApiOperation(value = "Validates user login details.", response = Status.class)
-    public Status login(UserDetails user){
+    public Status login(@RequestBody UserDetails user){
        String email = user.getEmail_address();
        String pass = user.getPassword();
        System.out.println("email"+ email+" "+pass);
@@ -109,7 +123,7 @@ public class UserDetailsController {
 
     @RequestMapping(value="/logout", method = RequestMethod.POST)
     @ApiOperation(value = "Logs user out.", response = Status.class)
-    public Status logout(UserDetails user){
+    public Status logout(@RequestBody UserDetails user){
         String email = user.getEmail_address();
         String pass = user.getPassword();
         List<UserDetails> li = userDetailsService.get();
