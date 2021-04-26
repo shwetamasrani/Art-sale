@@ -1,17 +1,27 @@
-package in.ac.iiitb.speart.modal;
+package in.ac.iiitb.speart.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 
 //Added datasource
 @Entity
 @Table(name = "user_details")
-public class UserDetails {
+public class UserDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name="user_id")
     private Integer user_id;
+
+    @OneToMany(mappedBy = "user_id")
+    private List<PaintingBuyerMM> activities = new ArrayList<>();
+
     @Column
     private String first_name;
     @Column
@@ -29,6 +39,28 @@ public class UserDetails {
     @Column
     private boolean log_status = false;
 
+//    @JsonIgnoreProperties(value = {"users"})
+//    @ManyToMany(mappedBy = "users")
+//    Set<PaintingRepoDetails> painting;
+
+//    @OneToMany(mappedBy = "userMO")
+//    List<ArtCustomizationDetails> artCustomizationDetails;
+
+
+    public UserDetails() {
+    }
+
+    public UserDetails(String first_name, String last_name, String email_address,
+                       String password, Integer contact_no, String address, String user_category) {
+//        this.user_id = user_id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email_address = email_address;
+        this.password = password;
+        this.contact_no = contact_no;
+        this.address = address;
+        this.user_category = user_category;
+    }
 
     @Override
     public String toString() {
@@ -117,4 +149,33 @@ public class UserDetails {
         this.log_status = log_status;
     }
 
+//
+//    public Set<PaintingRepoDetails> getPainting() {
+//        return painting;
+//    }
+//
+//    public void setPainting(Set<PaintingRepoDetails> painting) {
+//        this.painting = painting;
+//    }
+
+    public List<PaintingBuyerMM> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<PaintingBuyerMM> activities) {
+        this.activities = activities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDetails that = (UserDetails) o;
+        return log_status == that.log_status && user_id.equals(that.user_id) && Objects.equals(activities, that.activities) && Objects.equals(first_name, that.first_name) && Objects.equals(last_name, that.last_name) && Objects.equals(email_address, that.email_address) && Objects.equals(password, that.password) && Objects.equals(contact_no, that.contact_no) && Objects.equals(address, that.address) && Objects.equals(user_category, that.user_category) ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user_id, activities, first_name, last_name, email_address, password, contact_no, address, user_category, log_status);
+    }
 }

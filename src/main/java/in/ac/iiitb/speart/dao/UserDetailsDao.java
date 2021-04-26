@@ -2,7 +2,7 @@ package in.ac.iiitb.speart.dao;
 
 import java.util.List;
 
-import in.ac.iiitb.speart.modal.UserDetails;
+import in.ac.iiitb.speart.model.UserDetails;
 
 public interface UserDetailsDao {
 
@@ -13,4 +13,8 @@ public interface UserDetailsDao {
     void save(UserDetails userDetails);
 
     void delete(int id);
+
+    Integer getArtistID(String emailAddress);
+
+    Integer getID(String email) ;
 }
