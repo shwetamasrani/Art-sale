@@ -10,6 +10,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/addUser")
+@CrossOrigin(origins = "http://localhost:3000")
+
 public class UserDetailsController {
     @Autowired
     private UserDetailsService userDetailsService;
@@ -19,13 +21,21 @@ public class UserDetailsController {
         return userDetailsService.get();
     }
 
-//    @PostMapping("/userDetails")
-    @RequestMapping(value = "/userDetails",method = RequestMethod.POST)
-    public UserDetails save(UserDetails userDetails) {
+    @PostMapping("/userDetails")
+    public UserDetails createUser(@RequestBody UserDetails userDetails)  //mapping the JSON Body to the object directly
+    {
         System.out.println("Fname:"+ userDetails.getFirst_name());
         userDetailsService.save(userDetails);
         return userDetails;
     }
+
+//  @PostMapping("/userDetails")
+   /* @RequestMapping(value = "/userDetails",method = RequestMethod.POST)
+    public UserDetails save(UserDetails userDetails) {
+        System.out.println("Fname:"+ userDetails.getFirst_name());
+        userDetailsService.save(userDetails);
+        return userDetails;
+    }*/
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public Status login(UserDetails user){
@@ -48,7 +58,6 @@ public class UserDetailsController {
        return Status.FAILURE;
     }
 
-
     @RequestMapping(value="/logout", method = RequestMethod.POST)
     public Status logout(UserDetails user){
         String email = user.getEmail_address();
@@ -67,9 +76,5 @@ public class UserDetailsController {
 
         return Status.FAILURE;
     }
-
-
-
-
 
 }
