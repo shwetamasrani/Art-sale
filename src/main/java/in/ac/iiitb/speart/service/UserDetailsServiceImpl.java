@@ -34,6 +34,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Transactional
     @Override
+    public void updateUserCategoryStatus(UserDetails userDetails){
+        userDetailsDao.updateUserCategoryStatus(userDetails);
+    }
+
+    @Transactional
+    @Override
     public void delete(int id) {
         userDetailsDao.delete(id);
     }
@@ -42,6 +48,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public Integer getUserID(String email) {
         return userDetailsDao.getID(email);
     }
+
 
 
 }

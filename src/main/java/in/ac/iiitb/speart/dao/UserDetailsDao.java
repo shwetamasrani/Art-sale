@@ -17,4 +17,6 @@ public interface UserDetailsDao {
     Integer getArtistID(String emailAddress);
 
     Integer getID(String email) ;
+
+    void updateUserCategoryStatus(UserDetails userDetails);
 }

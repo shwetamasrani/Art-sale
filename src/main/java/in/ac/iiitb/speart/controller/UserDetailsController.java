@@ -79,7 +79,7 @@ public class UserDetailsController {
             paintingRepoDetails.setDate_of_purchase(date);
             if(Status.SUCCESS.equals(paintingRepoDetailsService.save(paintingRepoDetails))){
                 int artist_user_id = userDetailsService.getUserID(userArtistAPI.getEmail_address());
-                userArtistAPI.setArtist_id(artist_user_id);
+                userArtistAPI.setArtist_user_id(artist_user_id);
                 return userArtistAPI;
             }
         }

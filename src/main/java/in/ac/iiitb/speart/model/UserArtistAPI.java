@@ -16,7 +16,7 @@ public class UserArtistAPI {
 
     private String user_category;
 
-    private Integer artist_id;
+    private Integer artist_user_id;
 
     private String category_taught;
 
@@ -90,14 +90,6 @@ public class UserArtistAPI {
         this.user_category = user_category;
     }
 
-    public Integer getArtist_id() {
-        return artist_id;
-    }
-
-    public void setArtist_id(Integer artist_id) {
-        this.artist_id = artist_id;
-    }
-
     public String getCategory_taught() {
         return category_taught;
     }
@@ -160,5 +152,13 @@ public class UserArtistAPI {
 
     public void setHighest_price(Float highest_price) {
         this.highest_price = highest_price;
+    }
+
+    public Integer getArtist_user_id() {
+        return artist_user_id;
+    }
+
+    public void setArtist_user_id(Integer artist_user_id) {
+        this.artist_user_id = artist_user_id;
     }
 }

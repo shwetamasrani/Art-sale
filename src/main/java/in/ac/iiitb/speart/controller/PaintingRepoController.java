@@ -1,6 +1,7 @@
 package in.ac.iiitb.speart.controller;
 
 import in.ac.iiitb.speart.model.PaintingBuyerMM;
+import in.ac.iiitb.speart.model.PaintingRepoAPI;
 import in.ac.iiitb.speart.model.PaintingRepoDetails;
 import in.ac.iiitb.speart.service.PaintingBuyerMMService;
 import in.ac.iiitb.speart.service.PaintingRepoDetailsService;
@@ -86,10 +87,9 @@ public class PaintingRepoController {
 
 
     @RequestMapping(value = "/bidAnArtPiece", method = RequestMethod.POST)
-    public ResponseEntity<PaintingRepoDetails> bidAnArtPiece(@RequestParam Integer buyer_id,
-                                                             @RequestParam Integer p_id){
-        paintingRepoDetailsService.bidArtPieceByUser(buyer_id, p_id);
-        return null;
+    public ResponseEntity<PaintingRepoAPI> bidAnArtPiece(@RequestBody PaintingRepoAPI paintingRepoAPI){
+        paintingRepoDetailsService.bidArtPieceByUser(paintingRepoAPI.getBuyer_id(), paintingRepoAPI.getP_id());
+        return new ResponseEntity<>(paintingRepoAPI, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value="/getArtBiddingDetails/{painting_id}", method = RequestMethod.GET)
@@ -99,11 +99,9 @@ public class PaintingRepoController {
     }
 
     @RequestMapping(value = "/postBiddingRequestBuyer", method = RequestMethod.POST)
-    @ApiOperation(value = "Logs user out.", response = PaintingBuyerMM.class)
-    public ResponseEntity<?> getBiddingRequestBuyer(@RequestParam(value = "painting_id", required = false) Integer painting_id,
-                                                    @RequestParam(value = "bidder_price", required = false) Float bidder_price,
-                                                    @RequestParam(value = "bidder_id", required = false) Integer bidder_id){
-        PaintingBuyerMM paintingRepoDetails = paintingBuyerMMService.postBiddingReqBuyerPrice(painting_id, bidder_price, bidder_id);
-        return new ResponseEntity<>(paintingRepoDetails, HttpStatus.ACCEPTED);
+    public ResponseEntity<?> getBiddingRequestBuyer(@RequestBody PaintingRepoAPI paintingRepoAPI){
+        PaintingBuyerMM paintingRepoDetails = paintingBuyerMMService.postBiddingReqBuyerPrice(paintingRepoAPI.getP_id(),
+                paintingRepoAPI.getBidded_price(), paintingRepoAPI.getUser_id());
+        return new ResponseEntity<>(paintingRepoAPI, HttpStatus.ACCEPTED);
     }
 }
