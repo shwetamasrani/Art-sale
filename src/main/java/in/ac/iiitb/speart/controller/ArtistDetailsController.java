@@ -2,6 +2,8 @@ package in.ac.iiitb.speart.controller;
 
 
 import in.ac.iiitb.speart.model.ArtistDetails;
+import in.ac.iiitb.speart.model.PaintingRepoDetails;
+import in.ac.iiitb.speart.model.UserArtistAPI;
 import in.ac.iiitb.speart.model.UserDetails;
 import in.ac.iiitb.speart.service.ArtistDetailsService;
 import in.ac.iiitb.speart.service.UserDetailsService;
@@ -15,7 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/artist")
@@ -27,6 +31,9 @@ public class ArtistDetailsController {
     @Autowired
     private ArtistDetailsService artistDetailsService;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @GetMapping("/getArtists")
     @ApiOperation(value = "Views a list of available artists.", response = List.class)
     public List<ArtistDetails> get() {
@@ -35,22 +42,31 @@ public class ArtistDetailsController {
         return list;
     }
 
-
     //How to pass user_id?
     @RequestMapping(value = "/saveArtist", method = RequestMethod.POST)
     @ApiOperation(value = "Saves details of an artist.", response = ArtistDetails.class)
-    public ResponseEntity<ArtistDetails> saveArtist(@RequestParam("file") MultipartFile file, @RequestParam("category_taught") String category,
-                             @RequestParam("eerience") Integer exp, @RequestParam(value = "sample_img_nm", required = false) String name,
-                             @RequestParam("type_art") String type,
-                             @RequestParam(value="price", required = false) Float price,
-                             @RequestParam(value="painting_category", required = false) String painting_category,
-                              @RequestParam(value="email", required = false) String email
-    ){
+    public ResponseEntity<UserArtistAPI> saveArtist(@RequestBody UserArtistAPI userArtistAPI){
         UserDetails userDetails = new UserDetails();
-        ArtistDetails art = artistDetailsService.saveArtist(file, category, exp, name, type, price, painting_category, email);
-
-        return new ResponseEntity<>(art, HttpStatus.OK);
+        PaintingRepoDetails paintingRepoDetails = new PaintingRepoDetails();
+        userDetails.setUser_id(userArtistAPI.getArtist_user_id());
+        userDetails.setEmail_address(userArtistAPI.getEmail_address());
+        paintingRepoDetails.setPrice(userArtistAPI.getPrice());
+        paintingRepoDetails.setCategory(userArtistAPI.getCategory());
+        Set<UserDetails> set = new HashSet<>();
+        set.add(userDetails);
+        UserDetails changeUserArtist = userDetailsService.get(userArtistAPI.getArtist_user_id());
+        changeUserArtist.setUser_category("artist");
+        userDetailsService.updateUserCategoryStatus(changeUserArtist);
+        paintingRepoDetails.setUsers(set);
+        ArtistDetails art = new ArtistDetails(userDetails,userArtistAPI.getCategory_taught(), userArtistAPI.getExperience(), userArtistAPI.getType_of_art(),
+                userArtistAPI.getSample_image_name());
+        ArtistDetails artist = artistDetailsService.saveArtist(art, paintingRepoDetails);
+        userArtistAPI.setEmail_address(changeUserArtist.getEmail_address());
+        return new ResponseEntity<>(userArtistAPI, HttpStatus.OK);
     }
+
+
+    //To save a painting of an artist, call post method from usercontroller.
 
 
     @GetMapping(value = "/getArtistId/{emailAdd}")

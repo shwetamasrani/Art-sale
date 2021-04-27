@@ -35,6 +35,17 @@ public class ArtistDetails implements Serializable {
         private String sample_image_name;
 
 
+        public ArtistDetails() {
+        }
+
+        public ArtistDetails(UserDetails userDetails, String category_taught, Integer experience, String type_of_art, String sample_image_name) {
+//                this.artist_id = artist_id;
+                this.userDetails = userDetails;
+                this.category_taught = category_taught;
+                this.experience = experience;
+                this.type_of_art = type_of_art;
+                this.sample_image_name = sample_image_name;
+        }
 
         public Integer getArtist_id() {
                 return artist_id;

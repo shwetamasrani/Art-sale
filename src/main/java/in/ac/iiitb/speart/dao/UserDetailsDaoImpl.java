@@ -128,5 +128,9 @@ public class UserDetailsDaoImpl implements UserDetailsDao{
         return (Integer) query.getSingleResult();
     }
 
+    public void updateUserCategoryStatus(UserDetails userDetails){
+        Session currSession = entityManager.unwrap(Session.class);
+        currSession.update(userDetails);
+    }
 
 }
