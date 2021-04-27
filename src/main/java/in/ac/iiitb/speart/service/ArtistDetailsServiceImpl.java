@@ -34,39 +34,40 @@ public class ArtistDetailsServiceImpl implements ArtistDetailsService{
         return artistDetailsDao.get();
     }
 
+
     @Override
-    public ArtistDetails saveArtist(MultipartFile file, String category, Integer exp, String name, String type, Float price, String painting_category, String email) {
+    public ArtistDetails saveArtist(ArtistDetails art, PaintingRepoDetails paintingRepoDetails) {
         try{
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        ArtistDetails artistDetails = new ArtistDetails();
-        UserDetails userDetails = new UserDetails();
-        PaintingRepoDetails paintingRepoDetails = new PaintingRepoDetails();
-        ArtistDetailsController artistDetailsController = new ArtistDetailsController();
-        int idArtist = userDetailsDao.getArtistID(email);
-        //Update buyer as an art.
-        userDetails.setUser_id(idArtist);
-        artistDetails.setUserDetails(userDetails);
-//        artistDetails.setSample_images(file.getBytes());
-        artistDetails.setExperience(exp);
-        artistDetails.setCategory_taught(category);
-        artistDetails.setSample_image_name(name);
-        artistDetails.setType_of_art(type);
-        ArtistDetails retArtist = artistDetailsDao.save(artistDetails);
-        Set<UserDetails> hs = new HashSet<>();
-        hs.add(userDetails);
-        paintingRepoDetails.setUsers(hs);
-        paintingRepoDetails.setPainting_image(file.getBytes());
-        paintingRepoDetails.setPainting_name(name);
-        paintingRepoDetails.setArtistDetails(artistDetails);
-        paintingRepoDetails.setPrice(price);
-        paintingRepoDetails.setCategory(painting_category);
-        paintingRepoDetails.setContentType(file.getContentType());
-        String str="2015-03-31";
-        Date date=Date.valueOf(str);//converting string into sql date
-        paintingRepoDetails.setDate_of_purchase(date);
-        paintingRepoDetailsService.save(paintingRepoDetails);
-        System.out.println(artistDetails);
-        return retArtist;
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//        ArtistDetails artistDetails = new ArtistDetails();
+//        UserDetails userDetails = new UserDetails();
+//        PaintingRepoDetails paintingRepoDetails = new PaintingRepoDetails();
+//        ArtistDetailsController artistDetailsController = new ArtistDetailsController();
+//        int idArtist = userDetailsDao.getArtistID(email);
+//        //Update buyer as an art.
+//        userDetails.setUser_id(idArtist);
+//        artistDetails.setUserDetails(userDetails);
+////        artistDetails.setSample_images(file.getBytes());
+//        artistDetails.setExperience(art.getExperience());
+//        artistDetails.setCategory_taught(art.getCategory_taught());
+//        artistDetails.setSample_image_name(art.getSample_image_name());
+//        artistDetails.setType_of_art(art.getType_of_art());
+            ArtistDetails retArtist = artistDetailsDao.save(art);
+//        Set<UserDetails> hs = new HashSet<>();
+//        hs.add(userDetails);
+            paintingRepoDetails.setUsers(paintingRepoDetails.getUsers());
+//        paintingRepoDetails.setPainting_image(file.getBytes());
+            paintingRepoDetails.setPainting_name(art.getSample_image_name());
+            paintingRepoDetails.setArtistDetails(art);
+            paintingRepoDetails.setPrice(paintingRepoDetails.getPrice());
+            paintingRepoDetails.setCategory(paintingRepoDetails.getCategory());
+//        paintingRepoDetails.setContentType(file.getContentType());
+            String str="2015-03-31";
+            Date date=Date.valueOf(str);//converting string into sql date
+            paintingRepoDetails.setDate_of_purchase(date);
+            paintingRepoDetailsService.save(paintingRepoDetails);
+            System.out.println(art);
+            return retArtist;
         }
         catch(Exception e){
             System.out.println("wdaw"+e);
@@ -74,7 +75,6 @@ public class ArtistDetailsServiceImpl implements ArtistDetailsService{
         }
         return null;
     }
-
     @Override
     public Integer getArtistID(String emailAdd) {
 

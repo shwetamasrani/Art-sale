@@ -1,6 +1,7 @@
 package in.ac.iiitb.speart.service;
 
 import in.ac.iiitb.speart.model.ArtistDetails;
+import in.ac.iiitb.speart.model.PaintingRepoDetails;
 import in.ac.iiitb.speart.model.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,7 +12,7 @@ public interface ArtistDetailsService {
 
     List<ArtistDetails> get() ;
 
-    ArtistDetails saveArtist(MultipartFile file, String category, Integer exp, String name, String type, Float price, String painting_category, String email) ;
+    public ArtistDetails saveArtist(ArtistDetails art, PaintingRepoDetails paintingRepoDetails);
 
     Integer getArtistID(String emailAdd);
 

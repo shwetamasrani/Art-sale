@@ -15,4 +15,6 @@ public interface UserDetailsService {
 
     Integer getUserID(String email);
 
+    void updateUserCategoryStatus(UserDetails userDetails);
+
 }
