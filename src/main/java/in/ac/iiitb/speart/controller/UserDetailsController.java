@@ -23,8 +23,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/addUser")
-@CrossOrigin(origins = "http://localhost:3000")
-
 @Api(value="User Repository", description = "Operations pertaining to users.")
 public class UserDetailsController {
     private static final Logger logger = LogManager.getLogger(UserDetailsController.class);
@@ -44,23 +42,11 @@ public class UserDetailsController {
         return userDetailsService.get();
     }
 
-    @PostMapping("/userDetails")
-    public UserDetails createUser(@RequestBody UserDetails userDetails)  //mapping the JSON Body to the object directly
-    {
-        System.out.println("Fname:"+ userDetails.getFirst_name());
-        userDetailsService.save(userDetails);
-        return userDetails;
-    }
-
-//  @PostMapping("/userDetails")
-   @RequestMapping(value = "/userDetails",method = RequestMethod.POST)
-    public UserDetails save(UserDetails userDetails) {
-        System.out.println("Fname:"+ userDetails.getFirst_name());
-//    @PostMapping("/userDetails")
+    //    @PostMapping("/userDetails")
     @RequestMapping(value = "/userDetails",method = RequestMethod.POST)
     @ApiOperation(value = "Saves details of a user.", response = UserDetails.class)
     public UserArtistAPI save(
-                            @RequestBody UserArtistAPI userArtistAPI
+            @RequestBody UserArtistAPI userArtistAPI
     ) throws IOException {
 //        System.out.println("Fname:"+ userDetails1.getFirst_name());
 //        logger.info("Userdetails are:"+ userDetails1);
@@ -97,8 +83,6 @@ public class UserDetailsController {
                 return userArtistAPI;
             }
         }
-        return userDetails;
-    }
 
         return userArtistAPI;
     }
@@ -116,24 +100,24 @@ public class UserDetailsController {
     @RequestMapping(value="/login", method = RequestMethod.POST)
     @ApiOperation(value = "Validates user login details.", response = Status.class)
     public Status login(@RequestBody UserDetails user){
-       String email = user.getEmail_address();
-       String pass = user.getPassword();
-       System.out.println("email"+ email+" "+pass);
-       List<UserDetails> li = userDetailsService.get();
-       System.out.println("Size" + li.size());
+        String email = user.getEmail_address();
+        String pass = user.getPassword();
+        System.out.println("email"+ email+" "+pass);
+        List<UserDetails> li = userDetailsService.get();
+        System.out.println("Size" + li.size());
 
-       for(UserDetails check : li){
-           if(check.getEmail_address().equals(email) && check.getPassword().equals(pass)){
-               System.out.println("flag before:"+ check.isLog_status());
-               check.setLog_status(true);
-               userDetailsService.save(check);
+        for(UserDetails check : li){
+            if(check.getEmail_address().equals(email) && check.getPassword().equals(pass)){
+                System.out.println("flag before:"+ check.isLog_status());
+                check.setLog_status(true);
+                userDetailsService.save(check);
 //               System.out.println("flag after:"+ check.isLog_status());
-               logger.info("User found with details:"+ email+" and "+pass);
-               return Status.SUCCESS;
-           }
-       }
-       logger.error("User not found with details:"+ email+" and "+pass);
-       return Status.FAILURE;
+                logger.info("User found with details:"+ email+" and "+pass);
+                return Status.SUCCESS;
+            }
+        }
+        logger.error("User not found with details:"+ email+" and "+pass);
+        return Status.FAILURE;
     }
 
 
@@ -157,9 +141,5 @@ public class UserDetailsController {
         logger.error("Couldn't logout the user with details:"+ email+" and "+pass);
         return Status.FAILURE;
     }
-
-
-
-
 
 }
