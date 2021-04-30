@@ -5,13 +5,15 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Login from "./component/Login";
 import SignUp from "./component/SignUp";
+import Dashboard from "./component/Dashboard";
 
 function App() {
+    let cors = require('cors');
     return (<Router>
             <div className="App">
                 <nav className="navbar navbar-expand-lg navbar-light fixed-top">
                     <div className="container">
-                        <Link className="navbar-brand" to={"/sign-in"}>RemoteStack</Link>
+                        <Link className="navbar-brand" to={"/sign-in"}>Art-Sale</Link>
                         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item">
@@ -31,6 +33,7 @@ function App() {
                             <Route exact path='/' component={Login} />
                             <Route path="/sign-in" component={Login} />
                             <Route path="/sign-up" component={SignUp} />
+                            <Route path="/Dashboard" component={Dashboard} />
                         </Switch>
                     </div>
                 </div>

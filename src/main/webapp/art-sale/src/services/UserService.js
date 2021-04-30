@@ -3,9 +3,9 @@ import axios from 'axios';
 const USER_API_BASE_URL="http://localhost:8090/addUser/userDetails"
 class UserService{
 
-    getUser()
+    getUser(user)
     {
-        return axios.get(USER_API_BASE_URL);   //get the data from the API mentioned
+        return axios.post("http://localhost:8090/addUser/login",user);   //get the data from the API mentioned
     }
 
     createUser(user)
