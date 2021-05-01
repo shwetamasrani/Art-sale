@@ -128,9 +128,17 @@ public class UserDetailsDaoImpl implements UserDetailsDao{
         return (Integer) query.getSingleResult();
     }
 
+    @Override
     public void updateUserCategoryStatus(UserDetails userDetails){
         Session currSession = entityManager.unwrap(Session.class);
         currSession.update(userDetails);
+    }
+
+    @Override
+    public UserDetails updateUserLoginStatus(UserDetails userDetails){
+        Session currSession = entityManager.unwrap(Session.class);
+        currSession.update(userDetails);
+        return userDetails;
     }
 
 }
