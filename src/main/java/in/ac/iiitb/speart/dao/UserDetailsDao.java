@@ -19,4 +19,6 @@ public interface UserDetailsDao {
     Integer getID(String email) ;
 
     void updateUserCategoryStatus(UserDetails userDetails);
+
+    UserDetails updateUserLoginStatus(UserDetails userDetails);
 }
