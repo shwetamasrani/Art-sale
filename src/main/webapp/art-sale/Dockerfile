@@ -2,7 +2,7 @@
 FROM node:10-alpine as build-step
 RUN mkdir /app
 WORKDIR /app
-COPY src/main/weapp/art-sale/package.json /app
+COPY src/main/webapp/art-sale/package.json /app
 RUN npm install
 COPY . /app
 RUN npm run build
