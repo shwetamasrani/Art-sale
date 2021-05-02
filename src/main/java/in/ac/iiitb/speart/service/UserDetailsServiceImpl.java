@@ -40,6 +40,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Transactional
     @Override
+    public UserDetails updateLoginStatus(UserDetails userDetails) {
+        return userDetailsDao.updateUserLoginStatus(userDetails);
+    }
+
+    @Transactional
+    @Override
     public void delete(int id) {
         userDetailsDao.delete(id);
     }

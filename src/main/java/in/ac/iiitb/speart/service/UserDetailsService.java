@@ -17,4 +17,6 @@ public interface UserDetailsService {
 
     void updateUserCategoryStatus(UserDetails userDetails);
 
+    UserDetails updateLoginStatus(UserDetails userDetails);
+
 }

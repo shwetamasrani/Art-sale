@@ -122,15 +122,23 @@ public class UserDetailsDaoImpl implements UserDetailsDao{
     public Integer getID(String email) {
         Session currSession = entityManager.unwrap(Session.class);
 //        UserDetails emp = currSession.get(UserDetails.class, name);
-        Query query = currSession.createNativeQuery("select artist_user_id from user_details, artist_details where email_address =:name and user_details.user_id = artist_details.artist_id", UserDetails.class);
+        Query query = currSession.createNativeQuery("select user_id from user_details where email_address =:name ");
         query.setParameter("name", email);
         System.out.println(query.getSingleResult());
         return (Integer) query.getSingleResult();
     }
 
+    @Override
     public void updateUserCategoryStatus(UserDetails userDetails){
         Session currSession = entityManager.unwrap(Session.class);
         currSession.update(userDetails);
+    }
+
+    @Override
+    public UserDetails updateUserLoginStatus(UserDetails userDetails){
+        Session currSession = entityManager.unwrap(Session.class);
+        currSession.update(userDetails);
+        return userDetails;
     }
 
 }

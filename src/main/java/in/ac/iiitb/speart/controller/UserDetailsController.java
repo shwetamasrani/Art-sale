@@ -9,7 +9,10 @@ import in.ac.iiitb.speart.service.PaintingRepoDetailsService;
 import in.ac.iiitb.speart.service.UserDetailsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,11 +45,11 @@ public class UserDetailsController {
         return userDetailsService.get();
     }
 
-    //    @PostMapping("/userDetails")
+//    @PostMapping("/userDetails")
     @RequestMapping(value = "/userDetails",method = RequestMethod.POST)
     @ApiOperation(value = "Saves details of a user.", response = UserDetails.class)
     public UserArtistAPI save(
-            @RequestBody UserArtistAPI userArtistAPI
+                            @RequestBody UserArtistAPI userArtistAPI
     ) throws IOException {
 //        System.out.println("Fname:"+ userDetails1.getFirst_name());
 //        logger.info("Userdetails are:"+ userDetails1);
@@ -97,34 +100,33 @@ public class UserDetailsController {
     }
 
     //Retn user details, response entity
-    //@CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value="/login", method = RequestMethod.POST)
     @ApiOperation(value = "Validates user login details.", response = Status.class)
-    public Status login(@RequestBody UserDetails user){
-        String email = user.getEmail_address();
-        String pass = user.getPassword();
-        System.out.println("email"+ email+" "+pass);
-        List<UserDetails> li = userDetailsService.get();
-        System.out.println("Size" + li.size());
+    public ResponseEntity<?> login(@RequestBody UserDetails user){
+       String email = user.getEmail_address();
+       String pass = user.getPassword();
+       System.out.println("email"+ email+" "+pass);
+       List<UserDetails> li = userDetailsService.get();
+       System.out.println("Size" + li.size());
 
-        for(UserDetails check : li){
-            if(check.getEmail_address().equals(email) && check.getPassword().equals(pass)){
-                System.out.println("flag before:"+ check.isLog_status());
-                check.setLog_status(true);
-                userDetailsService.save(check);
+       for(UserDetails check : li){
+           if(check.getEmail_address().equals(email) && check.getPassword().equals(pass)){
+               System.out.println("flag before:"+ check.isLog_status());
+               check.setLog_status(true);
+               UserDetails checkLoggedin = userDetailsService.updateLoginStatus(check);
 //               System.out.println("flag after:"+ check.isLog_status());
-                logger.info("User found with details:"+ email+" and "+pass);
-                return Status.SUCCESS;
-            }
-        }
-        logger.error("User not found with details:"+ email+" and "+pass);
-        return Status.FAILURE;
+               logger.info("User found with details:"+ email+" and "+pass);
+               return new ResponseEntity<>(checkLoggedin, HttpStatus.OK);
+           }
+       }
+       logger.error("User not found with details:"+ email+" and "+pass);
+       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 
     @RequestMapping(value="/logout", method = RequestMethod.POST)
     @ApiOperation(value = "Logs user out.", response = Status.class)
-    public Status logout(@RequestBody UserDetails user){
+    public ResponseEntity<?> logout(@RequestBody UserDetails user){
         String email = user.getEmail_address();
         String pass = user.getPassword();
         List<UserDetails> li = userDetailsService.get();
@@ -133,14 +135,18 @@ public class UserDetailsController {
                 System.out.println("flag before:"+ check.isLog_status());
                 check.setLog_status(Boolean.FALSE);
                 System.out.println("flag after:"+ check.isLog_status());
-                userDetailsService.save(check);
+                UserDetails checkLoggedout = userDetailsService.updateLoginStatus(check);
                 logger.info("User successfully logged out with details:"+ email+" and "+pass);
-                return Status.SUCCESS;
+                return new ResponseEntity<>(checkLoggedout, HttpStatus.OK);
             }
 
         }
         logger.error("Couldn't logout the user with details:"+ email+" and "+pass);
-        return Status.FAILURE;
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+
+
+
 
 }
