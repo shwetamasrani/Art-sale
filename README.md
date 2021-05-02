@@ -20,4 +20,27 @@ url: "http://localhost:8090/artist/saveArtist"
 
 }
 
+UserDetailsCtrlr
 
+url : "http://localhost:8090/addUser/userDetails"
+{
+	"first_name" : "sammu",
+	"last_name" : "pratapwar",
+	
+    "email_address" : "sammup@gmail.com",
+
+    "password" : "sm123",
+
+    "contact_no" : "12345",
+
+    "address" : "UK",
+
+    "user_category" : "artist"
+
+}
+
+url : "http://localhost:8090/addUser/login"
+{
+	"email_address" : "sm@gmail.com",
+	"password" : "sm12"
+}
