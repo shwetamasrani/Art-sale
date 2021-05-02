@@ -97,6 +97,7 @@ public class UserDetailsController {
     }
 
     //Retn user details, response entity
+    //@CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value="/login", method = RequestMethod.POST)
     @ApiOperation(value = "Validates user login details.", response = Status.class)
     public Status login(@RequestBody UserDetails user){

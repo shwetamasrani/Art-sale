@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import UserService from "../services/UserService";
-
+import Dashboard from "./Dashboard";
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -14,12 +14,18 @@ export default class Login extends Component {
         this.handleClick=this.handleClick.bind(this)
     }
     handleChange = (event) => {
+        // this.setState(
+        //     {errorMessage : false}
+        //     )
         const {name, value} = event.target
         this.setState({
             [name]: value
         })
     }
     handleClick(e){
+        this.setState(
+                 {errorMessage : false}
+                 )
         e.preventDefault();
 
         let user = {
@@ -48,11 +54,11 @@ export default class Login extends Component {
             //
             //     //this.props.history.push('/Dashboard');
             // }
-            if(res.data ==="SUCESS"){
+            if(res.data ==="SUCCESS"){
                 this.props.history.push('/Dashboard');
             }
             else{
-                this.state.errorMessage = "Failure";
+                this.state.errorMessage = true;
             }
             console.log("LoggedIn");
         })

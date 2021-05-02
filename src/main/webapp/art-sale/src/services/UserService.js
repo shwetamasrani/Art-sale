@@ -5,7 +5,13 @@ class UserService{
 
     getUser(user)
     {
-        return axios.post("http://localhost:8090/addUser/login",user);   //get the data from the API mentioned
+        return axios.post("http://localhost:8090/addUser/login",user);
+        // {headers: {
+            //     Accept: 'application/json',
+            //         'Content-Type': 'application/json',
+            //         'Access-Control-Allow-Origin': '*',
+            // }},
+              //get the data from the API mentioned
     }
 
     createUser(user)
