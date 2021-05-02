@@ -2,9 +2,9 @@
 FROM node:10-alpine as build-step
 RUN mkdir /app
 WORKDIR /app
-COPY src/main/webapp/art-sale/package.json /app
+COPY src/main/webapp/art-sale/package*.json /app
 RUN npm install
-COPY . /app
+COPY src/main/webapp/art-sale /app
 RUN npm run build
 # Stage 2
 FROM nginx:1.17.1-alpine
