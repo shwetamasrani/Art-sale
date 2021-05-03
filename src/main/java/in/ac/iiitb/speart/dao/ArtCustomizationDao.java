@@ -12,9 +12,12 @@ public interface ArtCustomizationDao {
 
     List<ArtCustomTrial> get(int id);
 
-    void save(ArtCustomTrial artistDetails);
+    ArtCustomTrial save(ArtCustomTrial artistDetails);
 
     void delete(int id);
 
 
+    ArtCustomTrial saveCustomizedImageByCustomID(ArtCustomTrial customTrial);
+
+    ArtCustomTrial getCustReq(Integer custom_id);
 }
