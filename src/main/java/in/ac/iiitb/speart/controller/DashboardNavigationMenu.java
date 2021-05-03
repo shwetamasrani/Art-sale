@@ -5,6 +5,7 @@ import in.ac.iiitb.speart.service.ArtCustomizationService;
 import in.ac.iiitb.speart.service.ReqStatusService;
 import in.ac.iiitb.speart.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,14 +37,24 @@ public class DashboardNavigationMenu {
     //Customized Art
     //Check req table save method.
     @RequestMapping(value = "/getArtCustomized", method = RequestMethod.POST)
-    public ArtCustomTrial getCustomizationDetails(@RequestParam(value = "buyer_id") Integer buyer_id,
-       @RequestParam(value = "artist_customizer") Integer artist_customizer, @RequestParam(value = "art_type" ,required = false) String art_type,
-       @RequestParam(value = "paper_canvas", required = false) String paper_canvas, @RequestParam(value = "art_loc", required = false) String art_loc,
-       @RequestParam(value = "qty", required = false) Integer qty, @RequestParam(value = "art_use", required = false) String art_use, @RequestParam(value = "ref_img", required = false) MultipartFile ref_img,
-       @RequestParam(value = "desc", required = false) String desc) throws IOException {
+    public ResponseEntity<?> getCustomizationDetails(@RequestBody ArtCustomizationAPI artCustomizationAPI) throws IOException {
 
-        artCustomizationService.save(buyer_id, artist_customizer, art_type, paper_canvas, art_loc, qty, art_use, ref_img, desc);
-        return null;
+        ArtCustomTrial saved = artCustomizationService.save(artCustomizationAPI.getBuyer_id(), artCustomizationAPI.getArtist_customizer(), artCustomizationAPI.getType_of_art(),
+                artCustomizationAPI.getPaper_canvas(), artCustomizationAPI.getArt_location(), artCustomizationAPI.getQuantity(), artCustomizationAPI.getArt_use(),
+                artCustomizationAPI.getDescription());
+//        artCustomizationService.save(buyer_id, artist_customizer, art_type, paper_canvas, art_loc, qty, art_use, ref_img, desc);
+        return new ResponseEntity<ArtCustomTrial>(saved, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getArtCustmizedSampleImage", method = RequestMethod.POST)
+    public ResponseEntity<?> getCustomizedSampleImage(@RequestParam("file") MultipartFile file, @RequestParam("custom_id") Integer custom_id,
+                                                      @RequestParam("buyer_id") Integer buyer_id) throws IOException{
+        System.out.println("Inside");
+        ArtCustomTrial customTrial = artCustomizationService.getCustReq(custom_id);
+        customTrial.setRef_art_image(file.getBytes());
+        ArtCustomTrial artCustomTrial = artCustomizationService.saveImage(customTrial);
+        return new ResponseEntity<ArtCustomTrial>(artCustomTrial, HttpStatus.OK);
+//        return custom_id;
     }
 
     //Remove this
@@ -53,13 +64,13 @@ public class DashboardNavigationMenu {
         return art;
     }
 
-    @RequestMapping(value = "/getAllCustomizedOrdersUser/{buyerId}")
+    @RequestMapping(value = "/getAllCustomizedOrdersUser/{buyerId}", method = RequestMethod.GET)
     public List<ArtCustomTrial> getAllUserCustOrders(@PathVariable Integer buyerId){
         return artCustomizationService.get(buyerId);
     }
 
     //Check query
-    @RequestMapping(value = "/getAllCustOrdersArtist/{artistId}")
+    @RequestMapping(value = "/getAllCustOrdersArtist/{artistId}", method = RequestMethod.GET)
     public List<ArtCustomTrial> getAllCustOrdersArtist(@PathVariable Integer artistId){
         return artCustomizationService.get(artistId);
     }

@@ -36,13 +36,35 @@ public class ArtCustomizationDaoImpl implements ArtCustomizationDao{
     }
 
     @Override
-    public void save(ArtCustomTrial artCustom) {
+    public ArtCustomTrial save(ArtCustomTrial artCustom) {
         Session currSession = entityManager.unwrap(Session.class);
+//        int custom_id = (Integer)currSession.save(artCustom);
         currSession.saveOrUpdate(artCustom);
+        return artCustom;
+
     }
 
     @Override
     public void delete(int id) {
 
+    }
+
+    @Override
+    public ArtCustomTrial saveCustomizedImageByCustomID(ArtCustomTrial customTrial) {
+        Session currSession = entityManager.unwrap(Session.class);
+//        Query query = currSession.createNativeQuery("select * from art_customization_trial where custom_id =:customID", ArtCustomTrial.class);
+//        query.setParameter("customID", custom_id);
+//        ArtCustomTrial artCustomTrial = (ArtCustomTrial) query.getSingleResult();
+//        artCustomTrial.setRef_art_image(ref_art_image);
+        currSession.saveOrUpdate(customTrial);
+        return customTrial;
+    }
+
+    @Override
+    public ArtCustomTrial getCustReq(Integer custom_id) {
+        Session currSession = entityManager.unwrap(Session.class);
+        Query query = currSession.createNativeQuery("select * from art_customization_trial where custom_id =:customID", ArtCustomTrial.class);
+        query.setParameter("customID", custom_id);
+        return (ArtCustomTrial) query.getSingleResult();
     }
 }
