@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
-import UserService from '../services/UserService';
+import UserService from '../../services/UserService';
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -56,6 +56,16 @@ export default class SignUp extends Component {
         console.log('User =>' + JSON.stringify(user));
 
         UserService.createUser(user).then(res => {
+            console.log("Response data:")
+            console.log(res.data);
+            UserService.saveImage(
+                {
+                    file: this.state.art,
+                    artist_id: res.data.artist_id
+                }
+            ).then(response=>{
+                console.log(response);
+            })
             this.props.history.push('/Login');
         });
     }
@@ -72,7 +82,7 @@ export default class SignUp extends Component {
                         id="isArtist"
                         onChange={this.handleChange}
                     >
-                        <option value="No" selected>No</option>
+                        <option value="No">No</option>
                         <option value="Yes">Yes</option>
                     </select>
                 </div>
@@ -82,9 +92,9 @@ export default class SignUp extends Component {
                     <input type="text"
                            className="form-control"
                            placeholder="First name"
-                           name="firstname"
+                           name="firstName"
                            required="True"
-                           value={this.state.firstname}
+                           value={this.state.firstName}
                            onChange={this.handleChange}
                     />
                 </div>
@@ -94,9 +104,9 @@ export default class SignUp extends Component {
                     <input type="text"
                            className="form-control"
                            placeholder="Last name"
-                           name="lastname"
+                           name="lastName"
                            required="True"
-                           value={this.state.lastname}
+                           value={this.state.lastName}
                            onChange={this.handleChange}
                     />
                 </div>
@@ -216,7 +226,9 @@ export default class SignUp extends Component {
 
 
                 <button type="submit"
-                        className="btn btn-dark btn-lg btn-block">Register</button>
+                        className="btn btn-dark btn-lg btn-block"
+                        onClick={this.saveUser}
+                >Register</button>
                 <p className="forgot-password text-right">
                     Already registered <a href="#">log in?</a>
                 </p>

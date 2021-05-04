@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {Link} from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import Login from "./Login";
-import SignUp from "./SignUp";
+import Login from "./common/Login";
+import SignUp from "./common/SignUp";
 
 export default class Welcome extends Component {
     constructor(props) {

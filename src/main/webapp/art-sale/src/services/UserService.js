@@ -19,5 +19,9 @@ class UserService{
         console.log(user);
         return axios.post('http://localhost:8090/addUser/userDetails',user);
     }
+
+    saveImage(artist){
+        return axios.post("http://localhost:8090/addUser/saveArtistSampleImage",artist);
+    }
 }
 export default new UserService()   //exporting the object of this class
