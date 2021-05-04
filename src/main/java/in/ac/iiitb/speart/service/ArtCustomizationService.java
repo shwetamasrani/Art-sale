@@ -1,9 +1,6 @@
 package in.ac.iiitb.speart.service;
 
 import in.ac.iiitb.speart.model.ArtCustomTrial;
-import in.ac.iiitb.speart.model.ArtCustomizationDetails;
-import in.ac.iiitb.speart.model.ArtistDetails;
-import in.ac.iiitb.speart.model.CustomizedRequestStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,5 +17,9 @@ public interface ArtCustomizationService {
 
     void save(ArtCustomTrial artistDetails);
 
-    void save(Integer buyer_id, Integer artist_customizer, String art_type, String paper_canvas, String art_loc, Integer qty, String art_use, MultipartFile ref_img, String desc) throws IOException;
+    ArtCustomTrial save(Integer buyer_id, Integer artist_customizer, String art_type, String paper_canvas, String art_loc, Integer qty, String art_use, String desc) throws IOException;
+
+    ArtCustomTrial saveImage(ArtCustomTrial artCustomTrial) throws IOException;
+
+    ArtCustomTrial getCustReq(Integer custom_id);
 }

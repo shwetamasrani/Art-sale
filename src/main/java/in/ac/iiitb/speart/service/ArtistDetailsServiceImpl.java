@@ -87,5 +87,16 @@ public class ArtistDetailsServiceImpl implements ArtistDetailsService{
         return artistDetailsDao.save(artistDetails);
     }
 
+    @Override
+    public Object getArtistProfile(Integer artist_user_id) {
+        return artistDetailsDao.get(artist_user_id);
+    }
+
+    @Transactional
+    @Override
+    public int getArtistArtistID(String email_address){
+
+        return artistDetailsDao.getArtistID(email_address);
+    }
 
 }

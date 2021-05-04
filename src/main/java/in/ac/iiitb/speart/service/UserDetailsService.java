@@ -19,4 +19,5 @@ public interface UserDetailsService {
 
     UserDetails updateLoginStatus(UserDetails userDetails);
 
+    UserDetails getProfileUseEmail(String email_add);
 }

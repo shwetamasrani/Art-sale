@@ -21,4 +21,6 @@ public interface UserDetailsDao {
     void updateUserCategoryStatus(UserDetails userDetails);
 
     UserDetails updateUserLoginStatus(UserDetails userDetails);
+
+    UserDetails getUserProfile(String email_add);
 }

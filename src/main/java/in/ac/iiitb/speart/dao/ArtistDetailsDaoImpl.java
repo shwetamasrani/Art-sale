@@ -1,8 +1,6 @@
 package in.ac.iiitb.speart.dao;
 
-import in.ac.iiitb.speart.controller.UserDetailsController;
 import in.ac.iiitb.speart.model.ArtistDetails;
-import in.ac.iiitb.speart.model.UserDetails;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -39,8 +37,14 @@ public class ArtistDetailsDaoImpl implements ArtistDetailsDao {
     }
 
     @Override
-    public ArtistDetails get(int id) {
-        return null;
+    public Object get(int id) {
+        Session session = entityManager.unwrap(Session.class);
+        Query query = session.createNativeQuery("select artist_details.artist_id, artist_details.category_taught, artist_details.experience," +
+                "artist_details.type_of_art, artist_details.artist_user_id, painting_repo.p_id, painting_repo.bidding_end_date," +
+                "painting_repo.category, painting_repo.painting_image from artist_details, painting_repo where artist_details.artist_user_id =:artistUserid " +
+                "and artist_details.artist_id = painting_repo.artist_id");
+        query.setParameter("artistUserid", id);
+        return query.getSingleResult();
     }
 
     @Override
@@ -53,6 +57,14 @@ public class ArtistDetailsDaoImpl implements ArtistDetailsDao {
     @Override
     public void delete(int id) {
 
+    }
+
+    @Override
+    public int getArtistID(String email_address){
+        Session currSession = entityManager.unwrap(Session.class);
+        Query query = currSession.createNativeQuery("select artist_id from artist_details, user_details where user_details.email_address = :email and user_details.user_id = artist_details.artist_user_id");
+        query.setParameter("email", email_address);
+        return (int) query.getSingleResult();
     }
 
 }

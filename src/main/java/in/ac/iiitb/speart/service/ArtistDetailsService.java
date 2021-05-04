@@ -12,10 +12,13 @@ public interface ArtistDetailsService {
 
     List<ArtistDetails> get() ;
 
-    public ArtistDetails saveArtist(ArtistDetails art, PaintingRepoDetails paintingRepoDetails);
+    ArtistDetails saveArtist(ArtistDetails art, PaintingRepoDetails paintingRepoDetails);
 
     Integer getArtistID(String emailAdd);
 
     ArtistDetails save(ArtistDetails artistDetails);
 
+    Object getArtistProfile(Integer artist_user_id);
+
+    int getArtistArtistID(String email_address);
 }

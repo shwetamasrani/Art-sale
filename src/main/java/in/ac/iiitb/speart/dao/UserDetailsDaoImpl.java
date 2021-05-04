@@ -141,4 +141,13 @@ public class UserDetailsDaoImpl implements UserDetailsDao{
         return userDetails;
     }
 
+    @Override
+    public UserDetails getUserProfile(String email_add) {
+        Session session = entityManager.unwrap(Session.class);
+        Query query = session.createNativeQuery("select * from user_details where email_address =:email", UserDetails.class);
+        query.setParameter("email", email_add);
+
+        return (UserDetails) query.getSingleResult();
+    }
+
 }

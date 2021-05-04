@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +55,9 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
     //
 
     //Many artists for a request in req table or cust table?
+    @Transactional
     @Override
-    public void save(Integer buyer_id, Integer artist_customizer, String art_type, String paper_canvas, String art_loc, Integer qty, String art_use, MultipartFile ref_img, String desc) throws IOException {
+    public ArtCustomTrial save(Integer buyer_id, Integer artist_customizer, String art_type, String paper_canvas, String art_loc, Integer qty, String art_use, String desc) throws IOException {
         ArtCustomizationDetails art = new ArtCustomizationDetails();
         ArtCustomTrial artCustomTrial = new ArtCustomTrial();
         UserDetails user = new UserDetails();
@@ -78,16 +80,31 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
         artCustomTrial.setType_of_art(art_type);
         art.setDescription(desc);
         artCustomTrial.setDescription(desc);
-        art.setRef_art_image(ref_img.getBytes());
-        artCustomTrial.setRef_art_image(ref_img.getBytes());
+//        art.setRef_art_image(ref_img.getBytes());
+//        artCustomTrial.setRef_art_image(ref_img.getBytes());
         art.setPaper_canvas(paper_canvas);
         artCustomTrial.setPaper_canvas(paper_canvas);
 //        art.setArtistDetails3(artist);
-        artCustomizationDao.save(artCustomTrial);
+        ArtCustomTrial saved = artCustomizationDao.save(artCustomTrial);
         cust_trial.setArtCustomizationDetails(artCustomTrial);
         cust_trial.setArtCustomizationDetails1(artCustomTrial);
         cust_trial.setArtCustomizationDetails2(artCustomTrial);
         cust_trial.setReqStatus(ReqStatus.PENDING);
         reqStatusDao.save(cust_trial);
+        return saved;
     }
+
+    @Transactional
+    @Override
+    public ArtCustomTrial saveImage(ArtCustomTrial customTrial) throws IOException {
+        ArtCustomTrial artCustomTrial = artCustomizationDao.saveCustomizedImageByCustomID(customTrial);
+        return artCustomTrial;
+    }
+
+    @Transactional
+    @Override
+    public ArtCustomTrial getCustReq(Integer custom_id) {
+        return artCustomizationDao.getCustReq(custom_id);
+    }
+
 }

@@ -7,7 +7,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.swing.text.html.parser.Entity;
+import java.util.List;
 
 @Repository
 public class PaintingBuyerMMDaoImpl implements PaintingBuyerMMDao{
@@ -21,5 +23,16 @@ public class PaintingBuyerMMDaoImpl implements PaintingBuyerMMDao{
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(paintingBuyerMM);
                 return paintingBuyerMM;
+    }
+
+    @Override
+    public List<PaintingBuyerMM> getAllBidders(Integer p_id, Integer user_id, Float bidder_price){
+        Session session = entityManager.unwrap(Session.class);
+        Query query = session.createNativeQuery("select * from painting_buyer_trial where p_id =:pid and bidded_price <= :priceBid", PaintingBuyerMM.class);
+        query.setParameter("pid", p_id);
+//        query.setParameter("userId", user_id);
+        query.setParameter("priceBid", bidder_price);
+        List<PaintingBuyerMM> returnList = (List<PaintingBuyerMM>)query.getResultList();
+        return returnList ;
     }
 }

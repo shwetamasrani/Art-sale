@@ -89,19 +89,19 @@ public class PaintingRepoController {
     @RequestMapping(value = "/bidAnArtPiece", method = RequestMethod.POST)
     public ResponseEntity<PaintingRepoAPI> bidAnArtPiece(@RequestBody PaintingRepoAPI paintingRepoAPI){
         paintingRepoDetailsService.bidArtPieceByUser(paintingRepoAPI.getBuyer_id(), paintingRepoAPI.getP_id());
-        return new ResponseEntity<>(paintingRepoAPI, HttpStatus.ACCEPTED);
+        return new ResponseEntity<PaintingRepoAPI>(paintingRepoAPI, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value="/getArtBiddingDetails/{painting_id}", method = RequestMethod.GET)
     public ResponseEntity<?> artBiddingDetails(@PathVariable Integer painting_id){
         Object obj = paintingRepoDetailsService.getBiddingDetailsArtPiece(painting_id);
-        return new ResponseEntity<>(obj, HttpStatus.ACCEPTED);
+        return new ResponseEntity<Object>(obj, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/postBiddingRequestBuyer", method = RequestMethod.POST)
     public ResponseEntity<?> getBiddingRequestBuyer(@RequestBody PaintingRepoAPI paintingRepoAPI){
         PaintingBuyerMM paintingRepoDetails = paintingBuyerMMService.postBiddingReqBuyerPrice(paintingRepoAPI.getP_id(),
                 paintingRepoAPI.getBidded_price(), paintingRepoAPI.getUser_id());
-        return new ResponseEntity<>(paintingRepoAPI, HttpStatus.ACCEPTED);
+        return new ResponseEntity<PaintingRepoAPI>(paintingRepoAPI, HttpStatus.ACCEPTED);
     }
 }

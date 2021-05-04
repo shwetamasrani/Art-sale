@@ -31,14 +31,14 @@ public class RequestCommentsController {
 
     }
 
-    @RequestMapping(value = "/approveCustRequestStatus", method = RequestMethod.PUT)
+    @RequestMapping(value = "/approveCustRequestStatusTrial", method = RequestMethod.PUT)
     public void approveRequestByUser(@RequestParam(value = "artist_id") Integer artist_id,
     @RequestParam(value = "customization_id") Integer customization_id){
         requestCommentsService.updateStatusAsApproved(artist_id, customization_id);
     }
 
     //Check why it is doing for all records. Checked
-    @RequestMapping(value = "/approveCustRequestStatusTrial/{comm_id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/approveCustRequestStatus/{comm_id}", method = RequestMethod.PUT)
     public void approveRequestByUserTrial(
     @PathVariable Integer comm_id){
         requestCommentsService.putUpdateReqApproved(comm_id);

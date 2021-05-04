@@ -6,10 +6,11 @@ import java.util.List;
 public interface ArtistDetailsDao {
     List<ArtistDetails> get();
 
-    ArtistDetails get(int id);
+    Object get(int id);
 
     ArtistDetails save(ArtistDetails artistDetails);
 
     void delete(int id);
 
+    int getArtistID(String email_address);
 }
