@@ -59,4 +59,12 @@ public class ArtistDetailsDaoImpl implements ArtistDetailsDao {
 
     }
 
+    @Override
+    public int getArtistID(String email_address){
+        Session currSession = entityManager.unwrap(Session.class);
+        Query query = currSession.createNativeQuery("select artist_id from artist_details, user_details where user_details.email_address = :email and user_details.user_id = artist_details.artist_user_id");
+        query.setParameter("email", email_address);
+        return (int) query.getSingleResult();
+    }
+
 }
