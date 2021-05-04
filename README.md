@@ -62,14 +62,14 @@ url :  http://localhost:8090/dashNavigationMenu/getArtCustomized  --> Post a cus
     "description" : "Need it urgently"
 }
  
-url : http://localhost:8090/dashNavigationMenu/getArtCustmizedSampleImage --> Post a customization sample image.(Requestparam) 
+url : "http://localhost:8090/dashNavigationMenu/getArtCustmizedSampleImage" --> Post a customization sample image.(Requestparam) 
 file, custom_id, buyer_id
 
-url : http://localhost:8090/dashNavigationMenu/getAllCustomizedOrdersUser/{buyerId} -->  Get all customization orders of a buyer using buyer-id.
+url : "http://localhost:8090/dashNavigationMenu/getAllCustomizedOrdersUser/{buyerId}" -->  Get all customization orders of a buyer using buyer-id.
 
-url :  http://localhost:8090/dashNavigationMenu/getAllCustOrdersArtist/{artistId} --> Get all customization orders done by an artist using artist-id.
+url :  "http://localhost:8090/dashNavigationMenu/getAllCustOrdersArtist/{artistId}" --> Get all customization orders done by an artist using artist-id.
 
-
+url : "http://localhost:8090/dashNavigationMenu/getMyProfile/{email_add}" --> Get user profile. Returning UserArtistPaintingAPI object which consists of UserDetails object and a generic Object(For storing data from ArtistDetails and PaintingRepo details)
 =================================================================================================================
 
 
