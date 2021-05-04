@@ -26,11 +26,11 @@ To save painting image of artist, use userdetailscontroller’s save image api a
 
 url: "http://localhost:8090/artist/getArtists" --> Get list of all artists
 
-url: "http://localhost:8090/artist//getArtistId/{emailAdd}  --> Get artist by email address. 
+url: "http://localhost:8090/artist/getArtistId/{emailAdd}  --> Get artist by email address. 
 
 
 
-
+=============================================================================================================
 DashBoard
 
 url : http://localhost:8090/dashboard/getPaintings   --> Get all paintings from painting_repo table.
@@ -39,19 +39,38 @@ Url : http://localhost:8090/dashboard/getArtistName/{id} --> Get painting of an 
 
 
 
-
+==============================================================================================================
 DashBoardNavigationMenu
 
-url :  http://localhost:8090/dashNavigationMenu/getArtCustomized  --> Post a customization request. 
-url : http://localhost:8090/dashNavigationMenu/getArtCustmizedSampleImage --> Post a customization sample image. 
+url :  http://localhost:8090/dashNavigationMenu/getArtCustomized  --> Post a customization request.
 
+{
+    "buyer_id" : "6",
+
+    "artist_customizer" : "15",
+
+    "type_of_art": "landscape",
+
+    "paper_canvas" : "canvas",
+
+    "art_location" : "garden",
+
+    "quantity" : "5",
+    
+    "art_use" : "personal",
+
+    "description" : "Need it urgently"
+}
+ 
+url : http://localhost:8090/dashNavigationMenu/getArtCustmizedSampleImage --> Post a customization sample image.(Requestparam) 
+file, custom_id, buyer_id
 
 url : http://localhost:8090/dashNavigationMenu/getAllCustomizedOrdersUser/{buyerId} -->  Get all customization orders of a buyer using buyer-id.
 
 url :  http://localhost:8090/dashNavigationMenu/getAllCustOrdersArtist/{artistId} --> Get all customization orders done by an artist using artist-id.
 
 
-
+=================================================================================================================
 
 
 
@@ -76,7 +95,10 @@ url : "http://localhost:8090/addUser/userDetails"  --> Register user as a buyer/
 
 }
 
-url : 
+url : "http://localhost:8090/addUser/saveArtistSampleImage" --> saves an image while registering as an artist. (RequestParam)
+file, artist_id
+
+url : "http://localhost:8090/addUser/logout" --> Logs a user out.
 
 url : "http://localhost:8090/addUser/login"  --> Logins a user. 
 {
@@ -86,4 +108,12 @@ url : "http://localhost:8090/addUser/login"  --> Logins a user.
 
 
 
+================================================================================================================
 
+RequestCommentsController
+
+url : "http://localhost:8090/artistComments/getCommentsByCustomID/{custom_id}" --> Get all comments of a customization request using custom_id
+
+url : "http://localhost:8090/artistComments/saveCommentsByArtist" --> Post a comment by an artist using custom_id, artist_id
+
+url : "http://localhost:8090/artistComments/approveCustRequestStatus/{comm_id}" --> update status as approved using comment_id.
