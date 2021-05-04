@@ -18,4 +18,5 @@ public interface ArtistDetailsService {
 
     ArtistDetails save(ArtistDetails artistDetails);
 
+    Object getArtistProfile(Integer artist_user_id);
 }

@@ -87,5 +87,10 @@ public class ArtistDetailsServiceImpl implements ArtistDetailsService{
         return artistDetailsDao.save(artistDetails);
     }
 
+    @Override
+    public Object getArtistProfile(Integer artist_user_id) {
+        return artistDetailsDao.get(artist_user_id);
+    }
+
 
 }
