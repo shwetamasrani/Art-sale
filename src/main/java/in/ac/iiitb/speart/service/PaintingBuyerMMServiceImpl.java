@@ -65,7 +65,7 @@ public class PaintingBuyerMMServiceImpl implements PaintingBuyerMMService{
 
             }
             String paintingName = paintingRepoDetails.getPainting_name().substring(0,paintingRepoDetails.getPainting_name().indexOf("."));
-            String message = "Some other interested bidder has raised the bid on art piece named"+paintingName+ ".Immediately take an action.";
+            String message = "Some other interested bidder has raised the bid on art piece named "+paintingName+ " .Immediately take an action.";
             SendEmail.sendMail(emailReceivers, "Bidding price raised up by another bidder", message);
             System.out.println(biddersList);
         }

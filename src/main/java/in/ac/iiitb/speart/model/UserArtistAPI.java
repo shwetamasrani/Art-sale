@@ -34,6 +34,8 @@ public class UserArtistAPI {
 
     private Float highest_price;
 
+    private Integer artist_id;
+
     public String getFirst_name() {
         return first_name;
     }
@@ -160,5 +162,13 @@ public class UserArtistAPI {
 
     public void setArtist_user_id(Integer artist_user_id) {
         this.artist_user_id = artist_user_id;
+    }
+
+    public Integer getArtist_id() {
+        return artist_id;
+    }
+
+    public void setArtist_id(Integer artist_id) {
+        this.artist_id = artist_id;
     }
 }
