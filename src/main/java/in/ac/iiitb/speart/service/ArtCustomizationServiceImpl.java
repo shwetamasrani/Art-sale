@@ -106,4 +106,5 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
     public ArtCustomTrial getCustReq(Integer custom_id) {
         return artCustomizationDao.getCustReq(custom_id);
     }
+
 }

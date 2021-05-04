@@ -46,6 +46,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Transactional
     @Override
+    public UserDetails getProfileUseEmail(String email_add) {
+        return userDetailsDao.getUserProfile(email_add);
+    }
+
+    @Transactional
+    @Override
     public void delete(int id) {
         userDetailsDao.delete(id);
     }

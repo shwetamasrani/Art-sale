@@ -6,7 +6,7 @@ import java.util.List;
 public interface ArtistDetailsDao {
     List<ArtistDetails> get();
 
-    ArtistDetails get(int id);
+    Object get(int id);
 
     ArtistDetails save(ArtistDetails artistDetails);
 

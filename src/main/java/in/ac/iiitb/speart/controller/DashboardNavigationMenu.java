@@ -2,6 +2,7 @@ package in.ac.iiitb.speart.controller;
 
 import in.ac.iiitb.speart.model.*;
 import in.ac.iiitb.speart.service.ArtCustomizationService;
+import in.ac.iiitb.speart.service.ArtistDetailsService;
 import in.ac.iiitb.speart.service.ReqStatusService;
 import in.ac.iiitb.speart.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class DashboardNavigationMenu {
 
     @Autowired
     ReqStatusService reqStatusService;
+
+    @Autowired
+    ArtistDetailsService artistDetailsService;
     //User Profile: Use get(id) of UserController
 
     //Register as an artist: Use saveArtist(...) of ArtistDetailsController
@@ -84,6 +88,17 @@ public class DashboardNavigationMenu {
     }
 
 
+    @RequestMapping(value = "/getMyProfile/{email_add}", method = RequestMethod.GET)
+    public ResponseEntity<?> getUserProfile(@PathVariable String email_add){
+        UserDetails userprofile = userDetailsService.getProfileUseEmail(email_add);
+        UserArtistPaintingAPI userArtistPaintingAPI = new UserArtistPaintingAPI();
+        if(userprofile.getUser_category().equals("artist")){
+            Object artist = artistDetailsService.getArtistProfile(userprofile.getUser_id());
+            userArtistPaintingAPI.setObject(artist);
+        }
+        userArtistPaintingAPI.setUserDetails(userprofile);
+        return new ResponseEntity<UserArtistPaintingAPI>(userArtistPaintingAPI, HttpStatus.ACCEPTED);
+    }
 
 
 
