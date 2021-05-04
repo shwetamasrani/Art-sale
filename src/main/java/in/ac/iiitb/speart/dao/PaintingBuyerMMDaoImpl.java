@@ -35,4 +35,12 @@ public class PaintingBuyerMMDaoImpl implements PaintingBuyerMMDao{
         List<PaintingBuyerMM> returnList = (List<PaintingBuyerMM>)query.getResultList();
         return returnList ;
     }
+
+    @Override
+    public PaintingBuyerMM getAllBiddersPID(Integer p_id){
+        Session session = entityManager.unwrap(Session.class);
+        Query query = session.createNativeQuery("select * from painting_buyer_trial  where p_id = :pid order by bidded_price desc", PaintingBuyerMM.class);
+        query.setParameter("pid", p_id);
+        return (PaintingBuyerMM) query.getResultList().get(0);
+    }
 }

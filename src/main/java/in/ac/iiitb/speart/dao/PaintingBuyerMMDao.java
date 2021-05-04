@@ -9,4 +9,6 @@ public interface PaintingBuyerMMDao {
     PaintingBuyerMM save(PaintingBuyerMM paintingBuyerMM);
 
     List<PaintingBuyerMM> getAllBidders(Integer p_id, Integer user_id, Float bidder_price);
+
+    PaintingBuyerMM getAllBiddersPID(Integer p_id);
 }
