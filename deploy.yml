@@ -1,0 +1,82 @@
+ 
+---     
+- name: Pull and run springboot image
+  hosts: all
+  remote_user: remoteuser
+  tasks:
+    - name: Pull springboot image
+      docker_image:
+        name: kanchanmahajan67/spe_backend_springboot_wofrontend:latest
+        source: pull
+
+    - name: Running springboot image
+      docker_container:
+        name: springboot
+        image: kanchanmahajan67/spe_backend_springboot_wofrontend:latest
+        state: started
+        restart: yes
+        restart_policy : always
+        env: 
+          APP_NAME: "app"
+        exposed_ports:
+          - "8090"
+
+- name: Pull and run react image
+  hosts: all
+  remote_user: remoteuser
+  tasks:
+    - name: Pull react image
+      docker_image:
+        name: kanchanmahajan67/spe_frontend_react_backwofront:latest
+        source: pull
+
+    - name: Running react image
+      docker_container:
+        name: nginx
+        image: kanchanmahajan67/spe_frontend_react_backwofront:latest
+        state: started
+        restart: yes
+        restart_policy : always
+        ports:
+          - "80:80"
+
+- name: Pull and run sql image
+  hosts: all
+  remote_user: remoteuser
+  tasks:
+    - name: Pull sql image
+      docker_image:
+        name: kanchanmahajan67/spe_frontend_react_backwofront:latest
+        source: pull
+
+    - name: Running react image
+      docker_container:
+        name: nginx
+        image: kanchanmahajan67/spe_frontend_react_backwofront:latest
+        state: started
+        restart: yes
+        restart_policy : always
+        ports:
+          - "80:80"
+vars:
+  docker_volume: db_data
+  docker_network: ansible_net
+  db_name: db
+
+- name: "Launch database container"
+  docker_container:
+    name: "art_spe3"
+    image: mysql:5.7
+  volumes:
+    - "/var/lib/mysql:rw"
+  restart: true
+  networks:
+  - name:
+          backend
+          frontend
+
+  env:
+    MYSQL_ROOT_PASSWORD: GOforkanchu@67!
+    MYSQL_DATABASE: art_spe3
+    MYSQL_USER: root
+    MYSQL_PASSWORD: GOforkanchu@67!

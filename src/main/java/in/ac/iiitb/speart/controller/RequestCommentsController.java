@@ -18,6 +18,10 @@ public class RequestCommentsController {
     @Autowired
     RequestCommentsService requestCommentsService;
 
+    public RequestCommentsController(RequestCommentsService requestCommentsService) {
+        this.requestCommentsService = requestCommentsService;
+    }
+
     @RequestMapping("/getCommentsByCustomID/{custom_id}")
     public List<ArtCustomizationCommentsTrial> getAllCommentsByCustomID(@PathVariable Integer custom_id){
         return requestCommentsService.getAllCommentsCustomID(custom_id);
