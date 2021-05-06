@@ -9,7 +9,7 @@ public interface RequestCommentsDao {
 
     List<ArtCustomizationCommentsTrial> getAllCommentsCustomID(Integer custom_id);
 
-    void saveCommentsByArtist(ArtCustomizationCommentsTrial commentsObj);
+    ArtCustomizationCommentsTrial saveCommentsByArtist(ArtCustomizationCommentsTrial commentsObj);
 
     int getCommentID(Integer artist_id, Integer customization_id);
 

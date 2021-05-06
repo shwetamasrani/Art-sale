@@ -35,7 +35,7 @@ public class ScheduledTasks {
     PaintingBuyerMMDao paintingBuyerMMDao;
 
 
-    @Scheduled(fixedRate = 90000)
+    @Scheduled(fixedRate = 9000000)
     public void scheduleTaskWithFixedRate() throws ParseException {
         System.out.println("Inside Scheduled Method.");
         List<PaintingRepoDetails> paintings = paintingRepoDetailsService.get();
