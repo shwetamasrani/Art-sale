@@ -19,6 +19,8 @@
           APP_NAME: "app"
       exposed_ports:
         - 8090
+      networks:
+        - name: backend
 
 - name: Pull and run react image
   hosts: all
@@ -38,6 +40,8 @@
       restart_policy : always
       ports:
        - "80:80"
+      networks:
+        - name: frontend
 
 - name: Pull and run sql image
   hosts: all
@@ -45,13 +49,13 @@
   tasks:
   - name: Pull sql image
       docker_image:
-        name: mysql
+              name: mysql:latest
         pull: yes
 
 - name: "Launch database container"
   docker_container:
     name: "docker-mysql"
-    image: mysql:5.7
+    image: mysql:latest
     volumes:
           - "/var/lib/mysql:rw"
   restart: true
