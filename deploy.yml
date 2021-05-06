@@ -40,10 +40,6 @@
         ports:
           - "80:80"
 
-vars:
-  docker_volume: db_data
-  docker_network: ansible_net
-  db_name: db
 
 - name: "Launch database container"
   docker_container:
