@@ -49,7 +49,7 @@
   tasks:
   - name: Pull sql image
       docker_image:
-              name: mysql:latest
+        name: mysql:latest
         pull: yes
 
 - name: "Launch database container"
