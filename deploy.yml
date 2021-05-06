@@ -2,67 +2,68 @@
 ---     
 - name: Pull and run springboot image
   hosts: all
-  remote_user: remoteuser
   tasks:
-    - name: Pull springboot image
-      docker_image:
-        name: kanchanmahajan67/spe_backend_springboot_wofrontend:latest
-        source: pull
+  - name: Pull springboot image
+    docker_image:
+      name: kanchanmahajan67/spe_backend_springboot_wofrontend:latest
+      pull: yes
 
-    - name: Running springboot image
-      docker_container:
-        name: springboot
-        image: kanchanmahajan67/spe_backend_springboot_wofrontend:latest
-        state: started
-        restart: yes
-        restart_policy : always
-        env: 
+  - name: Running springboot image
+    docker_container:
+      name: springboot
+      image: kanchanmahajan67/spe_backend_springboot_wofrontend:latest
+      state: started
+      restart: yes
+      restart_policy : always
+      env: 
           APP_NAME: "app"
-        exposed_ports:
-          - "8090"
+      exposed_ports:
+        - 8090
 
 - name: Pull and run react image
   hosts: all
   remote_user: remoteuser
   tasks:
-    - name: Pull react image
-      docker_image:
-        name: kanchanmahajan67/spe_frontend_react_backwofront:latest
-        source: pull
+  - name: Pull react image
+    docker_image:
+      name: kanchanmahajan67/spe_frontend_react_backwofront:latest
+      pull: yes
 
-    - name: Running react image
-      docker_container:
-        name: nginx
-        image: kanchanmahajan67/spe_frontend_react_backwofront:latest
-        state: started
-        restart: yes
-        restart_policy : always
-        ports:
-          - "80:80"
+  - name: Running react image
+    docker_container:
+      name: nginx
+      image: kanchanmahajan67/spe_frontend_react_backwofront:latest
+      state: started
+      restart: yes
+      restart_policy : always
+      ports:
+       - "80:80"
 
 - name: Pull and run sql image
   hosts: all
   remote_user: remoteuser
   tasks:
-    - name: Pull sql image
-        docker_image:
-                name: mysql:5.7
-         source: pull
+  - name: Pull sql image
+      docker_image:
+        name: mysql
+        pull: yes
 
-    - name: "Launch database container"
-      docker_container:
-        name: "art_spe3"
-        image: mysql:5.7
-        volumes:
+- name: "Launch database container"
+  docker_container:
+    name: "docker-mysql"
+    image: mysql:5.7
+    volumes:
           - "/var/lib/mysql:rw"
   restart: true
   networks:
     - name:
-          backend
-          frontend
+        backend
+        frontend
 
   env:
     MYSQL_ROOT_PASSWORD: GOforkanchu@67!
     MYSQL_DATABASE: art_spe3
     MYSQL_USER: root
     MYSQL_PASSWORD: GOforkanchu@67!
+    MYSQL_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/art_spe3?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+
