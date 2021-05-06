@@ -3,8 +3,8 @@ package in.ac.iiitb.speart.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "art_custom_comments")
+//@Entity
+//@Table(name = "art_custom_comments")
 public class ArtCustomizationComments {
 
     @OneToOne

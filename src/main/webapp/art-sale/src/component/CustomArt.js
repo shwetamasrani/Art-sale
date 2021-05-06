@@ -1,36 +1,70 @@
 import React, {Component} from 'react';
+import UserService from "../services/UserService";
 
-class CustomArt extends Component {
-    constructor(props) {
-        super(props);
+export default class CustomArt extends Component {
+        constructor(props) {
+            super(props);
 
-        this.state = {
-            sizeOfArt: "",
-            paper: "",
-            quantity: "",
-            location: "",
-            usage: "",
-            reference: "",
-            description: ""
+            this.state = {
+                typeOfArt: "landscape",
+                paper: "",
+                quantity: "",
+                artLocation: "",
+                use: "",
+                image: "",
+                description: ""
 
+            }
+            this.handleChange = this.handleChange.bind(this);
+            this.handleImage = this.handleImage(this);
+            this.handleClick = this.handleClick.bind(this);
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleClick = this.handleClick.bind(this);
-    }
 
-    handleChange(event) {
-        const {name, value} = event.target;
-        this.setState({
-            [name]: value
-        })
-    }
+        handleChange(event) {
+            const {name, value} = event.target;
+            this.setState({
+                [name]: value
+            });
+        }
 
-    handleClick(event){
-        console.log("Submit")
-    }
+        handleImage(e){
+            this.setState({
+                image: e.target.files[0]
+            })
+        }
+
+        handleClick(event){
+            event.preventDefault();
+            let request = {
+                    buyer_id : "10",
+                    type_of_art: this.state.typeOfArt,
+                    paper_canvas : this.state.paper,
+                    art_location : this.state.artLocation,
+                    quantity : this.state.quantity,
+                    art_use : this.state.use,
+                    description : this.state.description
+                }
+
+            console.log("Submit")
+            console.log(request);
+            UserService.requestCustomArt(request).then(res=>{
+                    console.log(res.data)
+                    let form_data = new FormData();
+                    form_data.append('file', this.state.image, this.state.image.name);
+                    form_data.append('artist_id', res.data.custom_id);
+                    form_data.append('buyer_id',"10");
+                    UserService.saveReferenceImage(form_data).then(response=>{
+                        console.log(response);
+                    }).catch(err=>{
+                        console.log(err);
+                    })
+            }).catch(err=>{
+                    console.log(err);
+            })
+        }
 
 
-    render() {
+        render() {
         return(
             <form>
                 <h3>Request for a Customized Art piece</h3>
@@ -50,17 +84,17 @@ class CustomArt extends Component {
                     </select>
                 </div>
 
-                <div className="form-group">
+                {/*<div className="form-group">
                     <label>Size of Art piece</label>
                     <input type="text"
                            className="form-control"
                            placeholder="Size of Art"
                            name="sizeOfArt"
                            required="True"
-                           value={this.state.sizeOfArt}
+                           //value={this.state.sizeOfArt}
                            onChange={this.handleChange}
                     />
-                </div>
+                </div>*/}
 
                 <div className="form-group">
                     <label>Medium of Paper</label>
@@ -88,10 +122,10 @@ class CustomArt extends Component {
 
                 <div className="form-group">
                     <label>Where do you want to put it?</label>
-                    <input type="email"
+                    <input type="text"
                            className="form-control"
                            placeholder="Location"
-                           name="location"
+                           name="artLocation"
                            required="True"
                            value={this.state.location}
                            onChange={this.handleChange}
@@ -103,20 +137,9 @@ class CustomArt extends Component {
                     <input type="password"
                            className="form-control"
                            placeholder="Usage?"
-                           name="usage"
+                           name="use"
                            required="True"
-                           value={this.state.usage}
-                           onChange={this.handleChange}
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label>Upload a reference picture</label>
-                    <input type="file"
-                           placeholder="Reference Picture"
-                           name="art"
-                           required="False"
-                           value={this.state.reference}
+                           value={this.state.use}
                            onChange={this.handleChange}
                     />
                 </div>
@@ -133,6 +156,17 @@ class CustomArt extends Component {
                     />
                 </div>
 
+                <div className="form-group">
+                    <label>Upload one reference picture</label>
+                    <input type="file"
+                           placeholder="Enter Address"
+                           name="image"
+                           required
+                           id="image"
+                           accept="image/png, image/jpeg"
+                           onChange={this.handleImage}
+                    />
+                </div>
 
                 <button type="submit"
                         className="btn btn-dark btn-lg btn-block"
@@ -140,8 +174,6 @@ class CustomArt extends Component {
                         >Submit</button>
 
             </form>
-        )
+        );
     }
 }
-
-export default CustomArt

@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table(name = "art_customization")
+//@Entity
+//@Table(name = "art_customization")
 public class ArtCustomizationDetails implements Serializable {
 
     @Id

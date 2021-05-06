@@ -9,24 +9,50 @@ import Dashboard from "./component/common/Dashboard";
 import Welcome from "./component/Welcome";
 import CustomArt from "./component/CustomArt";
 import RegisterArtist from "./component/RegisterArtist";
+import Profile from "./component/Profile";
 
-function App() {
-    let cors = require('cors');
-    return (<Router>
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentUser: null,
+            isArtist: false
+        };
+    }
+
+    componentDidMount() {
+        console.log("from app componentDidMount")
+        console.log(localStorage.getItem('currentUser'));
+    }
+
+    logout() {
+
+        //history.push('/login');
+    }
+
+    render(){
+            return (<Router>
+            <div className="App">
+
                 <div className="outer">
                     <div className="inner">
                         <Switch>
-                            <Route exact path='/' component={Welcome} />
+                            <Route exact path='/' component={Login} />
                             <Route path="/sign-in" component={Login} />
                             <Route path="/sign-up" component={SignUp} />
                             <Route path="/Dashboard" component={Dashboard} />
                             <Route path="/custom-art" component={CustomArt} />
                             <Route path="/register-artist" component={RegisterArtist} />
+                            <Route path="/profile" component={Profile} />
                         </Switch>
                     </div>
                 </div>
+
+            </div>
         </Router>
-    );
+            );
+    }
 }
 
 export default App;

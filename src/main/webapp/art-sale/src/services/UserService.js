@@ -21,7 +21,29 @@ class UserService{
     }
 
     saveImage(artist){
-        return axios.post("http://localhost:8090/addUser/saveArtistSampleImage",artist);
+        return axios.post("http://localhost:8090/addUser/saveArtistSampleImage",artist,
+            {headers: {
+                    'content-type': 'multipart/form-data'
+                }});
+    }
+
+    saveReferenceImage(image){
+        return axios.post("http://localhost:8090/dashNavigationMenu/getArtCustmizedSampleImage",image,
+            {headers: {
+                    'content-type': 'multipart/form-data'
+                }}
+            );
+    }
+
+    requestCustomArt(request){
+        return axios.post("http://localhost:8090/dashNavigationMenu/getArtCustomized",request);
+    }
+
+    viewProfile(email)
+    {
+        let URL = "http://localhost:8090/dashNavigationMenu/getMyProfile/" + email;
+        console.log(URL);
+        return axios.get(URL);
     }
 }
 export default new UserService()   //exporting the object of this class

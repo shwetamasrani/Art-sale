@@ -19,7 +19,8 @@ export default class Welcome extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div>Welcome page</div>
+           /* <div className="App">
                 <nav className="navbar navbar-expand-lg navbar-light fixed-top">
                     <div className="container">
                         <Link className="navbar-brand" to={"/sign-in"}>Art-Sale</Link>
@@ -35,7 +36,7 @@ export default class Welcome extends Component {
                         </div>
                     </div>
                 </nav>
-            </div>
+            </div>*/
         );
     }
 }
