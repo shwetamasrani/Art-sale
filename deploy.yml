@@ -48,9 +48,9 @@
   remote_user: remoteuser
   tasks:
   - name: Pull sql image
-      docker_image:
-        name: mysql:latest
-        pull: yes
+    docker_image:
+      name: mysql:latest
+      pull: yes
 
 - name: "Launch database container"
   docker_container:
