@@ -40,16 +40,24 @@
         ports:
           - "80:80"
 
+- name: Pull and run sql image
+  hosts: all
+  remote_user: remoteuser
+  tasks:
+    - name: Pull sql image
+        docker_image:
+                name: mysql:5.7
+         source: pull
 
-- name: "Launch database container"
-  docker_container:
-    name: "art_spe3"
-    image: mysql:5.7
-  volumes:
-    - "/var/lib/mysql:rw"
+    - name: "Launch database container"
+      docker_container:
+        name: "art_spe3"
+        image: mysql:5.7
+        volumes:
+          - "/var/lib/mysql:rw"
   restart: true
   networks:
-  - name:
+    - name:
           backend
           frontend
 
