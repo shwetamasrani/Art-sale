@@ -52,11 +52,11 @@
       name: mysql:latest
       pull: yes
 
- - name: "Launch database container"
-   docker_container:
-     name: "docker-mysql"
-     image: mysql:latest
-     volumes:
+  - name: "Launch database container"
+    docker_container:
+      name: "docker-mysql"
+      image: mysql:latest
+      volumes:
           - "/var/lib/mysql:rw"
   restart: true
   networks:
