@@ -91,13 +91,13 @@ public class PaintingRepoDetailsDaoImpl implements PaintingRepoDetailsDao{
     @Override
     public List<PaintingRepoDetails> getAllDashboardDetails() {
         Session currSession = entityManager.unwrap(Session.class);
-        Query<PaintingRepoDetails> query = currSession.createNativeQuery("select p_id, painting_image, artist_id, highest_price, price, bidding_end_date from painting_repo");
+        Query<PaintingRepoDetails> query = currSession.createNativeQuery("select * from painting_repo", PaintingRepoDetails.class);
         try{
             List<PaintingRepoDetails> list = query.getResultList();
             if(list.size() == 0)
                 throw new Exception();
             System.out.println(list.size());
-            logger.info("List of all paintings for dashboard is:", list);
+            logger.info("List of all paintings for dashboard is:", list.get(0));
             return list;
         }
         catch(Exception e){

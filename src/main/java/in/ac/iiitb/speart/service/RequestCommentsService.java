@@ -11,9 +11,9 @@ public interface RequestCommentsService {
 
     List<ArtCustomizationCommentsTrial> getAllCommentsCustomID(Integer custom_id);
 
-    void saveCommentsByAnArtist(String comments, Integer customization_id, Integer artist_id);
+    ArtCustomizationCommentsTrial saveCommentsByAnArtist(String comments, Integer customization_id, Integer artist_id);
 
-    void updateStatusAsApproved(Integer artist_id, Integer customization_id);
+    Integer updateStatusAsApproved(Integer artist_id, Integer customization_id);
 
     void putUpdateReqApproved(Integer comm_id);
 }

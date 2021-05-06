@@ -50,7 +50,7 @@ public class UserDetailsController {
     @ApiOperation(value = "Saves details of a user.", response = UserDetails.class)
     public UserArtistAPI save(@RequestBody UserArtistAPI userArtistAPI) throws IOException {
 //        System.out.println("Fname:"+ userDetails1.getFirst_name());
-//        logger.info("Userdetails are:"+ userDetails1);
+        logger.info("Userdetails are:"+ userArtistAPI);
         //unique check pending
         UserDetails userDetails = new UserDetails(userArtistAPI.getFirst_name(), userArtistAPI.getLast_name(), userArtistAPI.getEmail_address(),
                 userArtistAPI.getPassword(), userArtistAPI.getContact_no(), userArtistAPI.getAddress(), userArtistAPI.getUser_category());
