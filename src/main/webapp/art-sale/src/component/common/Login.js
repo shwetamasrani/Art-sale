@@ -75,7 +75,7 @@ export default class Login extends Component {
     render() {
         return (
             <div>
-                <Navbar/>
+                {/* <Navbar/> */}
                 <form>
 
                     <h3>Log in</h3>

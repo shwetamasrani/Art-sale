@@ -99,7 +99,7 @@ export default class SignUp extends Component {
     render() {
         return (
             <div>
-                <Navbar/>
+                {/* <Navbar/> */}
                 <form>
                     <h3>Register</h3>
                     <div className="form-group">

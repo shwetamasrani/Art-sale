@@ -1,24 +1,49 @@
 import React, {Component} from 'react';
 import DashboardService from "../../services/DashboardService";
+import Painting from "./Painting";
 
 class Dashboard extends Component {
 
     constructor(props) {
         super(props);
+        this.state ={
+            paintings: []
+        }
 
         DashboardService.getAllPaintings().then(res=>{
             console.log(res.data);
-            console.log(res.data.json());
             console.log(res.status)
+            this.setState({
+                paintings: res.data
+            })
         }).catch(err=>{
             console.log(err);
         });
     }
 
     render() {
-        return(
-            <p>Dashboard</p>
+
+        const paintings = this.state.paintings.map((painting) => {
+            return (
+                <Painting
+                    id={painting.p_id}
+                    name={painting.painting_name}
+                    artist={painting.artistDetails.userDetails.first_name +" "+ painting.artistDetails.userDetails.last_name}
+                    price={painting.price}
+                    img={painting.painting_image}
+                />
+            )
+        })
+        return (
+            <div className="Dashboard">
+
+                    <div>
+                        <h1>Dashboard</h1>
+                        {paintings}
+                    </div>
+            </div>
         )
+
     }
 }
 

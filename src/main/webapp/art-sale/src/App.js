@@ -10,6 +10,7 @@ import Welcome from "./component/Welcome";
 import CustomArt from "./component/CustomArt";
 import RegisterArtist from "./component/RegisterArtist";
 import Profile from "./component/Profile";
+import Layout from './component/common/Layout';
 
 class App extends React.Component {
     constructor(props) {
@@ -32,25 +33,41 @@ class App extends React.Component {
     }
 
     render(){
-            return (<Router>
-            <div className="App">
-
-                <div className="outer">
-                    <div className="inner">
-                        <Switch>
-                            <Route exact path='/' component={Login} />
-                            <Route path="/sign-in" component={Login} />
-                            <Route path="/sign-up" component={SignUp} />
-                            <Route path="/Dashboard" component={Dashboard} />
-                            <Route path="/custom-art" component={CustomArt} />
-                            <Route path="/register-artist" component={RegisterArtist} />
-                            <Route path="/profile" component={Profile} />
-                        </Switch>
+            return (
+            <Layout>
+                <Router>
+                <div className="App">
+                    <div className="outer">
+                        <div className="inner">
+                            <Switch>
+                                <Route exact path='/'>
+                                    <Login/>
+                                </Route>
+                                <Route path="/sign-in" >
+                                    <Login/>
+                                </Route>
+                                <Route path="/sign-up">
+                                    <SignUp/>
+                                </Route>
+                                <Route path="/Dashboard">
+                                    <Dashboard/>
+                                </Route>
+                                <Route path="/custom-art">
+                                    <CustomArt/>
+                                </Route>
+                                <Route path="/register-artist">
+                                    <RegisterArtist/>
+                                </Route>
+                                <Route path="/profile">
+                                    <Profile/>
+                                </Route>
+                            </Switch>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-        </Router>
+                </div>
+                </Router>
+            </Layout>
             );
     }
 }
