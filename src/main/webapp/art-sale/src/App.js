@@ -34,8 +34,8 @@ class App extends React.Component {
 
     render(){
             return (
-            <Layout>
-                <Router>
+            <Layout name="Hii">
+                {/* <Router> */}
                 <div className="App">
                     <div className="outer">
                         <div className="inner">
@@ -49,7 +49,7 @@ class App extends React.Component {
                                 <Route path="/sign-up">
                                     <SignUp/>
                                 </Route>
-                                <Route path="/Dashboard">
+                                <Route path="/dashboard">
                                     <Dashboard/>
                                 </Route>
                                 <Route path="/custom-art">
@@ -66,7 +66,7 @@ class App extends React.Component {
                     </div>
 
                 </div>
-                </Router>
+                {/* </Router> */}
             </Layout>
             );
     }

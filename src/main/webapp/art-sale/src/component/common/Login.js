@@ -1,78 +1,69 @@
-import React, { Component } from "react";
-import {Link} from 'react-router-dom';
+import React, { useState,useContext, useRef } from "react";
+import {Link, useHistory} from 'react-router-dom';
 import UserService from "../../services/UserService";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
-export default class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-            errorMessage: false
-        }
-        this.handleChange=this.handleChange.bind(this)
-        this.handleClick=this.handleClick.bind(this)
-    }
-    handleChange = (event) => {
-        // this.setState(
-        //     {errorMessage : false}
-        //     )
-        const {name, value} = event.target
-        this.setState({
-            [name]: value
-        })
-    }
-    handleClick(e){
-        this.setState(
-                 {errorMessage : false}
-                 )
+import AuthContext from '../../stores/auth-context';
+
+const Login = (props) => {
+    const history = useHistory();
+    const emailInputRef = useRef();
+    const passwordInputRef = useRef();
+    const authCtx = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState(false);
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         email: "",
+    //         password: "",
+    //         errorMessage: false
+    //     }
+    //     this.handleChange=this.handleChange.bind(this)
+    //     this.handleClick=this.handleClick.bind(this)
+    // }
+
+    // handleChange = (event) => {
+    //     // this.setState(
+    //     //     {errorMessage : false}
+    //     //     )
+    //     const {name, value} = event.target
+    //     this.setState({
+    //         [name]: value
+    //     })
+    // };
+
+    const handleClick = (e) => {
         e.preventDefault();
+        const enteredEmail = emailInputRef.current.value;
+        const enteredPassword = passwordInputRef.current.value;
 
         let user = {
-            email_address: this.state.email,
-            password: this.state.password
+            email_address: enteredEmail,
+            password: enteredPassword
         }
         console.log("HandleClick")
         console.log(user);
         UserService.getUser(user).then(res => {
-            console.log("response",res);
-            console.log("SignIn Component", res.data);
-            console.log("Publisher", res.data);
-
-            // if(res.data.publisherFlag){
-            //     this.props.history.push({
-            //         pathname: "/AdminDashboard",
-            //         userId: res.data.user_id
-            //     })
-            //     //this.props.history.push('/AdminDashboard');
-            // }
-            // else{
-            //     this.props.history.push({
-            //         pathname: "/Dashboard",
-            //         userId: res.data.user_id
-            //     })
-            //
-            //     //this.props.history.push('/Dashboard');
-            // }
-           // if(res.data ==="SUCCESS"){
-                localStorage.setItem('currentUser', JSON.stringify(res.data));
-                this.props.history.push('/Dashboard');
-
-           // }
-           /* else{
-                this.state.errorMessage = true;
-            }*/
-            console.log("LoggedIn");
+            console.log(res);
+           
+            const expirationTime = new Date(
+                new Date().getTime() + 600000
+            );
+            authCtx.login(JSON.stringify(res.data), expirationTime.toISOString());
+            history.push('/Dashboard');
+           
+            // localStorage.setItem('currentUser', JSON.stringify(res.data));
+            // this.props.history.push('/Dashboard');
         })
         .catch(err =>{
             console.log(err);
+            setErrorMessage(err);
             alert("Username or Password doesn't Match!");
-            window.location.reload(true);
+            //window.location.reload(true);
         });
-    }
+    };
 
-    render() {
+    
         return (
             <div>
                 {/* <Navbar/> */}
@@ -87,8 +78,9 @@ export default class Login extends Component {
                                placeholder="Enter email"
                                name="email"
                                required="True"
-                               value={this.state.email}
-                               onChange={this.handleChange}
+                            //    value={this.state.email}
+                               ref={emailInputRef}
+                             //  onChange={this.handleChange}
                         />
                     </div>
 
@@ -99,11 +91,12 @@ export default class Login extends Component {
                                placeholder="Enter password"
                                name="password"
                                required="True"
-                               value={this.state.password}
-                               onChange={this.handleChange}
+                            //    value={this.state.password}
+                               ref={passwordInputRef}
+                              // onChange={handleChange}
                         />
                     </div>
-                    <h3 style={{display: this.state.errorMessage ? "block" : "none"}}>Incorrect
+                    <h3 style={{display: errorMessage ? "block" : "none"}}>Incorrect
                         Username/Password</h3>
                     <br/>
                     {/*<div className="form-group">
@@ -115,7 +108,7 @@ export default class Login extends Component {
 
                     <button type="submit"
                             className="btn btn-dark btn-lg btn-block"
-                            onClick={this.handleClick}
+                            onClick={handleClick}
                     >Sign in</button>
                     <p className="forgot-password text-right">
                         Forgot <a href="#">password?</a>
@@ -125,5 +118,7 @@ export default class Login extends Component {
 
             </div>
         );
-    }
+   
 }
+
+export default Login;

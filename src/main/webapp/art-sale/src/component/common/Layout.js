@@ -5,7 +5,8 @@ import Navbar from './Navbar';
 const Layout = (props) => {
   return (
     <Fragment>
-      <Navbar />
+      <Navbar/>
+      {console.log(props.name)}
       <main>{props.children}</main>
     </Fragment>
   );
