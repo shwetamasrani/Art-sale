@@ -58,7 +58,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao{
     private boolean checkUserAvail(String email_address) {
         try{
             Session currSession = entityManager.unwrap(Session.class);
-            Query query = currSession.createNativeQuery("select * from art_spe3.user_details where email_address =:email", UserDetails.class);
+            Query query = currSession.createNativeQuery("select * from user_details where email_address =:email", UserDetails.class);
             query.setParameter("email", email_address);
             List<UserDetails> list = query.getResultList();
             if(list == null || list.size() == 0)
