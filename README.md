@@ -70,6 +70,12 @@ url : "http://localhost:8090/dashNavigationMenu/getAllCustomizedOrdersUser/{buye
 url :  "http://localhost:8090/dashNavigationMenu/getAllCustOrdersArtist/{artistId}" --> Get all customization orders done by an artist using artist-id.
 
 url : "http://localhost:8090/dashNavigationMenu/getMyProfile/{email_add}" --> Get user profile. Returning UserArtistPaintingAPI object which consists of UserDetails object and a generic Object(For storing data from ArtistDetails and PaintingRepo details)
+
+url : "http://localhost:8090/dashNavigationMenu/getAllCustOrders" --> Get list of all Customization Orders.
+
+url : "http://localhost:8090/dashNavigationMenu/getAllCustomizedOrdersUser/{buyerId}" --> Get list of all customized orders by buyer.
+
+url : "http://localhost:8090/dashNavigationMenu/getAllCustOrdersArtist/{artistId}" --> Get list of customized orders by artist.
 =================================================================================================================
 
 
