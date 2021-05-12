@@ -14,6 +14,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.ServletContext;
@@ -86,11 +87,11 @@ public class PaintingRepoController {
     //Add for bidding changes.
 
 
-    @RequestMapping(value = "/bidAnArtPiece", method = RequestMethod.POST)
-    public ResponseEntity<PaintingRepoAPI> bidAnArtPiece(@RequestBody PaintingRepoAPI paintingRepoAPI){
-        paintingRepoDetailsService.bidArtPieceByUser(paintingRepoAPI.getBuyer_id(), paintingRepoAPI.getP_id());
-        return new ResponseEntity<PaintingRepoAPI>(paintingRepoAPI, HttpStatus.ACCEPTED);
-    }
+//    @RequestMapping(value = "/bidAnArtPiece", method = RequestMethod.POST)
+//    public ResponseEntity<PaintingRepoAPI> bidAnArtPiece(@RequestBody PaintingRepoAPI paintingRepoAPI){
+//        paintingRepoDetailsService.bidArtPieceByUser(paintingRepoAPI.getBuyer_id(), paintingRepoAPI.getP_id());
+//        return new ResponseEntity<PaintingRepoAPI>(paintingRepoAPI, HttpStatus.ACCEPTED);
+//    }
 
     @RequestMapping(value="/getArtBiddingDetails/{painting_id}", method = RequestMethod.GET)
     public ResponseEntity<?> artBiddingDetails(@PathVariable Integer painting_id){
@@ -103,5 +104,20 @@ public class PaintingRepoController {
         PaintingBuyerMM paintingRepoDetails = paintingBuyerMMService.postBiddingReqBuyerPrice(paintingRepoAPI.getP_id(),
                 paintingRepoAPI.getBidded_price(), paintingRepoAPI.getUser_id());
         return new ResponseEntity<PaintingRepoAPI>(paintingRepoAPI, HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/addExtraArtistImage", method = RequestMethod.POST)
+    public ResponseEntity<?> addExtraImageForDashboard(@RequestBody PaintingRepoAPI paintingRepoAPI){
+        paintingRepoAPI = paintingRepoDetailsService.addExtraArtistImage(paintingRepoAPI);
+        return new ResponseEntity<PaintingRepoAPI>(paintingRepoAPI, HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/saveArtistSampleImage", method = RequestMethod.POST)
+    public ResponseEntity<?> saveArtistExtraImage(@RequestParam("file") MultipartFile file, @RequestParam("painting_id") Integer painting_id) throws IOException {
+        PaintingRepoDetails paintingRepoDetails = paintingRepoDetailsService.getPaintingByPaintingID(painting_id);
+        System.out.println(paintingRepoDetails.getPainting_name());
+        paintingRepoDetails.setPainting_image(file.getBytes());
+        paintingRepoDetailsService.save(paintingRepoDetails);
+        return new ResponseEntity<PaintingRepoDetails>(paintingRepoDetails, HttpStatus.ACCEPTED);
     }
 }

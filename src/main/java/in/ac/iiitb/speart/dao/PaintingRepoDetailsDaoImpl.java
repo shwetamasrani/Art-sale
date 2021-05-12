@@ -143,4 +143,19 @@ public class PaintingRepoDetailsDaoImpl implements PaintingRepoDetailsDao{
 
     }
 
+    @Override
+    public void addExtraArtistImage(PaintingRepoDetails paintingRepoDetails) {
+        Session currSession = entityManager.unwrap(Session.class);
+        currSession.saveOrUpdate(paintingRepoDetails);
+    }
+
+    @Override
+    public PaintingRepoDetails getPaintingDetailsByPID(Integer painting_id) {
+
+        Session currSession = entityManager.unwrap(Session.class);
+        Query query = currSession.createNativeQuery("select * from painting_repo where p_id =:pid " ,PaintingRepoDetails.class);
+        query.setParameter("pid", painting_id);
+        return (PaintingRepoDetails) query.getSingleResult();
+    }
+
 }

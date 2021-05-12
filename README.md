@@ -123,3 +123,39 @@ url : "http://localhost:8090/artistComments/getCommentsByCustomID/{custom_id}" -
 url : "http://localhost:8090/artistComments/saveCommentsByArtist" --> Post a comment by an artist using custom_id, artist_id
 
 url : "http://localhost:8090/artistComments/approveCustRequestStatus/{comm_id}" --> update status as approved using comment_id.
+
+
+=====================================================================================================================
+
+PaintingRepoController
+
+url : "http://localhost:8090/paintings/getArtBiddingDetails/{painting_id}" --> Get Bidding details of a painting.
+
+url : "http://localhost:8090/paintings/postBiddingRequestBuyer" --> Post a bidding request by user.
+
+{
+	"p_id" : "12",
+	"bidded_price" : "87867",
+	"user_id" : "32"
+	
+}
+
+url : "http://localhost:8090/paintings/addExtraArtistImage" --> Post extra image of artist's painting.
+
+{
+
+    "category": "canvas",
+
+    "painting_name" : "The Happiness!",
+
+    "price" : "49000",
+
+    "artist_id" : "16"
+
+}
+
+url : "http://localhost:8090/paintings/saveArtistSampleImage" --> Post image using painting_id. Painting_id can be obtained from above API. 
+
+@RequestParam(file, painting_id)
+
+
