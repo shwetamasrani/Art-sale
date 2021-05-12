@@ -20,4 +20,6 @@ public interface ArtCustomizationDao {
     ArtCustomTrial saveCustomizedImageByCustomID(ArtCustomTrial customTrial);
 
     ArtCustomTrial getCustReq(Integer custom_id);
+
+    ArtCustomTrial saveApprovedArtist(ArtCustomTrial artCustomTrial);
 }

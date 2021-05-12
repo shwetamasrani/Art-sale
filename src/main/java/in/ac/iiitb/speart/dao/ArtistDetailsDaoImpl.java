@@ -67,4 +67,13 @@ public class ArtistDetailsDaoImpl implements ArtistDetailsDao {
         return (int) query.getSingleResult();
     }
 
+    @Override
+    public ArtistDetails getApprovedArtistProfile(Integer status_artist_id) {
+        Session currSession = entityManager.unwrap(Session.class);
+        Query query = currSession.createNativeQuery("select * from artist_details where artist_id = :artistID", ArtistDetails.class);
+        query.setParameter("artistID", status_artist_id);
+        ArtistDetails artistDetails = (ArtistDetails) query.getSingleResult();
+        return artistDetails;
+    }
+
 }
