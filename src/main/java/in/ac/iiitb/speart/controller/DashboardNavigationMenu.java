@@ -70,10 +70,9 @@ public class DashboardNavigationMenu {
 
     @RequestMapping(value = "/getAllCustomizedOrdersUser/{buyerId}", method = RequestMethod.GET)
     public List<ArtCustomTrial> getAllUserCustOrders(@PathVariable Integer buyerId){
-        return artCustomizationService.get(buyerId);
+        return artCustomizationService.getCustOrdersList(buyerId);
     }
 
-    //Check query
     @RequestMapping(value = "/getAllCustOrdersArtist/{artistId}", method = RequestMethod.GET)
     public List<ArtCustomTrial> getAllCustOrdersArtist(@PathVariable Integer artistId){
         return artCustomizationService.get(artistId);
@@ -98,6 +97,11 @@ public class DashboardNavigationMenu {
         }
         userArtistPaintingAPI.setUserDetails(userprofile);
         return new ResponseEntity<UserArtistPaintingAPI>(userArtistPaintingAPI, HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/getAllCustOrders", method = RequestMethod.GET)
+    public List<ArtCustomTrial> getAllCustOrders(){
+        return artCustomizationService.getAllCustOrders();
     }
 
 

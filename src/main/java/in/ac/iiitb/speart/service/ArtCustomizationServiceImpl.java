@@ -114,4 +114,15 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
         return artCustomizationDao.saveApprovedArtist(artCustomTrial);
     }
 
+    @Override
+    public List<ArtCustomTrial> getCustOrdersList(Integer buyer_id) {
+        return artCustomizationDao.getCustOrdersList(buyer_id);
+    }
+
+    @Override
+    public List<ArtCustomTrial> getAllCustOrders() {
+        return artCustomizationDao.getAllCustOrders();
+    }
+
+
 }
