@@ -43,9 +43,9 @@ public class SpeartApplication {
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        String url = System.getenv("Docker_VAR");
+        String url = System.getenv("DATABASE_HOST");
         if(url !=null){
-            dataSourceBuilder.url("jdbc:mysql://$Docker_VAR:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
+            dataSourceBuilder.url("jdbc:mysql://artSale-mysql:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
         }else{
             dataSourceBuilder.url("jdbc:mysql://localhost:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
         }
