@@ -98,7 +98,7 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <div>
+            <div className="inner">
                 {/* <Navbar/> */}
                 <form>
                     <h3>Register</h3>

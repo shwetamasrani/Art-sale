@@ -26,11 +26,12 @@ class Dashboard extends Component {
         const paintings = this.state.paintings.map((painting) => {
             return (
                 <Painting
-                    id={painting.p_id}
+                    key={painting.p_id}
                     name={painting.painting_name}
                     artist={painting.artistDetails.userDetails.first_name +" "+ painting.artistDetails.userDetails.last_name}
                     price={painting.price}
                     img={painting.painting_image}
+                    bidEnd = {painting.bidding_end_date}
                 />
             )
         })

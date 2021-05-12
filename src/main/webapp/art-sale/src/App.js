@@ -13,24 +13,24 @@ import Profile from "./component/Profile";
 import Layout from './component/common/Layout';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            currentUser: null,
-            isArtist: false
-        };
-    }
-
-    componentDidMount() {
-        console.log("from app componentDidMount")
-        console.log(localStorage.getItem('currentUser'));
-    }
-
-    logout() {
-
-        //history.push('/login');
-    }
+    // constructor(props) {
+    //     super(props);
+    //
+    //     this.state = {
+    //         currentUser: null,
+    //         isArtist: false
+    //     };
+    // }
+    //
+    // componentDidMount() {
+    //     // console.log("from app componentDidMount")
+    //     // console.log(localStorage.getItem('currentUser'));
+    // }
+    //
+    // logout() {
+    //
+    //     //history.push('/login');
+    // }
 
     render(){
             return (
@@ -38,7 +38,7 @@ class App extends React.Component {
                 {/* <Router> */}
                 <div className="App">
                     <div className="outer">
-                        <div className="inner">
+                        
                             <Switch>
                                 <Route exact path='/'>
                                     <Login/>
@@ -62,7 +62,7 @@ class App extends React.Component {
                                     <Profile/>
                                 </Route>
                             </Switch>
-                        </div>
+                        
                     </div>
 
                 </div>
