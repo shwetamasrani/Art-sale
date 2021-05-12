@@ -67,4 +67,11 @@ public class ArtCustomizationDaoImpl implements ArtCustomizationDao{
         query.setParameter("customID", custom_id);
         return (ArtCustomTrial) query.getSingleResult();
     }
+
+    @Override
+    public ArtCustomTrial saveApprovedArtist(ArtCustomTrial artCustomTrial) {
+        Session currSession = entityManager.unwrap(Session.class);
+        currSession.saveOrUpdate(artCustomTrial);
+        return artCustomTrial;
+    }
 }
