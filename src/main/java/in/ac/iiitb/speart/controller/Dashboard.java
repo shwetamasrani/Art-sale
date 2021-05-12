@@ -23,8 +23,8 @@ public class Dashboard {
     //Works in browser, not in postman. Try and see if this works in React.
     @RequestMapping(value = "/getPaintings", method = RequestMethod.GET)
     public List<PaintingRepoDetails> getDashboardPaintings(){
-
-        return paintingRepoDetailsDao.getAllDashboardDetails();
+        List<PaintingRepoDetails> li = paintingRepoDetailsDao.getAllDashboardDetails();
+        return li;
     }
 
 
