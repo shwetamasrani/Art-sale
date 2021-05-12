@@ -12,6 +12,56 @@ public class PaintingRepoAPI {
 
     private Float bidded_price;
 
+    private String category;
+
+    private String painting_name;
+
+    private Float price;
+
+    private Integer artist_id;
+
+    private ArtistDetails artistDetails;
+
+    public ArtistDetails getArtistDetails() {
+        return artistDetails;
+    }
+
+    public void setArtistDetails(ArtistDetails artistDetails) {
+        this.artistDetails = artistDetails;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getPainting_name() {
+        return painting_name;
+    }
+
+    public void setPainting_name(String painting_name) {
+        this.painting_name = painting_name;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Integer getArtist_id() {
+        return artist_id;
+    }
+
+    public void setArtist_id(Integer artist_id) {
+        this.artist_id = artist_id;
+    }
+
     public Integer getBuyer_id() {
         return buyer_id;
     }
