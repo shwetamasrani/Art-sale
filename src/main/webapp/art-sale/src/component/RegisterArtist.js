@@ -45,6 +45,7 @@ class RegisterArtist extends Component {
 
     render() {
         return(
+            <div className="inner">
             <form>
                 <h3>Register Yourself as an Artist here</h3>
                     <div className="form-group">
@@ -112,6 +113,7 @@ class RegisterArtist extends Component {
                 >Register</button>
 
             </form>
+            </div>
         )
     }
 }

@@ -32,11 +32,12 @@ class Dashboard extends Component {
                     price={painting.price}
                     img={painting.painting_image}
                     bidEnd = {painting.bidding_end_date}
+                    category = {painting.category}
                 />
             )
         })
         return (
-            <div className="Dashboard">
+            <div>
 
                     <div>
                         <h1>Dashboard</h1>

@@ -117,3 +117,21 @@ url : "http://localhost:8090/artistComments/getCommentsByCustomID/{custom_id}" -
 url : "http://localhost:8090/artistComments/saveCommentsByArtist" --> Post a comment by an artist using custom_id, artist_id
 
 url : "http://localhost:8090/artistComments/approveCustRequestStatus/{comm_id}" --> update status as approved using comment_id.
+
+Save comments:
+{
+	
+   "comments" : "Artist 25 can do it.",
+
+    "status_custom_id" : "12",
+
+    "status_artist_id" : "25"
+}
+
+/approveCustRequestStatusTrial
+{
+	"status_custom_id" : "6",
+	"status_artist_id" : "20"
+	
+}
+
