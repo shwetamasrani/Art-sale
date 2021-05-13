@@ -66,7 +66,7 @@ export const AuthContextProvider = (props) => {
       }, []);
     
     const loginHandler = (token, expirationTime) => {
-        setToken(JSON.stringify(token));
+        setToken(token);
         console.log("From auth context",token);
         console.log(userIsLoggedIn);
         //JSON.parse(localStorage.getItem('token'));

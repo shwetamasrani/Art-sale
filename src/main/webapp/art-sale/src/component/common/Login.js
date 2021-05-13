@@ -49,7 +49,7 @@ const Login = (props) => {
             const expirationTime = new Date(
                 new Date().getTime() + 600000
             );
-            authCtx.login(JSON.stringify(res.data), expirationTime.toISOString());
+            authCtx.login(res.data, expirationTime.toISOString());
             history.push('/Dashboard');
            
             // localStorage.setItem('currentUser', JSON.stringify(res.data));

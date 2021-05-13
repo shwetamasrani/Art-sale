@@ -1,23 +1,28 @@
-import React, {Component} from 'react';
+import React, {Component, useContext} from 'react';
 import UserService from "../services/UserService";
+import AuthContext from '../stores/auth-context';
 
-export default class CustomArt extends Component {
+
+class CustomArt extends Component {
+
+    
         constructor(props) {
             super(props);
-
+            //const authCtx = useContext(AuthContext);
             this.state = {
-                typeOfArt: "landscape",
+                typeOfArt: "Landscape",
                 paper: "",
                 quantity: "",
                 artLocation: "",
                 use: "",
                 image: "",
-                description: ""
-
+                description: "",
+                user_id: JSON.parse(localStorage.getItem('token')).user_id
             }
             this.handleChange = this.handleChange.bind(this);
-            this.handleImage = this.handleImage(this);
+            console.log("From constructor",this.state.user_id)
             this.handleClick = this.handleClick.bind(this);
+            
         }
 
         handleChange(event) {
@@ -27,7 +32,9 @@ export default class CustomArt extends Component {
             });
         }
 
-        handleImage(e){
+        handleImage = (e) => {
+
+            
             this.setState({
                 image: e.target.files[0]
             })
@@ -35,8 +42,12 @@ export default class CustomArt extends Component {
 
         handleClick(event){
             event.preventDefault();
+            const user = JSON.parse(localStorage.getItem('token'));
+            this.setState({
+                user_id: user.user_id
+            })
             let request = {
-                    buyer_id : "10",
+                    buyer_id : JSON.parse(localStorage.getItem('token')).user_id,
                     type_of_art: this.state.typeOfArt,
                     paper_canvas : this.state.paper,
                     art_location : this.state.artLocation,
@@ -45,19 +56,26 @@ export default class CustomArt extends Component {
                     description : this.state.description
                 }
 
+            
             console.log("Submit")
             console.log(request);
             UserService.requestCustomArt(request).then(res=>{
                     console.log(res.data)
-                    let form_data = new FormData();
-                    form_data.append('file', this.state.image, this.state.image.name);
-                    form_data.append('artist_id', res.data.custom_id);
-                    form_data.append('buyer_id',"10");
-                    UserService.saveReferenceImage(form_data).then(response=>{
-                        console.log(response);
-                    }).catch(err=>{
-                        console.log(err);
-                    })
+
+                    if (res.data.custom_id)
+                    {
+                        let form_data = new FormData();
+                        form_data.append('file', this.state.image, this.state.image.name);
+                        form_data.append('custom_id', res.data.custom_id);
+                        form_data.append('buyer_id',request.buyer_id);
+                        console.log("form_data",form_data);
+                        UserService.saveReferenceImage(form_data).then(response=>{
+                            console.log(response);
+                        }).catch(err=>{
+                            console.log(err);
+                        })
+                    }
+                    
             }).catch(err=>{
                     console.log(err);
             })
@@ -134,7 +152,7 @@ export default class CustomArt extends Component {
 
                 <div className="form-group">
                     <label>Type of Use</label>
-                    <input type="password"
+                    <input type="text"
                            className="form-control"
                            placeholder="Usage?"
                            name="use"
@@ -159,7 +177,7 @@ export default class CustomArt extends Component {
                 <div className="form-group">
                     <label>Upload one reference picture</label>
                     <input type="file"
-                           placeholder="Enter Address"
+                           placeholder="Enter Image"
                            name="image"
                            required
                            id="image"
@@ -177,3 +195,5 @@ export default class CustomArt extends Component {
         );
     }
 }
+
+export default CustomArt;
