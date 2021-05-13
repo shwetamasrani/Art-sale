@@ -20,7 +20,7 @@ public class RequestCommentsServiceImpl implements RequestCommentsService{
     }
 
     @Override
-    public void saveCommentsByAnArtist(String comments, Integer customization_id, Integer artist_id) {
+    public ArtCustomizationCommentsTrial saveCommentsByAnArtist(String comments, Integer customization_id, Integer artist_id) {
         ArtCustomizationComments artCustomizationComments = new ArtCustomizationComments();
         ArtCustomizationCommentsTrial artCustomizationCommentsTrial = new ArtCustomizationCommentsTrial();
         artCustomizationComments.setComments(comments);
@@ -33,14 +33,17 @@ public class RequestCommentsServiceImpl implements RequestCommentsService{
         artCustomizationDetails.setCustom_id(customization_id);
         artCustomizationCommentsTrial.setArtCustomizationDetails(artCustomizationDetails);
         artCustomizationCommentsTrial.setReqStatus(ReqStatus.PENDING);
-        requestCommentsDao.saveCommentsByArtist(artCustomizationCommentsTrial);
+        return requestCommentsDao.saveCommentsByArtist(artCustomizationCommentsTrial);
     }
 
+    @Transactional
     @Override
-    public void updateStatusAsApproved(Integer artist_id, Integer customization_id) {
+    public Integer updateStatusAsApproved(Integer artist_id, Integer customization_id) {
         ArtCustomizationComments artCustomizationComments = new ArtCustomizationComments();
         int comment_id = requestCommentsDao.getCommentID(artist_id, customization_id);
         requestCommentsDao.updateStatusApproved(comment_id);
+        ArtCustomizationCommentsTrial artCustomizationCommentsTrial = requestCommentsDao.findCommId(comment_id);
+        return comment_id;
     }
 
     @Transactional

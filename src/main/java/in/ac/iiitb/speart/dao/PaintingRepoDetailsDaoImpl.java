@@ -97,7 +97,7 @@ public class PaintingRepoDetailsDaoImpl implements PaintingRepoDetailsDao{
             if(list.size() == 0)
                 throw new Exception();
             System.out.println(list.size());
-            logger.info("List of all paintings for dashboard is:", list);
+            logger.info("List of all paintings for dashboard is:", list.get(0));
             return list;
         }
         catch(Exception e){
@@ -141,6 +141,28 @@ public class PaintingRepoDetailsDaoImpl implements PaintingRepoDetailsDao{
         query.setParameter("pid", artist_id);
         return (PaintingRepoDetails) query.getSingleResult();
 
+    }
+
+    @Override
+    public void addExtraArtistImage(PaintingRepoDetails paintingRepoDetails) {
+        Session currSession = entityManager.unwrap(Session.class);
+        currSession.saveOrUpdate(paintingRepoDetails);
+    }
+
+    @Override
+    public PaintingRepoDetails getPaintingDetailsByPID(Integer painting_id) {
+        Session currSession = entityManager.unwrap(Session.class);
+        Query query = currSession.createNativeQuery("select * from painting_repo where p_id =:pid " ,PaintingRepoDetails.class);
+        query.setParameter("pid", painting_id);
+        return (PaintingRepoDetails) query.getSingleResult();
+    }
+
+    @Override
+    public List<PaintingRepoDetails> getAllConfBidsByUserID(Integer bidder_conf_id) {
+        Session currSession = entityManager.unwrap(Session.class);
+        Query query = currSession.createNativeQuery("select * from painting_repo where highest_bidder_id_conf =:pid " ,PaintingRepoDetails.class);
+        query.setParameter("pid", bidder_conf_id);
+        return query.getResultList();
     }
 
 }

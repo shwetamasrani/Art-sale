@@ -2,10 +2,7 @@ package in.ac.iiitb.speart.service;
 
 import in.ac.iiitb.speart.controller.Status;
 import in.ac.iiitb.speart.dao.PaintingRepoDetailsDao;
-import in.ac.iiitb.speart.model.ArtistDetails;
-import in.ac.iiitb.speart.model.PaintingBuyerMM;
-import in.ac.iiitb.speart.model.PaintingRepoDetails;
-import in.ac.iiitb.speart.model.UserDetails;
+import in.ac.iiitb.speart.model.*;
 import in.ac.iiitb.speart.utils.HelperFunctions;
 import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,9 @@ public class PaintingRepoDetailsServiceImpl implements PaintingRepoDetailsServic
 
     @Autowired
     PaintingRepoDetailsDao paintingRepoDetailsDao;
+
+    @Autowired
+    ArtistDetailsService artistDetailsService;
 
     @Override
     public List<PaintingRepoDetails> get() {
@@ -83,6 +83,30 @@ public class PaintingRepoDetailsServiceImpl implements PaintingRepoDetailsServic
     @Transactional
     public PaintingRepoDetails getPaintingByArtistID(Integer id) {
         return paintingRepoDetailsDao.getPaintingDetailsByArtistId(id);
+    }
+
+    @Override
+    public PaintingRepoAPI addExtraArtistImage(PaintingRepoAPI paintingRepoAPI) {
+        PaintingRepoDetails paintingRepoDetails = new PaintingRepoDetails();
+        paintingRepoDetails.setCategory(paintingRepoAPI.getCategory());
+        paintingRepoDetails.setPrice(paintingRepoAPI.getPrice());
+        paintingRepoDetails.setContentType("image/png");
+        paintingRepoDetails.setPainting_name(paintingRepoAPI.getPainting_name());
+        ArtistDetails artistDetails = artistDetailsService.getApprovedArtistProfile(paintingRepoAPI.getArtist_id());
+        paintingRepoDetails.setArtistDetails(artistDetails);
+        paintingRepoDetailsDao.addExtraArtistImage(paintingRepoDetails);
+        paintingRepoAPI.setArtistDetails(artistDetails);
+        return paintingRepoAPI;
+    }
+
+    @Override
+    public PaintingRepoDetails getPaintingByPaintingID(Integer painting_id) {
+        return paintingRepoDetailsDao.getPaintingDetailsByPID(painting_id);
+    }
+
+    @Override
+    public List<PaintingRepoDetails> getAllBiddingConf(Integer bidder_conf_id) {
+        return paintingRepoDetailsDao.getAllConfBidsByUserID(bidder_conf_id);
     }
 
 }

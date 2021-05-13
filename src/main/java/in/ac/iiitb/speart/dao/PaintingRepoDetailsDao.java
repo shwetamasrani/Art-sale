@@ -25,4 +25,9 @@ public interface PaintingRepoDetailsDao {
 
     PaintingRepoDetails getPaintingDetailsByArtistId(Integer artist_id);
 
+    void addExtraArtistImage(PaintingRepoDetails paintingRepoDetails);
+
+    PaintingRepoDetails getPaintingDetailsByPID(Integer painting_id);
+
+    List<PaintingRepoDetails> getAllConfBidsByUserID(Integer bidder_conf_id);
 }

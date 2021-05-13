@@ -33,20 +33,21 @@ public class RequestCommentsDaoImpl implements RequestCommentsDao{
 //SET column1 = value1, column2 = value2, ...
 //WHERE condition;
     @Override
-    public void saveCommentsByArtist(ArtCustomizationCommentsTrial commentsObj) {
+    public ArtCustomizationCommentsTrial saveCommentsByArtist(ArtCustomizationCommentsTrial commentsObj) {
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(commentsObj);
         session.update(commentsObj);
+        return commentsObj;
     }
 
     @Override
     public int getCommentID(Integer artist_id, Integer customization_id) {
         Session session = entityManager.unwrap(Session.class);
-        Query query = session.createNativeQuery("select comments_id from art_custom_comments_trial where " +
-                "status_custom_id =:customid and status_artist_id =:artistid", ArtCustomizationCommentsTrial.class);
+        Query query = session.createNativeQuery("select * from art_custom_comments_trial where status_custom_id =:customid and status_artist_id =:artistid", ArtCustomizationCommentsTrial.class);
         query.setParameter("customid", customization_id);
         query.setParameter("artistid", artist_id);
-        int id = (int) query.getResultList().get(0);
+        List<ArtCustomizationCommentsTrial> li = query.getResultList();
+        int id = li.get(0).getComments_id();
         return id;
     }
 

@@ -26,7 +26,7 @@ import java.util.Set;
 @Api(value="Artist Repository", description = "Operations pertaining to artists.")
 public class ArtistDetailsController {
 
-    private static final Logger logger = LogManager.getLogger(UserDetailsController.class);
+    private static final Logger logger = LogManager.getLogger(ArtistDetailsController.class);
 
     @Autowired
     private ArtistDetailsService artistDetailsService;
@@ -46,6 +46,7 @@ public class ArtistDetailsController {
     @RequestMapping(value = "/saveArtist", method = RequestMethod.POST)
     @ApiOperation(value = "Saves details of an artist.", response = ArtistDetails.class)
     public ResponseEntity<UserArtistAPI> saveArtist(@RequestBody UserArtistAPI userArtistAPI){
+        try{
         UserDetails userDetails = new UserDetails();
         PaintingRepoDetails paintingRepoDetails = new PaintingRepoDetails();
         userDetails.setUser_id(userArtistAPI.getArtist_user_id());
@@ -62,7 +63,13 @@ public class ArtistDetailsController {
                 userArtistAPI.getSample_image_name());
         ArtistDetails artist = artistDetailsService.saveArtist(art, paintingRepoDetails);
         userArtistAPI.setEmail_address(changeUserArtist.getEmail_address());
+        logger.info("Artist saved with details:"+ artist);
         return new ResponseEntity<>(userArtistAPI, HttpStatus.OK);
+        } catch(Exception e){
+            e.printStackTrace();
+            logger.error("Artist couldn't be saved:"+ e.getStackTrace());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 

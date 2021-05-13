@@ -70,6 +70,12 @@ url : "http://localhost:8090/dashNavigationMenu/getAllCustomizedOrdersUser/{buye
 url :  "http://localhost:8090/dashNavigationMenu/getAllCustOrdersArtist/{artistId}" --> Get all customization orders done by an artist using artist-id.
 
 url : "http://localhost:8090/dashNavigationMenu/getMyProfile/{email_add}" --> Get user profile. Returning UserArtistPaintingAPI object which consists of UserDetails object and a generic Object(For storing data from ArtistDetails and PaintingRepo details)
+
+url : "http://localhost:8090/dashNavigationMenu/getAllCustOrders" --> Get list of all Customization Orders.
+
+url : "http://localhost:8090/dashNavigationMenu/getAllCustomizedOrdersUser/{buyerId}" --> Get list of all customized orders by buyer.
+
+url : "http://localhost:8090/dashNavigationMenu/getAllCustOrdersArtist/{artistId}" --> Get list of customized orders by artist.
 =================================================================================================================
 
 
@@ -117,6 +123,43 @@ url : "http://localhost:8090/artistComments/getCommentsByCustomID/{custom_id}" -
 url : "http://localhost:8090/artistComments/saveCommentsByArtist" --> Post a comment by an artist using custom_id, artist_id
 
 url : "http://localhost:8090/artistComments/approveCustRequestStatus/{comm_id}" --> update status as approved using comment_id.
+
+
+=====================================================================================================================
+
+PaintingRepoController
+
+url : "http://localhost:8090/paintings/getArtBiddingDetails/{painting_id}" --> Get Bidding details of a painting.
+
+url : "http://localhost:8090/paintings/postBiddingRequestBuyer" --> Post a bidding request by user.
+
+{
+	"p_id" : "12",
+	"bidded_price" : "87867",
+	"user_id" : "32"
+	
+}
+
+url : "http://localhost:8090/paintings/addExtraArtistImage" --> Post extra image of artist's painting.
+
+{
+
+    "category": "canvas",
+
+    "painting_name" : "The Happiness!",
+
+    "price" : "49000",
+
+    "artist_id" : "16"
+
+}
+
+url : "http://localhost:8090/paintings/saveArtistSampleImage" --> Post image using painting_id. Painting_id can be obtained from above API. 
+
+@RequestParam(file, painting_id)
+
+url : "http://localhost:8090/paintings//getAllBiddingPurchasesByUserID/{bidder_conf_id}" --> Get all purchased bids of a buyer using buyer_id.
+
 
 Save comments:
 {

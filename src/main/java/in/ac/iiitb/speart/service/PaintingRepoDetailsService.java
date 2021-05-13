@@ -3,6 +3,7 @@ package in.ac.iiitb.speart.service;
 
 import in.ac.iiitb.speart.controller.Status;
 import in.ac.iiitb.speart.model.PaintingBuyerMM;
+import in.ac.iiitb.speart.model.PaintingRepoAPI;
 import in.ac.iiitb.speart.model.PaintingRepoDetails;
 import in.ac.iiitb.speart.model.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,4 +31,9 @@ public interface PaintingRepoDetailsService {
 
     PaintingRepoDetails getPaintingByArtistID(Integer id);
 
+    PaintingRepoAPI addExtraArtistImage(PaintingRepoAPI paintingRepoAPI);
+
+    PaintingRepoDetails getPaintingByPaintingID(Integer painting_id);
+
+    List<PaintingRepoDetails> getAllBiddingConf(Integer bidder_conf_id);
 }

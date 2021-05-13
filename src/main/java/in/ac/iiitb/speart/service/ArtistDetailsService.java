@@ -21,4 +21,6 @@ public interface ArtistDetailsService {
     Object getArtistProfile(Integer artist_user_id);
 
     int getArtistArtistID(String email_address);
+
+    ArtistDetails getApprovedArtistProfile(Integer status_artist_id);
 }

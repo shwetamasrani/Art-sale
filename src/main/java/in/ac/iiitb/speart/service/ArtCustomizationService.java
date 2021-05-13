@@ -22,4 +22,11 @@ public interface ArtCustomizationService {
     ArtCustomTrial saveImage(ArtCustomTrial artCustomTrial) throws IOException;
 
     ArtCustomTrial getCustReq(Integer custom_id);
+
+    ArtCustomTrial saveApprovedArtist(ArtCustomTrial artCustomTrial);
+
+    List<ArtCustomTrial> getCustOrdersList(Integer buyer_id);
+
+    List<ArtCustomTrial> getAllCustOrders();
+
 }

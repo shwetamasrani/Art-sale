@@ -13,4 +13,6 @@ public interface ArtistDetailsDao {
     void delete(int id);
 
     int getArtistID(String email_address);
+
+    ArtistDetails getApprovedArtistProfile(Integer status_artist_id);
 }

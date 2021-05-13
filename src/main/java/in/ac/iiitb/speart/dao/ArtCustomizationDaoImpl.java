@@ -67,4 +67,28 @@ public class ArtCustomizationDaoImpl implements ArtCustomizationDao{
         query.setParameter("customID", custom_id);
         return (ArtCustomTrial) query.getSingleResult();
     }
+
+    @Override
+    public ArtCustomTrial saveApprovedArtist(ArtCustomTrial artCustomTrial) {
+        Session currSession = entityManager.unwrap(Session.class);
+        currSession.saveOrUpdate(artCustomTrial);
+        return artCustomTrial;
+    }
+
+    @Override
+    public List<ArtCustomTrial> getCustOrdersList(Integer buyer_id) {
+        Session session = entityManager.unwrap(Session.class);
+        Query query = entityManager.createNativeQuery("select * from art_customization_trial where buyer_id =:artist_id", ArtCustomTrial.class);
+        query.setParameter("artist_id", buyer_id);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<ArtCustomTrial> getAllCustOrders() {
+        Session session = entityManager.unwrap(Session.class);
+        Query query = entityManager.createNativeQuery("select * from art_customization_trial ", ArtCustomTrial.class);
+        return query.getResultList();
+    }
+
+
 }

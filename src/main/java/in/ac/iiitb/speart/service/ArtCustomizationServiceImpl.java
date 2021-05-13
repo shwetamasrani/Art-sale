@@ -70,8 +70,8 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
         artist.setArtist_id(artist_customizer);
         List<ArtistDetails> li = new ArrayList<>();
         li.add(artist);
-        art.setArtistDetails3(artist);
-        artCustomTrial.setArtistDetails(artist);
+//        art.setArtistDetails3(artist);
+//        artCustomTrial.setArtistDetails(artist);
         art.setArt_location(art_loc);
         artCustomTrial.setArt_location(art_loc);
         art.setArt_use(art_use);
@@ -85,6 +85,7 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
         art.setPaper_canvas(paper_canvas);
         artCustomTrial.setPaper_canvas(paper_canvas);
 //        art.setArtistDetails3(artist);
+        artCustomTrial.setQuantity(qty);
         ArtCustomTrial saved = artCustomizationDao.save(artCustomTrial);
         cust_trial.setArtCustomizationDetails(artCustomTrial);
         cust_trial.setArtCustomizationDetails1(artCustomTrial);
@@ -106,5 +107,23 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
     public ArtCustomTrial getCustReq(Integer custom_id) {
         return artCustomizationDao.getCustReq(custom_id);
     }
+
+    @Transactional
+    @Override
+    public ArtCustomTrial saveApprovedArtist(ArtCustomTrial artCustomTrial) {
+        return artCustomizationDao.saveApprovedArtist(artCustomTrial);
+    }
+
+    @Override
+    public List<ArtCustomTrial> getCustOrdersList(Integer buyer_id) {
+        return artCustomizationDao.getCustOrdersList(buyer_id);
+    }
+
+    @Override
+    public List<ArtCustomTrial> getAllCustOrders() {
+        return artCustomizationDao.getAllCustOrders();
+    }
+
+
 
 }
