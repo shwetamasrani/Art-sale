@@ -49,8 +49,8 @@ public class SpeartApplication {
         }else{
             dataSourceBuilder.url("jdbc:mysql://localhost:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
         }
-        dataSourceBuilder.username("root");
-        dataSourceBuilder.password("GOforkanchu@67!");
+        dataSourceBuilder.username("artSalePortal");
+        dataSourceBuilder.password("artSalePortal16!");
         return dataSourceBuilder.build();
     }
 }
