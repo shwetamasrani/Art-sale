@@ -70,8 +70,8 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
         artist.setArtist_id(artist_customizer);
         List<ArtistDetails> li = new ArrayList<>();
         li.add(artist);
-//        art.setArtistDetails3(artist);
-//        artCustomTrial.setArtistDetails(artist);
+        art.setArtistDetails3(artist);
+        artCustomTrial.setArtistDetails(artist);
         art.setArt_location(art_loc);
         artCustomTrial.setArt_location(art_loc);
         art.setArt_use(art_use);

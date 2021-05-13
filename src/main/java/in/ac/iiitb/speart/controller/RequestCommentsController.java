@@ -70,6 +70,7 @@ public class RequestCommentsController {
         ArtCustomTrial artCustomTrial = artCustomizationService.getCustReq(requestCommentsAPI.getStatus_custom_id());
         ArtistDetails approvedArtist = artistDetailsService.getApprovedArtistProfile(requestCommentsAPI.getStatus_artist_id());
         artCustomTrial.setArtistDetails(approvedArtist);
+        artCustomTrial.setArtistDetails3(approvedArtist);
         artCustomTrial = artCustomizationService.saveApprovedArtist(artCustomTrial);
         return new ResponseEntity<RequestCommentsAPI>(requestCommentsAPI1, HttpStatus.ACCEPTED);
     }

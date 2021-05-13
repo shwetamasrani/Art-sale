@@ -2,8 +2,8 @@ package in.ac.iiitb.speart.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "cust_req_status")
+//@Entity
+//@Table(name = "cust_req_status")
 public class CustomizedRequestStatus {
 
     @Id

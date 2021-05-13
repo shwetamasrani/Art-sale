@@ -160,3 +160,21 @@ url : "http://localhost:8090/paintings/saveArtistSampleImage" --> Post image usi
 
 url : "http://localhost:8090/paintings//getAllBiddingPurchasesByUserID/{bidder_conf_id}" --> Get all purchased bids of a buyer using buyer_id.
 
+
+Save comments:
+{
+	
+   "comments" : "Artist 25 can do it.",
+
+    "status_custom_id" : "12",
+
+    "status_artist_id" : "25"
+}
+
+/approveCustRequestStatusTrial
+{
+	"status_custom_id" : "6",
+	"status_artist_id" : "20"
+	
+}
+

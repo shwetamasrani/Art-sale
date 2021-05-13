@@ -43,8 +43,8 @@ public class UserDetails implements Serializable {
 //    @ManyToMany(mappedBy = "users")
 //    Set<PaintingRepoDetails> painting;
 
-//    @OneToMany(mappedBy = "userMO")
-//    List<ArtCustomizationDetails> artCustomizationDetails;
+    @OneToMany(mappedBy = "userMO")
+    List<ArtCustomizationDetails> artCustomizationDetails;
 
 
     public UserDetails() {

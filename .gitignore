@@ -1,4 +1,9 @@
+.idea
+.gitignore
 target/
+speart.iml
+art_spe_user_details.sql
+src/main/resources/application.properties
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -9,6 +14,5 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
-speart.iml
 .idea/
 *.log

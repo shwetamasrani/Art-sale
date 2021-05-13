@@ -12,6 +12,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import javax.sql.DataSource;
 
 
@@ -29,6 +34,7 @@ public class SpeartApplication {
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.
                 basePackage("in.ac.iiitb.speart.controller")).build();
     }
+
     private ApiInfo metaData() {
         ApiInfo apiInfo = new ApiInfo(
                 "Art Sale APIs",
@@ -38,19 +44,31 @@ public class SpeartApplication {
                 "Kanchan And Shweta", "https://art_sale", "kanchanshweta@art_Sale");
         return apiInfo;
     }
-
     @Bean
-    public DataSource getDataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        String url = System.getenv("DATABASE_HOST");
-        if(url !=null){
-            dataSourceBuilder.url("jdbc:mysql://artSale-mysql:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
-        }else{
-            dataSourceBuilder.url("jdbc:mysql://localhost:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
-        }
-        dataSourceBuilder.username("artSalePortal");
-        dataSourceBuilder.password("artSalePortal16!");
-        return dataSourceBuilder.build();
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("*")
+                        .allowedHeaders("*")
+                        .allowedOrigins("http://localhost:3000");
+            }
+        };
     }
+
+//    @Bean
+//    public DataSource getDataSource() {
+//        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+//        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
+//        String url = System.getenv("DATABASE_HOST");
+//        if (url != null) {
+//            dataSourceBuilder.url("jdbc:mysql://artSale-mysql:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
+//        } else {
+//            dataSourceBuilder.url("jdbc:mysql://localhost:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
+//        }
+//        dataSourceBuilder.username("artSalePortal");
+//        dataSourceBuilder.password("artSalePortal16!");
+//        return dataSourceBuilder.build();
+//    }
 }
