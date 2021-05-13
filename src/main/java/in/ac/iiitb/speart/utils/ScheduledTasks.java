@@ -51,7 +51,7 @@ public class ScheduledTasks {
             Date bid_end_date = paintings.get(i).getBidding_end_date();
             if(bid_end_date != null){
                 int compareDate = bid_end_date.compareTo(currentDate);
-                if(compareDate < 0){
+                if(compareDate <= 0){
                     PaintingRepoDetails paintingRepoDetails = paintings.get(i);
                     PaintingBuyerMM paintBuyer = paintingBuyerMMDao.getAllBiddersPID(paintingRepoDetails.getP_id());
                     paintingRepoDetails.setArtistDetails2(paintBuyer.getUser_id());

@@ -104,4 +104,9 @@ public class PaintingRepoDetailsServiceImpl implements PaintingRepoDetailsServic
         return paintingRepoDetailsDao.getPaintingDetailsByPID(painting_id);
     }
 
+    @Override
+    public List<PaintingRepoDetails> getAllBiddingConf(Integer bidder_conf_id) {
+        return paintingRepoDetailsDao.getAllConfBidsByUserID(bidder_conf_id);
+    }
+
 }

@@ -89,4 +89,6 @@ public class ArtCustomizationDaoImpl implements ArtCustomizationDao{
         Query query = entityManager.createNativeQuery("select * from art_customization_trial ", ArtCustomTrial.class);
         return query.getResultList();
     }
+
+
 }

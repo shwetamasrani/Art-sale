@@ -158,4 +158,5 @@ url : "http://localhost:8090/paintings/saveArtistSampleImage" --> Post image usi
 
 @RequestParam(file, painting_id)
 
+url : "http://localhost:8090/paintings//getAllBiddingPurchasesByUserID/{bidder_conf_id}" --> Get all purchased bids of a buyer using buyer_id.
 

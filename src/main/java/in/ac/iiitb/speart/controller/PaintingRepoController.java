@@ -1,5 +1,6 @@
 package in.ac.iiitb.speart.controller;
 
+import in.ac.iiitb.speart.model.ArtCustomTrial;
 import in.ac.iiitb.speart.model.PaintingBuyerMM;
 import in.ac.iiitb.speart.model.PaintingRepoAPI;
 import in.ac.iiitb.speart.model.PaintingRepoDetails;
@@ -119,5 +120,11 @@ public class PaintingRepoController {
         paintingRepoDetails.setPainting_image(file.getBytes());
         paintingRepoDetailsService.save(paintingRepoDetails);
         return new ResponseEntity<PaintingRepoDetails>(paintingRepoDetails, HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/getAllBiddingPurchasesByUserID/{bidder_conf_id}", method = RequestMethod.GET)
+    public List<PaintingRepoDetails> getAllBidding(@PathVariable Integer bidder_conf_id){
+        return paintingRepoDetailsService.getAllBiddingConf(bidder_conf_id);
+
     }
 }
