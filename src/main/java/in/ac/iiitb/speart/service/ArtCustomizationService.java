@@ -28,4 +28,5 @@ public interface ArtCustomizationService {
     List<ArtCustomTrial> getCustOrdersList(Integer buyer_id);
 
     List<ArtCustomTrial> getAllCustOrders();
+
 }

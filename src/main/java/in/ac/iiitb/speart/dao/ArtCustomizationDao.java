@@ -26,4 +26,5 @@ public interface ArtCustomizationDao {
     List<ArtCustomTrial> getCustOrdersList(Integer buyer_id);
 
     List<ArtCustomTrial> getAllCustOrders();
+
 }

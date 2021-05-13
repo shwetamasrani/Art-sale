@@ -1,9 +1,7 @@
 package in.ac.iiitb.speart.controller;
 
 
-import in.ac.iiitb.speart.model.ArtCustomTrial;
-import in.ac.iiitb.speart.model.ArtCustomizationCommentsTrial;
-import in.ac.iiitb.speart.model.ArtistDetails;
+import in.ac.iiitb.speart.model.*;
 import in.ac.iiitb.speart.service.RequestCommentsService;
 import in.ac.iiitb.speart.service.RequestCommentsServiceImpl;
 import org.junit.Before;
@@ -12,6 +10,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -101,6 +101,29 @@ public class RequestCommentsControllerTest {
         return artistDetails;
     }
 
+    @Test
+    public void happyTestPostReqController(){
+        List<ArtCustomizationCommentsTrial> expected = new ArrayList<>();
+        expected.add(this.getArtCustomizationCommentsTrial("Need it", 1));
+        expected.add(this.getArtCustomizationCommentsTrial("Need it", 2));
+        expected.add(this.getArtCustomizationCommentsTrial("Need it", 3));
+        expected.add(this.getArtCustomizationCommentsTrial("Need it", 4));
+        ArtCustomizationCommentsTrial artCustomizationCommentsTrial = new ArtCustomizationCommentsTrial();
+        artCustomizationCommentsTrial.setArtistDetails(getArtistDetails(6));
+        artCustomizationCommentsTrial.setComments("Artist 6 can do it.");
+        artCustomizationCommentsTrial.setArtCustomizationDetails(getArtCustomDetails());
+        artCustomizationCommentsTrial.setReqStatus(ReqStatus.PENDING);
+        artCustomizationCommentsTrial.setComments_id(80);
+        RequestCommentsAPI requestCommentsAPI = new RequestCommentsAPI();
+        requestCommentsAPI.setComments("Artist 6 can do it."); requestCommentsAPI.setStatus_custom_id(11);requestCommentsAPI.setStatus_artist_id(6);
+//        Mockito.when(this.requestCommentsService.saveCommentsByAnArtist(artCustomizationCommentsTrial.getComments(), 11, 6)).thenReturn(artCustomizationCommentsTrial);
+//
+//        ResponseEntity<ArtCustomizationCommentsTrial>(artCustomizationCommentsTrial, HttpStatus.ACCEPTED) = requestCommentsController.saveCommentsByArtist(requestCommentsAPI);
+//
+//        Mockito.verify(this.requestCommentsService).getAllCommentsCustomID(1);
+//        Assert.assertEquals(actual, expected);
+
+    }
 
 
 }

@@ -34,4 +34,6 @@ public interface PaintingRepoDetailsService {
     PaintingRepoAPI addExtraArtistImage(PaintingRepoAPI paintingRepoAPI);
 
     PaintingRepoDetails getPaintingByPaintingID(Integer painting_id);
+
+    List<PaintingRepoDetails> getAllBiddingConf(Integer bidder_conf_id);
 }
