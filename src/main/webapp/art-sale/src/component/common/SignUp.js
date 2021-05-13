@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import UserService from '../../services/UserService';
 import Navbar from "./Navbar";
 
-export default class SignUp extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
 
@@ -91,7 +91,7 @@ export default class SignUp extends Component {
                     console.log(response);
                 })
             }
-            this.props.history.push('/Login');
+            this.props.history.push('/sign-in');
         });
     }
 
@@ -278,3 +278,5 @@ export default class SignUp extends Component {
         );
     }
 }
+
+export default withRouter (SignUp);

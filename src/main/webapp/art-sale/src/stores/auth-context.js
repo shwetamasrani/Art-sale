@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
+import {useHistory} from 'react-router-dom';
 let logoutTimer;
 
 const AuthContext = React.createContext({
@@ -40,6 +40,8 @@ const AuthContext = React.createContext({
 
 export const AuthContextProvider = (props) => {
 
+  const history = useHistory();
+
     const tokenData = retrieveStoredToken();
   
     let initialToken;
@@ -60,6 +62,7 @@ export const AuthContextProvider = (props) => {
         if (logoutTimer) {
           clearTimeout(logoutTimer);
         }
+        window.location.href = '/';
       }, []);
     
     const loginHandler = (token, expirationTime) => {

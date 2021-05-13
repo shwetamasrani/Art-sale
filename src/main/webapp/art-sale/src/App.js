@@ -36,8 +36,9 @@ class App extends React.Component {
             return (
             <Layout name="Hii">
                 {/* <Router> */}
+                {/* <div className="outer"> */}
                 <div className="App">
-                    <div className="outer">
+                    
                         
                             <Switch>
                                 <Route exact path='/'>
@@ -63,7 +64,7 @@ class App extends React.Component {
                                 </Route>
                             </Switch>
                         
-                    </div>
+                    {/* </div> */}
 
                 </div>
                 {/* </Router> */}

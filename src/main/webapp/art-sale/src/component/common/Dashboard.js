@@ -33,14 +33,14 @@ class Dashboard extends Component {
                     img={painting.painting_image}
                     bidEnd = {painting.bidding_end_date}
                     category = {painting.category}
+                    highestBid = {painting.highest_price}
                 />
             )
         })
         return (
             <div>
 
-                    <div>
-                        <h1>Dashboard</h1>
+                    <div className="container">
                         {paintings}
                     </div>
             </div>

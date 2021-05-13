@@ -26,19 +26,20 @@ class Painting extends Component {
 
     bid = (event) =>{
 
+        
 
     }
 
     render() {
         return(
-            <div className="inner" id={this.state.key}>
+            <div className="paintbox" id={this.state.key}>
                 {/* <div href="" style={{width: '30rem'}} ></div> */}
                     <img src={"data:image/jpg;base64," + this.state.img} style={{width: '18rem'}}/>
                     <div className="details">
-                        <p>Paining Name:{this.state.name}</p>
+                        <p>Painting Name:{this.state.name}</p>
                         <p>Category: {this.state.category}</p>
                         <p>Size: {this.state.size}</p>
-                        <p>Artist:{this.state.artist}</p>
+                        <p>Artist: {this.state.artist}</p>
                         <p>Price: Rs.{this.state.price}</p>
                         {this.state.highestBid && (
                             <p>Highest Bid: Rs. {this.state.highestBid}</p>
@@ -50,10 +51,10 @@ class Painting extends Component {
                         <button className="btn btn-dark btn-lg btn-block"
                                 onClick={this.bid}>
                             {this.state.highestBid && (
-                                <p>Bid Price</p>
+                                <p>Bid your price</p>
                             )}
                             {!this.state.highestBid && (
-                                <label>Bid First</label>
+                                <label>Be the first to Bid!</label>
                             )}
                         </button>
                     </div>

@@ -13,7 +13,7 @@ const Navbar=() => {
     const logoutHandler = () => {
       authCtx.logout();
       // optional: redirect the user
-      history.replace('/');
+      
     };
 
     
@@ -25,14 +25,15 @@ const Navbar=() => {
                         <ul className="navbar-nav ml-auto">
 
                             {!isLoggedIn && (
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/sign-in'>Sign in</Link>
-                                </li>
-                            )}
-                            {!isLoggedIn && (
-                                <li className="nav-item">
-                                    <Link className="nav-link" to='/sign-up'>Sign up</Link>
-                                </li>
+                                <Fragment>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/sign-in'>Sign in</Link>
+                                    </li>
+                                
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/sign-up'>Sign up</Link>
+                                    </li>
+                                </Fragment>
                             )}
                             {isLoggedIn && (
                                 <Fragment>
