@@ -1,6 +1,9 @@
 package in.ac.iiitb.speart.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -20,8 +23,8 @@ public class ArtCustomTrial implements Serializable {
 //    private List<UserDetails> userDetails1;
 
 
-    //
-    @ManyToOne
+//    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id_MO")
     private UserDetails userMO;
 
@@ -35,7 +38,8 @@ public class ArtCustomTrial implements Serializable {
     @JoinColumn(name = "artist_customizer", unique = false)
     private ArtistDetails artistDetails;
 
-    @ManyToOne
+//    @JsonManagedReference(value = "artistBack")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist_MO")
     private ArtistDetails artistDetails3;
 

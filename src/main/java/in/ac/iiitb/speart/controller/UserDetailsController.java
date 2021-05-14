@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.apache.logging.log4j.LogManager;
@@ -70,7 +71,7 @@ public class UserDetailsController {
             paintingRepoDetails.setArtistDetails(artistDetails);
             HashSet<UserDetails> hs1 = new HashSet<>();
             hs1.add(userDetails);
-            paintingRepoDetails.setUsers(hs1);
+//            paintingRepoDetails.setUsers(hs1);
             paintingRepoDetails.setPrice(userArtistAPI.getPrice());
             paintingRepoDetails.setCategory(userArtistAPI.getCategory());
             paintingRepoDetails.setPainting_image(userArtistAPI.getPainting_image());

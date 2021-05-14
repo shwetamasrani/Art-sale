@@ -58,7 +58,7 @@ public class ArtistDetailsController {
         UserDetails changeUserArtist = userDetailsService.get(userArtistAPI.getArtist_user_id());
         changeUserArtist.setUser_category("artist");
         userDetailsService.updateUserCategoryStatus(changeUserArtist);
-        paintingRepoDetails.setUsers(set);
+//        paintingRepoDetails.setUsers(set);
         ArtistDetails art = new ArtistDetails(userDetails,userArtistAPI.getCategory_taught(), userArtistAPI.getExperience(), userArtistAPI.getType_of_art(),
                 userArtistAPI.getSample_image_name());
         ArtistDetails artist = artistDetailsService.saveArtist(art, paintingRepoDetails);
