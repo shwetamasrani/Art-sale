@@ -1,6 +1,9 @@
 package in.ac.iiitb.speart.model;
 
+
+
 import javax.persistence.*;
+import in.ac.iiitb.speart.model.ReqStatus;
 
 //@Entity
 //@Table(name = "cust_req_status")

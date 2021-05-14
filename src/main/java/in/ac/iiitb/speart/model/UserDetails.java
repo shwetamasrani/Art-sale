@@ -175,18 +175,18 @@ public class UserDetails implements Serializable {
         this.artCustomizationDetails = artCustomizationDetails;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserDetails)) return false;
         UserDetails that = (UserDetails) o;
-        return isLog_status() == that.isLog_status() && Objects.equals(getUser_id(), that.getUser_id()) && Objects.equals(getFirst_name(), that.getFirst_name()) && Objects.equals(getLast_name(), that.getLast_name()) && Objects.equals(getEmail_address(), that.getEmail_address()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getContact_no(), that.getContact_no()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getUser_category(), that.getUser_category()) && Objects.equals(artCustomizationDetails, that.artCustomizationDetails);
 
+        return log_status == that.log_status && user_id.equals(that.user_id)  && Objects.equals(first_name, that.first_name) && Objects.equals(last_name, that.last_name) && Objects.equals(email_address, that.email_address) && Objects.equals(password, that.password) && Objects.equals(contact_no, that.contact_no) && Objects.equals(address, that.address) && Objects.equals(user_category, that.user_category) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser_id(), getFirst_name(), getLast_name(), getEmail_address(), getPassword(), getContact_no(), getAddress(), getUser_category(), isLog_status(), artCustomizationDetails);
-
+        return Objects.hash(user_id, first_name, last_name, email_address, password, contact_no, address, user_category, log_status);
     }
 }

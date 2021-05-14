@@ -50,8 +50,9 @@ const Login = (props) => {
                 new Date().getTime() + 600000
             );
             authCtx.login(res.data, expirationTime.toISOString());
-            history.push('/Dashboard');
 
+            history.push('/dashboard');
+           
             // localStorage.setItem('currentUser', JSON.stringify(res.data));
             // this.props.history.push('/Dashboard');
         })
