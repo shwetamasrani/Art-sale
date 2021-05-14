@@ -202,6 +202,7 @@ public class PaintingRepoDetails implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         PaintingRepoDetails that = (PaintingRepoDetails) o;
         return p_id.equals(that.p_id)&& Objects.equals(artistDetails, that.artistDetails) && Objects.equals(category, that.category) && Objects.equals(price, that.price) && Objects.equals(highest_price, that.highest_price) && Objects.equals(artistDetails2, that.artistDetails2) && Objects.equals(date_of_purchase, that.date_of_purchase) && Arrays.equals(painting_image, that.painting_image) && Objects.equals(painting_name, that.painting_name) && Objects.equals(contentType, that.contentType) && Objects.equals(users, that.users) && Objects.equals(bidding_end_date, that.bidding_end_date);
+
     }
 
     @Override

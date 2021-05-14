@@ -45,80 +45,80 @@ const Login = (props) => {
         console.log(user);
         UserService.getUser(user).then(res => {
             console.log(res);
-           
+
             const expirationTime = new Date(
                 new Date().getTime() + 600000
             );
-            authCtx.login(JSON.stringify(res.data), expirationTime.toISOString());
+            authCtx.login(res.data, expirationTime.toISOString());
             history.push('/Dashboard');
-           
+
             // localStorage.setItem('currentUser', JSON.stringify(res.data));
             // this.props.history.push('/Dashboard');
         })
-        .catch(err =>{
-            console.log(err);
-            setErrorMessage(err);
-            alert("Username or Password doesn't Match!");
-            //window.location.reload(true);
-        });
+            .catch(err =>{
+                console.log(err);
+                setErrorMessage(err);
+                alert("Username or Password doesn't Match!");
+                //window.location.reload(true);
+            });
     };
 
-    
-        return (
-            <div className="inner">
-                {/* <Navbar/> */}
-                <form>
 
-                    <h3>Log in</h3>
+    return (
+        <div className="inner">
+            {/* <Navbar/> */}
+            <form>
 
-                    <div className="form-group">
-                        <label>Email</label>
-                        <input type="email"
-                               className="form-control"
-                               placeholder="Enter email"
-                               name="email"
-                               required="True"
-                            //    value={this.state.email}
-                               ref={emailInputRef}
-                             //  onChange={this.handleChange}
-                        />
-                    </div>
+                <h3>Log in</h3>
 
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password"
-                               className="form-control"
-                               placeholder="Enter password"
-                               name="password"
-                               required="True"
-                            //    value={this.state.password}
-                               ref={passwordInputRef}
-                              // onChange={handleChange}
-                        />
-                    </div>
-                    <h3 style={{display: errorMessage ? "block" : "none"}}>Incorrect
-                        Username/Password</h3>
-                    <br/>
-                    {/*<div className="form-group">
+                <div className="form-group">
+                    <label>Email</label>
+                    <input type="email"
+                           className="form-control"
+                           placeholder="Enter email"
+                           name="email"
+                           required="True"
+                        //    value={this.state.email}
+                           ref={emailInputRef}
+                        //  onChange={this.handleChange}
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password"
+                           className="form-control"
+                           placeholder="Enter password"
+                           name="password"
+                           required="True"
+                        //    value={this.state.password}
+                           ref={passwordInputRef}
+                        // onChange={handleChange}
+                    />
+                </div>
+                <h3 style={{display: errorMessage ? "block" : "none"}}>Incorrect
+                    Username/Password</h3>
+                <br/>
+                {/*<div className="form-group">
                         <div className="custom-control custom-checkbox">
                             <input type="checkbox" className="custom-control-input" id="customCheck1" />
                             <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                         </div>
                     </div>*/}
 
-                    <button type="submit"
-                            className="btn btn-dark btn-lg btn-block"
-                            onClick={handleClick}
-                    >Sign in</button>
-                    <p className="forgot-password text-right">
-                        Forgot <a href="#">password?</a>
-                    </p>
-                </form>
+                <button type="submit"
+                        className="btn btn-dark btn-lg btn-block"
+                        onClick={handleClick}
+                >Sign in</button>
+                <p className="forgot-password text-right">
+                    Forgot <a href="#">password?</a>
+                </p>
+            </form>
 
 
-            </div>
-        );
-   
+        </div>
+    );
+
 }
 
 export default Login;

@@ -44,7 +44,7 @@ public class UserDetails implements Serializable {
 //    Set<PaintingRepoDetails> painting;
 
     @OneToMany(mappedBy = "userMO")
-    List<ArtCustomizationDetails> artCustomizationDetails;
+    List<ArtCustomTrial> artCustomizationDetails;
 
 
     public UserDetails() {
@@ -157,7 +157,7 @@ public class UserDetails implements Serializable {
 //    public void setPainting(Set<PaintingRepoDetails> painting) {
 //        this.painting = painting;
 //    }
-//
+
 //    public List<PaintingBuyerMM> getActivities() {
 //        return activities;
 //    }
@@ -174,10 +174,12 @@ public class UserDetails implements Serializable {
         if (!(o instanceof UserDetails)) return false;
         UserDetails that = (UserDetails) o;
         return isLog_status() == that.isLog_status() && Objects.equals(getUser_id(), that.getUser_id()) && Objects.equals(getFirst_name(), that.getFirst_name()) && Objects.equals(getLast_name(), that.getLast_name()) && Objects.equals(getEmail_address(), that.getEmail_address()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getContact_no(), that.getContact_no()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getUser_category(), that.getUser_category()) && Objects.equals(artCustomizationDetails, that.artCustomizationDetails);
+
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getUser_id(), getFirst_name(), getLast_name(), getEmail_address(), getPassword(), getContact_no(), getAddress(), getUser_category(), isLog_status(), artCustomizationDetails);
+
     }
 }

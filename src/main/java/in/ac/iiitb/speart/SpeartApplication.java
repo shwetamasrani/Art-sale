@@ -44,18 +44,6 @@ public class SpeartApplication {
                 "Kanchan And Shweta", "https://art_sale", "kanchanshweta@art_Sale");
         return apiInfo;
     }
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedMethods("*")
-                        .allowedHeaders("*")
-                        .allowedOrigins("http://localhost:3000");
-            }
-        };
-    }
 
     @Bean
     public DataSource getDataSource() {
@@ -71,4 +59,19 @@ public class SpeartApplication {
         dataSourceBuilder.password("artSalePortal16!");
         return dataSourceBuilder.build();
     }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("GET","POST","PUT","DELETE")
+                        .allowedHeaders("*")
+                        .allowedOrigins("http://localhost:3000");
+            }
+        };
+    }
+
+
 }
