@@ -1,4 +1,4 @@
-import React, { useState,useContext, useRef } from "react";
+import React, { useState,useContext, useRef,useEffect } from "react";
 import { Fragment } from "react";
 import {Link, useHistory} from "react-router-dom";
 import AuthContext from '../../stores/auth-context';
@@ -9,11 +9,29 @@ const Navbar=() => {
     const authCtx = useContext(AuthContext);
 
     const isLoggedIn = authCtx.isLoggedIn;
+    let isArtist = authCtx.isArtist;
+    console.log("isArtist",isArtist);
+    useEffect(() =>{
+        console.log("navbar")
+        console.log("isArtist",isArtist);
+        // if (isLoggedIn)
+        // {
+        //     const user = authCtx.token;
+        //     isArtist = JSON.parse(user).user_category === "artist" ? true : false;
+        //     // console.log(JSON.parse(user).user_category)
+        //     console.log(JSON.parse(user));
+        //     console.log("isArtist",isArtist);
+        //     console.log(isLoggedIn);
+        // }
+    },[isLoggedIn,isArtist]); 
+    
+   
+    // const isArtist = userLoggedIn.user_category === "artist" ? "true" : "false";
+    // console.log(isArtist);
   
     const logoutHandler = () => {
       authCtx.logout();
       // optional: redirect the user
-      
     };
 
     
@@ -49,12 +67,22 @@ const Navbar=() => {
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/profile'>Profile</Link>
                                     </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/art-request'>Art Requests</Link>
+                                    </li>
                                     
                                     <li>
                                         <button onClick={logoutHandler}>Logout</button>
                                     </li>
                                 </Fragment>
                             )}
+                            {/* {!isArtist && (
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/register-artist'>Register Artist</Link>
+                                    </li>
+                            )} */}
+                                    
+                                    
                         </ul>
                     </div>
                 </div>
