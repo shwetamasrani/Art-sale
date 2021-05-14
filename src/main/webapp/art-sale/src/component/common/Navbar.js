@@ -70,7 +70,9 @@ const Navbar=() => {
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/art-request'>Art Requests</Link>
                                     </li>
-                                    
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to='/custom-art-request'>My Custom Art Requests</Link>
+                                    </li>
                                     <li>
                                         <button onClick={logoutHandler}>Logout</button>
                                     </li>

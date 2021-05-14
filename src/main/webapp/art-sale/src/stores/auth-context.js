@@ -5,6 +5,7 @@ let logoutTimer;
 const AuthContext = React.createContext({
     token: {},
     isLoggedIn: false,
+    isArtist: false,
     login: (token) => {},
     logout: () => {},
 });
@@ -52,6 +53,13 @@ export const AuthContextProvider = (props) => {
     const [token, setToken] = useState(initialToken);
 
     const userIsLoggedIn = !!token;
+    let userIsArtist = false;
+    if(userIsLoggedIn)
+    {
+      userIsArtist = token;
+    }
+    
+
 
     
     const logoutHandler = useCallback(() => {
@@ -68,7 +76,10 @@ export const AuthContextProvider = (props) => {
     const loginHandler = (token, expirationTime) => {
         setToken(token);
         console.log("From auth context",token);
-        console.log(userIsLoggedIn);
+        console.log("userIsLoggedIn",userIsLoggedIn);
+        userIsArtist = token.user_category === "artist" ? true : false;
+        console.log("userIsArtist",userIsArtist);
+        // console.log("isLoggedIn",isLoggedIn);
         //JSON.parse(localStorage.getItem('token'));
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('expirationTime', expirationTime);
@@ -88,6 +99,7 @@ export const AuthContextProvider = (props) => {
     const contextValue = {
         token: token,
         isLoggedIn: userIsLoggedIn,
+        isArtist : userIsArtist,
         login: loginHandler,
         logout: logoutHandler,
     };

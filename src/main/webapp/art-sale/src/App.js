@@ -12,6 +12,7 @@ import RegisterArtist from "./component/RegisterArtist";
 import Profile from "./component/Profile";
 import Layout from './component/common/Layout';
 import CustomRequestsArtist from './component/CustomRequestsArtist';
+import MyCustomRequest from './component/buyer/MyCustomRequest';
 
 class App extends React.Component {
     // constructor(props) {
@@ -65,6 +66,9 @@ class App extends React.Component {
                                 </Route>
                                 <Route path="/art-request">
                                     <CustomRequestsArtist/>
+                                </Route>
+                                <Route path="/custom-art-request">
+                                    <MyCustomRequest/>
                                 </Route>
                             </Switch>
                         
