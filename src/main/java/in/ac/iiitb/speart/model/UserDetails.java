@@ -1,6 +1,9 @@
 package in.ac.iiitb.speart.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,8 +46,10 @@ public class UserDetails implements Serializable {
 //    @ManyToMany(mappedBy = "users")
 //    Set<PaintingRepoDetails> painting;
 
+//    @JsonBackReference()
+    @JsonIgnore
     @OneToMany(mappedBy = "userMO")
-    List<ArtCustomTrial> artCustomizationDetails;
+    public List<ArtCustomTrial> artCustomizationDetails;
 
 
     public UserDetails() {

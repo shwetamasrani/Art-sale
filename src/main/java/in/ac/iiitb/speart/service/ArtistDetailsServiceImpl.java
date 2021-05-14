@@ -55,7 +55,7 @@ public class ArtistDetailsServiceImpl implements ArtistDetailsService{
             ArtistDetails retArtist = artistDetailsDao.save(art);
 //        Set<UserDetails> hs = new HashSet<>();
 //        hs.add(userDetails);
-            paintingRepoDetails.setUsers(paintingRepoDetails.getUsers());
+//            paintingRepoDetails.setUsers(paintingRepoDetails.getUsers());
 //        paintingRepoDetails.setPainting_image(file.getBytes());
             paintingRepoDetails.setPainting_name(art.getSample_image_name());
             paintingRepoDetails.setArtistDetails(art);

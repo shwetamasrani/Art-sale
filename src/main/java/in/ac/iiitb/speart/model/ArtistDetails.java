@@ -1,10 +1,13 @@
 package in.ac.iiitb.speart.model;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -34,8 +37,10 @@ public class ArtistDetails implements Serializable {
         private String sample_image_name;
 
 
+//        @JsonBackReference(value = "artistBack")
+        @JsonIgnore
         @OneToMany(mappedBy = "artistDetails3")
-        List<ArtCustomTrial> artCustomizationDetails;
+        public List<ArtCustomTrial> artCustomizationDetails;
 
 
 

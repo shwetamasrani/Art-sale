@@ -59,10 +59,10 @@ public class PaintingRepoDetails implements Serializable {
     @Column
     private String contentType;
 
-    @ManyToMany
-    @JsonIgnoreProperties(value = {"painting"})
-    @JoinTable(name = "painting_buyer", joinColumns = @JoinColumn(name = "p_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<UserDetails> users;
+//    @ManyToMany
+//    @JsonIgnoreProperties(value = {"painting"})
+//    @JoinTable(name = "painting_buyer", joinColumns = @JoinColumn(name = "p_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private Set<UserDetails> users;
 
 
 
@@ -156,13 +156,13 @@ public class PaintingRepoDetails implements Serializable {
 //        this.artistDetails1 = artistDetails1;
 //    }
 
-    public Set<UserDetails> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UserDetails> users) {
-        this.users = users;
-    }
+//    public Set<UserDetails> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<UserDetails> users) {
+//        this.users = users;
+//    }
 
     public String getContentType() {
         return contentType;
@@ -202,14 +202,14 @@ public class PaintingRepoDetails implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaintingRepoDetails that = (PaintingRepoDetails) o;
-        return p_id.equals(that.p_id)&& Objects.equals(artistDetails, that.artistDetails) && Objects.equals(category, that.category) && Objects.equals(price, that.price) && Objects.equals(highest_price, that.highest_price) && Objects.equals(artistDetails2, that.artistDetails2) && Objects.equals(date_of_purchase, that.date_of_purchase) && Arrays.equals(painting_image, that.painting_image) && Objects.equals(painting_name, that.painting_name) && Objects.equals(contentType, that.contentType) && Objects.equals(users, that.users) && Objects.equals(bidding_end_date, that.bidding_end_date);
+        return p_id.equals(that.p_id)&& Objects.equals(artistDetails, that.artistDetails) && Objects.equals(category, that.category) && Objects.equals(price, that.price) && Objects.equals(highest_price, that.highest_price) && Objects.equals(artistDetails2, that.artistDetails2) && Objects.equals(date_of_purchase, that.date_of_purchase) && Arrays.equals(painting_image, that.painting_image) && Objects.equals(painting_name, that.painting_name) && Objects.equals(contentType, that.contentType) && Objects.equals(bidding_end_date, that.bidding_end_date);
 
 
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(p_id, artistDetails, category, price, highest_price, artistDetails2, date_of_purchase, painting_name, contentType, users, bidding_end_date);
+        int result = Objects.hash(p_id, artistDetails, category, price, highest_price, artistDetails2, date_of_purchase, painting_name, contentType, bidding_end_date);
         result = 31 * result + Arrays.hashCode(painting_image);
         return result;
     }
