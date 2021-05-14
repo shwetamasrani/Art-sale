@@ -167,6 +167,13 @@ public class UserDetails implements Serializable {
 //    }
 
 
+    public List<ArtCustomTrial> getArtCustomizationDetails() {
+        return artCustomizationDetails;
+    }
+
+    public void setArtCustomizationDetails(List<ArtCustomTrial> artCustomizationDetails) {
+        this.artCustomizationDetails = artCustomizationDetails;
+    }
 
     @Override
     public boolean equals(Object o) {

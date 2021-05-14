@@ -35,7 +35,7 @@ public class ArtistDetails implements Serializable {
 
 
         @OneToMany(mappedBy = "artistDetails3")
-        List<ArtCustomizationDetails> artCustomizationDetails;
+        List<ArtCustomTrial> artCustomizationDetails;
 
 
 
@@ -125,11 +125,11 @@ public class ArtistDetails implements Serializable {
                 }
         }
 
-        public List<ArtCustomizationDetails> getArtCustomizationDetails() {
+        public List<ArtCustomTrial> getArtCustomizationDetails() {
                 return artCustomizationDetails;
         }
 
-        public void setArtCustomizationDetails(List<ArtCustomizationDetails> artCustomizationDetails) {
+        public void setArtCustomizationDetails(List<ArtCustomTrial> artCustomizationDetails) {
                 this.artCustomizationDetails = artCustomizationDetails;
         }
 }
