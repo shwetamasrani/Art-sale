@@ -20,7 +20,7 @@ public class ArtCustomizationDaoImpl implements ArtCustomizationDao{
     @Override
     public List<ArtCustomTrial> get(Integer artistId) {
         Session session = entityManager.unwrap(Session.class);
-        Query query = entityManager.createNativeQuery("select * from art_customization_trial where artist_customizer =:artist_id", ArtCustomTrial.class);
+        Query query = entityManager.createNativeQuery("select * from art_customization_trial where artist_MO =:artist_id", ArtCustomTrial.class);
         query.setParameter("artist_id", artistId);
         return query.getResultList();
     }
@@ -78,7 +78,7 @@ public class ArtCustomizationDaoImpl implements ArtCustomizationDao{
     @Override
     public List<ArtCustomTrial> getCustOrdersList(Integer buyer_id) {
         Session session = entityManager.unwrap(Session.class);
-        Query query = entityManager.createNativeQuery("select * from art_customization_trial where buyer_id =:artist_id", ArtCustomTrial.class);
+        Query query = entityManager.createNativeQuery("select * from art_customization_trial where buyer_id_MO =:artist_id", ArtCustomTrial.class);
         query.setParameter("artist_id", buyer_id);
         return query.getResultList();
     }

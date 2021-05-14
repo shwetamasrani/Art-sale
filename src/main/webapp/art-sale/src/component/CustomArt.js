@@ -5,84 +5,84 @@ import AuthContext from '../stores/auth-context';
 
 class CustomArt extends Component {
 
-    
-        constructor(props) {
-            super(props);
-            //const authCtx = useContext(AuthContext);
-            this.state = {
-                typeOfArt: "Landscape",
-                paper: "",
-                quantity: "",
-                artLocation: "",
-                use: "",
-                image: "",
-                description: "",
-                user_id: JSON.parse(localStorage.getItem('token')).user_id
-            }
-            this.handleChange = this.handleChange.bind(this);
-            console.log("From constructor",this.state.user_id)
-            this.handleClick = this.handleClick.bind(this);
-            
+
+    constructor(props) {
+        super(props);
+        //const authCtx = useContext(AuthContext);
+        this.state = {
+            typeOfArt: "Landscape",
+            paper: "",
+            quantity: "",
+            artLocation: "",
+            use: "",
+            image: "",
+            description: "",
+            user_id: JSON.parse(localStorage.getItem('token')).user_id
+        }
+        this.handleChange = this.handleChange.bind(this);
+        console.log("From constructor",this.state.user_id)
+        this.handleClick = this.handleClick.bind(this);
+
+    }
+
+    handleChange(event) {
+        const {name, value} = event.target;
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleImage = (e) => {
+
+
+        this.setState({
+            image: e.target.files[0]
+        })
+    }
+
+    handleClick(event){
+        event.preventDefault();
+        const user = JSON.parse(localStorage.getItem('token'));
+        this.setState({
+            user_id: user.user_id
+        })
+        let request = {
+            buyer_id : JSON.parse(localStorage.getItem('token')).user_id,
+            type_of_art: this.state.typeOfArt,
+            paper_canvas : this.state.paper,
+            art_location : this.state.artLocation,
+            quantity : this.state.quantity,
+            art_use : this.state.use,
+            description : this.state.description
         }
 
-        handleChange(event) {
-            const {name, value} = event.target;
-            this.setState({
-                [name]: value
-            });
-        }
 
-        handleImage = (e) => {
+        console.log("Submit")
+        console.log(request);
+        UserService.requestCustomArt(request).then(res=>{
+            console.log(res.data)
 
-            
-            this.setState({
-                image: e.target.files[0]
-            })
-        }
-
-        handleClick(event){
-            event.preventDefault();
-            const user = JSON.parse(localStorage.getItem('token'));
-            this.setState({
-                user_id: user.user_id
-            })
-            let request = {
-                    buyer_id : JSON.parse(localStorage.getItem('token')).user_id,
-                    type_of_art: this.state.typeOfArt,
-                    paper_canvas : this.state.paper,
-                    art_location : this.state.artLocation,
-                    quantity : this.state.quantity,
-                    art_use : this.state.use,
-                    description : this.state.description
-                }
-
-            
-            console.log("Submit")
-            console.log(request);
-            UserService.requestCustomArt(request).then(res=>{
-                    console.log(res.data)
-
-                    if (res.data.custom_id)
-                    {
-                        let form_data = new FormData();
-                        form_data.append('file', this.state.image, this.state.image.name);
-                        form_data.append('custom_id', res.data.custom_id);
-                        form_data.append('buyer_id',request.buyer_id);
-                        console.log("form_data",form_data);
-                        UserService.saveReferenceImage(form_data).then(response=>{
-                            console.log(response);
-                        }).catch(err=>{
-                            console.log(err);
-                        })
-                    }
-                    
-            }).catch(err=>{
+            if (res.data.custom_id)
+            {
+                let form_data = new FormData();
+                form_data.append('file', this.state.image, this.state.image.name);
+                form_data.append('custom_id', res.data.custom_id);
+                form_data.append('buyer_id',request.buyer_id);
+                console.log("form_data",form_data);
+                UserService.saveReferenceImage(form_data).then(response=>{
+                    console.log(response);
+                }).catch(err=>{
                     console.log(err);
-            })
-        }
+                })
+            }
+
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
 
 
-        render() {
+    render() {
         return(
             <form>
                 <h3>Request for a Customized Art piece</h3>
@@ -189,7 +189,7 @@ class CustomArt extends Component {
                 <button type="submit"
                         className="btn btn-dark btn-lg btn-block"
                         onClick={this.handleClick}
-                        >Submit</button>
+                >Submit</button>
 
             </form>
         );

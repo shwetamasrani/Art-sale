@@ -34,6 +34,7 @@ public class SpeartApplication {
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.
                 basePackage("in.ac.iiitb.speart.controller")).build();
     }
+
     private ApiInfo metaData() {
         ApiInfo apiInfo = new ApiInfo(
                 "Art Sale APIs",
@@ -43,6 +44,22 @@ public class SpeartApplication {
                 "Kanchan And Shweta", "https://art_sale", "kanchanshweta@art_Sale");
         return apiInfo;
     }
+
+    @Bean
+    public DataSource getDataSource() {
+        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
+        String url = System.getenv("DATABASE_HOST");
+        if (url != null) {
+            dataSourceBuilder.url("jdbc:mysql://artSale-mysql:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
+        } else {
+            dataSourceBuilder.url("jdbc:mysql://localhost:3306/artSaleDatabase?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
+        }
+        dataSourceBuilder.username("artSalePortal");
+        dataSourceBuilder.password("artSalePortal16!");
+        return dataSourceBuilder.build();
+    }
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
@@ -56,18 +73,5 @@ public class SpeartApplication {
         };
     }
 
-//    @Bean
-//    public DataSource getDataSource() {
-//        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-//        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-//        String url = System.getenv("DATABASE_HOST");
-//        if(url !=null){
-//            dataSourceBuilder.url("jdbc:mysql://artSale-mysql:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
-//        }else{
-//            dataSourceBuilder.url("jdbc:mysql://localhost:3306/art_spe3?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10");
-//        }
-//        dataSourceBuilder.username("root");
-//        dataSourceBuilder.password("GOforkanchu@67!");
-//        return dataSourceBuilder.build();
-//    }
+
 }

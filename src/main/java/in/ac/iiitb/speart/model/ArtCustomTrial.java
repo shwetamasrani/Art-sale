@@ -20,24 +20,24 @@ public class ArtCustomTrial implements Serializable {
 //    private List<UserDetails> userDetails1;
 
 
-//    //
-//    @ManyToOne
-//    @JoinColumn(name = "buyer_id_MO")
-//    private UserDetails userMO;
+    //
+    @ManyToOne
+    @JoinColumn(name = "buyer_id_MO")
+    private UserDetails userMO;
 
     //    //Remove this
     @OneToOne
-    @JoinColumn(name = "buyer_id")
+    @JoinColumn(name = "buyer_id", unique = false)
     private UserDetails userDetails;
 
     //Remove this
     @OneToOne
-    @JoinColumn(name = "artist_customizer")
+    @JoinColumn(name = "artist_customizer", unique = false)
     private ArtistDetails artistDetails;
 
-//    @ManyToOne
-//    @JoinColumn(name = "artist_MO")
-//    private ArtistDetails artistDetails3;
+    @ManyToOne
+    @JoinColumn(name = "artist_MO")
+    private ArtistDetails artistDetails3;
 
     @Column
     private String type_of_art;
@@ -140,15 +140,15 @@ public class ArtCustomTrial implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-//
-//    public ArtistDetails getArtistDetails3() {
-//        return artistDetails3;
-//    }
-//
-//    public void setArtistDetails3(ArtistDetails artistDetails3) {
-//        this.artistDetails3 = artistDetails3;
-//    }
-//
+
+    public ArtistDetails getArtistDetails3() {
+        return artistDetails3;
+    }
+
+    public void setArtistDetails3(ArtistDetails artistDetails3) {
+        this.artistDetails3 = artistDetails3;
+    }
+
 
 //    public List<UserDetails> getUserDetails1() {
 //        return userDetails1;
@@ -158,11 +158,11 @@ public class ArtCustomTrial implements Serializable {
 //        this.userDetails1 = userDetails1;
 //    }
 //
-//    public UserDetails getUserMO() {
-//        return userMO;
-//    }
-//
-//    public void setUserMO(UserDetails userMO) {
-//        this.userMO = userMO;
-//    }
+    public UserDetails getUserMO() {
+        return userMO;
+    }
+
+    public void setUserMO(UserDetails userMO) {
+        this.userMO = userMO;
+    }
 }

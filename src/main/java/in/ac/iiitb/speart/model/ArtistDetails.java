@@ -4,13 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Arrays;
+import java.util.List;
 
 
 @Entity
 @Table(name = "artist_details")
 public class ArtistDetails implements Serializable {
-
-
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +32,11 @@ public class ArtistDetails implements Serializable {
 
         @Column
         private String sample_image_name;
+
+
+        @OneToMany(mappedBy = "artistDetails3")
+        List<ArtCustomTrial> artCustomizationDetails;
+
 
 
         public ArtistDetails() {
@@ -119,5 +123,13 @@ public class ArtistDetails implements Serializable {
                 if (!user.equals(this.userDetails)){
                         this.userDetails=user;
                 }
+        }
+
+        public List<ArtCustomTrial> getArtCustomizationDetails() {
+                return artCustomizationDetails;
+        }
+
+        public void setArtCustomizationDetails(List<ArtCustomTrial> artCustomizationDetails) {
+                this.artCustomizationDetails = artCustomizationDetails;
         }
 }

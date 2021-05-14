@@ -43,8 +43,8 @@ public class UserDetails implements Serializable {
 //    @ManyToMany(mappedBy = "users")
 //    Set<PaintingRepoDetails> painting;
 
-//    @OneToMany(mappedBy = "userMO")
-//    List<ArtCustomizationDetails> artCustomizationDetails;
+    @OneToMany(mappedBy = "userMO")
+    List<ArtCustomTrial> artCustomizationDetails;
 
 
     public UserDetails() {
@@ -158,19 +158,30 @@ public class UserDetails implements Serializable {
 //        this.painting = painting;
 //    }
 
-    // public List<PaintingBuyerMM> getActivities() {
-    //     return activities;
-    // }
+//    public List<PaintingBuyerMM> getActivities() {
+//        return activities;
+//    }
+//
+//    public void setActivities(List<PaintingBuyerMM> activities) {
+//        this.activities = activities;
+//    }
 
-    // public void setActivities(List<PaintingBuyerMM> activities) {
-    //     this.activities = activities;
-    // }
+
+    public List<ArtCustomTrial> getArtCustomizationDetails() {
+        return artCustomizationDetails;
+    }
+
+    public void setArtCustomizationDetails(List<ArtCustomTrial> artCustomizationDetails) {
+        this.artCustomizationDetails = artCustomizationDetails;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof UserDetails)) return false;
         UserDetails that = (UserDetails) o;
+
         return log_status == that.log_status && user_id.equals(that.user_id)  && Objects.equals(first_name, that.first_name) && Objects.equals(last_name, that.last_name) && Objects.equals(email_address, that.email_address) && Objects.equals(password, that.password) && Objects.equals(contact_no, that.contact_no) && Objects.equals(address, that.address) && Objects.equals(user_category, that.user_category) ;
     }
 
