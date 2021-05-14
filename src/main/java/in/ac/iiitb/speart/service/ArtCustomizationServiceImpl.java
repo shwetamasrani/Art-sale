@@ -65,13 +65,14 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
         CustomizedRequestStatusTrial cust_trial = new CustomizedRequestStatusTrial();
         user.setUser_id(buyer_id);
         art.setUserMO(user);
-        artCustomTrial.setUserDetails(user);
+//        artCustomTrial.setUserDetails(user);
+        artCustomTrial.setUserMO(user);
         ArtistDetails artist = new ArtistDetails();
         artist.setArtist_id(artist_customizer);
         List<ArtistDetails> li = new ArrayList<>();
         li.add(artist);
         art.setArtistDetails3(artist);
-        artCustomTrial.setArtistDetails(artist);
+//        artCustomTrial.setArtistDetails(artist);
         art.setArt_location(art_loc);
         artCustomTrial.setArt_location(art_loc);
         art.setArt_use(art_use);

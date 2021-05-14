@@ -64,12 +64,12 @@ public class RequestCommentsController {
         RequestCommentsAPI requestCommentsAPI1 = new RequestCommentsAPI();
         requestCommentsAPI1.setComments(artCustomizationCommentsTrial1.getComments());
         requestCommentsAPI1.setStatus_artist_id(artCustomizationCommentsTrial1.getArtistDetails().getArtist_id());
-        requestCommentsAPI1.setStatus_custom_id(artCustomizationCommentsTrial1.getArtCustomizationDetails().getUserDetails().getUser_id());
+        requestCommentsAPI1.setStatus_custom_id(artCustomizationCommentsTrial1.getArtCustomizationDetails().getUserMO().getUser_id());
         requestCommentsAPI1.setComments_id(artCustomizationCommentsTrial1.getComments_id());
         System.out.println(requestCommentsAPI.getComments());
         ArtCustomTrial artCustomTrial = artCustomizationService.getCustReq(requestCommentsAPI.getStatus_custom_id());
         ArtistDetails approvedArtist = artistDetailsService.getApprovedArtistProfile(requestCommentsAPI.getStatus_artist_id());
-        artCustomTrial.setArtistDetails(approvedArtist);
+//        artCustomTrial.setArtistDetails(approvedArtist);
         artCustomTrial.setArtistDetails3(approvedArtist);
         artCustomTrial = artCustomizationService.saveApprovedArtist(artCustomTrial);
         return new ResponseEntity<RequestCommentsAPI>(requestCommentsAPI1, HttpStatus.ACCEPTED);
