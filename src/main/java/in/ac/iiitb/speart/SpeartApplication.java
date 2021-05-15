@@ -68,7 +68,7 @@ public class SpeartApplication {
                 registry.addMapping("/**")
                         .allowedMethods("GET","POST","PUT","DELETE")
                         .allowedHeaders("*")
-                        .allowedOrigins("http://localhost:3000");
+                        .allowedOrigins("http://172.18.0.3:3000");
             }
         };
     }
