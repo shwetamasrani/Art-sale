@@ -30,4 +30,6 @@ public interface PaintingRepoDetailsDao {
     PaintingRepoDetails getPaintingDetailsByPID(Integer painting_id);
 
     List<PaintingRepoDetails> getAllConfBidsByUserID(Integer bidder_conf_id);
+
+    List<Object> getAllBiddingsActive(Integer bidder_id);
 }

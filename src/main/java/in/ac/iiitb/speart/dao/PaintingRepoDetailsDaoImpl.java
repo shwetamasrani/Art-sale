@@ -165,4 +165,14 @@ public class PaintingRepoDetailsDaoImpl implements PaintingRepoDetailsDao{
         return query.getResultList();
     }
 
+    @Override
+    public List<Object> getAllBiddingsActive(Integer bidder_id) {
+        Session session = entityManager.unwrap(Session.class);
+        Query query = session.createNativeQuery("select painting_repo.p_id, painting_repo.painting_image, painting_repo.artist_id, painting_repo.highest_bidder_id_conf, " +
+                "painting_repo.category, painting_repo.bidding_end_date, painting_repo.price, painting_repo.highest_price, painting_repo.date_of_purchase, painting_repo.painting_name," +
+                "painting_buyer_trial.user_id, painting_buyer_trial.bidded_price, painting_buyer_trial.bidded_date from painting_repo, painting_buyer_trial where painting_repo.p_id = painting_buyer_trial.p_id and painting_buyer_trial.user_id = :bidderID");
+        query.setParameter("bidderID", bidder_id);
+        return query.getResultList();
+    }
+
 }

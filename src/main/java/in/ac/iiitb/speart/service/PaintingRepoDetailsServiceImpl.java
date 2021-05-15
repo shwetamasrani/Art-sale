@@ -109,4 +109,9 @@ public class PaintingRepoDetailsServiceImpl implements PaintingRepoDetailsServic
         return paintingRepoDetailsDao.getAllConfBidsByUserID(bidder_conf_id);
     }
 
+    @Override
+    public List<Object> getAllBiddingsActive(Integer bidder_id) {
+        return paintingRepoDetailsDao.getAllBiddingsActive(bidder_id);
+    }
+
 }

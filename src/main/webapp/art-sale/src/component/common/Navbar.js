@@ -84,6 +84,10 @@ const Navbar=() => {
                                     )}
 
                                     <li className="nav-item">
+                                        <Link className="nav-link" to='/my-bids'>My Bids</Link>
+                                    </li>
+
+                                    <li className="nav-item">
                                         <Link className="nav-link" to='/profile'>Profile</Link>
                                     </li>
 

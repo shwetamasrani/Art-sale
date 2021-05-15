@@ -27,6 +27,7 @@ class Dashboard extends Component {
             return (
                 <Painting
                     key={painting.p_id}
+                    p_id = {painting.p_id}
                     name={painting.painting_name}
                     artist={painting.artistDetails.userDetails.first_name +" "+ painting.artistDetails.userDetails.last_name}
                     price={painting.price}
