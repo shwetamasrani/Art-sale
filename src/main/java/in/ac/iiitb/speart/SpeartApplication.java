@@ -68,7 +68,7 @@ public class SpeartApplication {
                 registry.addMapping("/**")
                         .allowedMethods("GET","POST","PUT","DELETE")
                         .allowedHeaders("*")
-                        .allowedOrigins("http://artSale-react:3000");
+                        .allowedOrigins("http://localhost:3000");
             }
         };
     }

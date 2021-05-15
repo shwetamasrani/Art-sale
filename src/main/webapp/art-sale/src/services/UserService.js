@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const USER_API_BASE_URL="http://localhost:8095/"
-axios.defaults.baseURL = "http://artSale-spring:8099"
+axios.defaults.baseURL = "http://localhost:8099"
 class UserService{
 
     getUser(user)
