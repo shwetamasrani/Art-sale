@@ -5,7 +5,7 @@ class UserService{
 
     getUser(user)
     {
-        return axios.post(USER_API_BASE_URL+"addUser/login",user);
+        return axios.post("/addUser/login",user);
         // {headers: {
             //     Accept: 'application/json',
             //         'Content-Type': 'application/json',
@@ -17,18 +17,18 @@ class UserService{
     createUser(user)
     {
         console.log(user);
-        return axios.post(USER_API_BASE_URL+'addUser/userDetails',user);
+        return axios.post('/addUser/userDetails',user);
     }
 
     saveImage(artist){
-        return axios.post(USER_API_BASE_URL+"addUser/saveArtistSampleImage",artist,
+        return axios.post("/addUser/saveArtistSampleImage",artist,
             {headers: {
                     'content-type': 'multipart/form-data'
                 }});
     }
 
     saveReferenceImage(image){
-        return axios.post(USER_API_BASE_URL+"dashNavigationMenu/getArtCustmizedSampleImage",image,
+        return axios.post("/dashNavigationMenu/getArtCustmizedSampleImage",image,
             {headers: {
                     'content-type': 'multipart/form-data'
                 }}
@@ -36,12 +36,12 @@ class UserService{
     }
 
     requestCustomArt(request){
-        return axios.post(USER_API_BASE_URL+"dashNavigationMenu/getArtCustomized",request);
+        return axios.post("/dashNavigationMenu/getArtCustomized",request);
     }
 
     viewProfile(email)
     {
-        let URL = USER_API_BASE_URL+"dashNavigationMenu/getMyProfile/" + email;
+        let URL = "/dashNavigationMenu/getMyProfile/" + email;
         console.log(URL);
         return axios.get(URL);
     }

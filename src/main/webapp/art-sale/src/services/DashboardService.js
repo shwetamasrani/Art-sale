@@ -5,7 +5,7 @@ class DashboardService{
 
     getAllPaintings()
     {
-        return axios.get(USER_API_BASE_URL+"/dashboard/getPaintings");
+        return axios.get("/dashboard/getPaintings");
 
     }
 
