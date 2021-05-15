@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Redirect} from "react-router-dom"
 import axios from 'axios';
+import UserService from '../services/UserService'
+
 class comment extends Component {
 
     constructor(props){
@@ -9,6 +11,8 @@ class comment extends Component {
         this.state = 
         {
             details: this.props.location.details,
+            email: JSON.parse(localStorage.getItem('token')).email_address,
+            artist_id: "",
             comment: ""
         }
         this.handleChange = this.handleChange.bind(this);
@@ -23,26 +27,41 @@ class comment extends Component {
         });
     }
 
-    onClick(e) {
+    async onClick(e) {
 
-        let comment ={
-            comments : this.state.comment,
-            status_custom_id : ""+this.state.details.custom_id,
-            status_artist_id : ""+JSON.parse(localStorage.getItem('token')).user_id
-        }
-
-        console.log(JSON.stringify(comment));
-        axios.post("http://localhost:8090/artistComments/saveCommentsByArtist",JSON.stringify(comment),{
-            headers: {'Content-Type': 'application/json'}
+        this.setState({
+            email: JSON.parse(localStorage.getItem('token')).email_address
         })
-        .then(res=>{
+
+        await UserService.viewProfile(this.state.email).then(res=>{
             console.log(res.data);
-            console.log(res.status)
-            this.props.history.push({pathname:'/art-request'});
-            
+            console.log("Artistid",res.data.object[0])
+            this.setState({
+                artist_id: res.data.object[0]
+            })
+            let comment ={
+                comments : this.state.comment,
+                status_custom_id : this.state.details.custom_id,
+                status_artist_id : this.state.artist_id
+            }
+    
+            console.log(JSON.stringify(comment));
+            axios.post("http://localhost:8090/artistComments/saveCommentsByArtist",JSON.stringify(comment),{
+                headers: {'Content-Type': 'application/json'}
+            })
+            .then(res=>{
+                console.log(res.data);
+                console.log(res.status)
+                this.props.history.push({pathname:'/art-request'});
+                
+            }).catch(err=>{
+                console.log(err);
+            });
         }).catch(err=>{
             console.log(err);
-        });
+        })
+
+       
     }
 
     render() {

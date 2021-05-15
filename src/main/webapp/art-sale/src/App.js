@@ -14,6 +14,7 @@ import Layout from './component/common/Layout';
 import CustomRequestsArtist from './component/CustomRequestsArtist';
 import MyCustomRequest from './component/buyer/MyCustomRequest';
 import comment from './component/comment';
+import ViewComments from './component/buyer/ViewComments';
 
 class App extends React.Component {
     // constructor(props) {
@@ -56,9 +57,7 @@ class App extends React.Component {
                                 <Route path="/dashboard">
                                     <Dashboard/>
                                 </Route>
-                                <Route path="/custom-art">
-                                    <CustomArt/>
-                                </Route>
+                                <Route path="/custom-art" component={CustomArt}/>
                                 <Route path="/register-artist">
                                     <RegisterArtist/>
                                 </Route>
@@ -68,9 +67,8 @@ class App extends React.Component {
                                 <Route path="/art-request" component={CustomRequestsArtist}/>
                                 <Route path="/comment" component={comment}/>
 
-                                <Route path="/custom-art-request">
-                                    <MyCustomRequest/>
-                                </Route>
+                                <Route path="/custom-art-request" component={MyCustomRequest}/>
+                                <Route path="/view-comments" component={ViewComments}/>
                             </Switch>
                         
                     {/* </div> */}

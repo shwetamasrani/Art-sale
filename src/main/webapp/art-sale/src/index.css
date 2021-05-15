@@ -95,3 +95,8 @@ main{
 .forgot-password a {
   color: #167bff;
 }
+
+.commentContainer{
+  display: flex;
+  flex-direction: column;
+}

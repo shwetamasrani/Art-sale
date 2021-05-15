@@ -71,6 +71,7 @@ class CustomArt extends Component {
                 console.log("form_data",form_data);
                 UserService.saveReferenceImage(form_data).then(response=>{
                     console.log(response);
+                    this.props.history.push({pathname:'/custom-art-request'});
                 }).catch(err=>{
                     console.log(err);
                 })

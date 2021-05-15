@@ -31,6 +31,7 @@ class MyCustomRequest extends Component {
                <Fragment>
                     <BuyerRequest
                         key={request.custom_id}
+                        custom_id={request.custom_id}
                         buyer={request.userMO.first_name +" "+ request.userMO.last_name}
                         refimg={request.ref_art_image}
                         type={request.type_of_art}
@@ -39,6 +40,8 @@ class MyCustomRequest extends Component {
                         loc={request.art_location}
                         use={request.art_use}
                         desc={request.description}
+                        artist={request.artistDetails3}
+                        history= {this.props.history}
                     />
             </Fragment>
             )

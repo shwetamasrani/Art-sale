@@ -17,6 +17,7 @@ class Profile extends Component {
 
         UserService.viewProfile(this.state.email).then(res=>{
             console.log(res.data);
+            console.log("Artistid",res.data.object[0])
         }).catch(err=>{
             console.log(err);
         })
