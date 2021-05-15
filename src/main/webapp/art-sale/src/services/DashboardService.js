@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const USER_API_BASE_URL="http://artSale-spring:8099/"
+axios.defaults.baseURL = "http://artSale-spring:8099"
+
 class DashboardService{
 
     getAllPaintings()
