@@ -31,7 +31,7 @@ class MyCustomRequest extends Component {
                <Fragment>
                     <BuyerRequest
                         key={request.custom_id}
-                        buyer={request.userDetails.first_name +" "+ request.userDetails.last_name}
+                        buyer={request.userMO.first_name +" "+ request.userMO.last_name}
                         refimg={request.ref_art_image}
                         type={request.type_of_art}
                         paper={request.paper_canvas}

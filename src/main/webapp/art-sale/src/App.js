@@ -13,6 +13,7 @@ import Profile from "./component/Profile";
 import Layout from './component/common/Layout';
 import CustomRequestsArtist from './component/CustomRequestsArtist';
 import MyCustomRequest from './component/buyer/MyCustomRequest';
+import comment from './component/comment';
 
 class App extends React.Component {
     // constructor(props) {
@@ -64,9 +65,9 @@ class App extends React.Component {
                                 <Route path="/profile">
                                     <Profile/>
                                 </Route>
-                                <Route path="/art-request">
-                                    <CustomRequestsArtist/>
-                                </Route>
+                                <Route path="/art-request" component={CustomRequestsArtist}/>
+                                <Route path="/comment" component={comment}/>
+
                                 <Route path="/custom-art-request">
                                     <MyCustomRequest/>
                                 </Route>

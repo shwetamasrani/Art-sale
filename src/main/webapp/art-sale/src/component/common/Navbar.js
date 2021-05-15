@@ -8,12 +8,25 @@ const Navbar=() => {
     const history = useHistory();
     const authCtx = useContext(AuthContext);
 
+    // const [isArtist, setisArtist] = useState(false);
+
     const isLoggedIn = authCtx.isLoggedIn;
-    let isArtist = authCtx.isArtist;
-    console.log("isArtist",isArtist);
+    const isArtist = authCtx.isArtist;
+    // if(isLoggedIn)
+    // {
+    //      const flag = JSON.parse(authCtx.token).user_category === "artist" ? true : false;
+    //      setisArtist(flag);
+    // }
+   
+    console.log("const",isArtist);
     useEffect(() =>{
         console.log("navbar")
         console.log("isArtist",isArtist);
+        // if(isLoggedIn)
+        // {
+        // const flag = JSON.parse(authCtx.token).user_category === "artist" ? true : false;
+            // setisArtist(authCtx.isArtist);
+        // }
         // if (isLoggedIn)
         // {
         //     const user = authCtx.token;
@@ -23,7 +36,7 @@ const Navbar=() => {
         //     console.log("isArtist",isArtist);
         //     console.log(isLoggedIn);
         // }
-    },[isLoggedIn,isArtist]); 
+    },[isLoggedIn]); 
     
    
     // const isArtist = userLoggedIn.user_category === "artist" ? "true" : "false";
@@ -53,7 +66,9 @@ const Navbar=() => {
                                     </li>
                                 </Fragment>
                             )}
-                            {isLoggedIn && (
+                    {isLoggedIn && (
+
+                                
                                 <Fragment>
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/dashboard'>Dashboard</Link>
@@ -61,15 +76,23 @@ const Navbar=() => {
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/custom-art'>CustomArt</Link>
                                     </li>
+
+                                    {!isArtist && (
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/register-artist'>Register Artist</Link>
                                     </li>
+                                    )}
+
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/profile'>Profile</Link>
                                     </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to='/art-request'>Art Requests</Link>
-                                    </li>
+
+                                    {isArtist && (
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to='/art-request'>Art Requests</Link>
+                                        </li>
+                                     )}
+                                    
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/custom-art-request'>My Custom Art Requests</Link>
                                     </li>
@@ -78,6 +101,8 @@ const Navbar=() => {
                                     </li>
                                 </Fragment>
                             )}
+
+
                             {/* {!isArtist && (
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/register-artist'>Register Artist</Link>

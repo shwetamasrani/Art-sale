@@ -23,7 +23,7 @@ export default class BuyerRequest extends Component {
                 {/* <div href="" style={{width: '30rem'}} ></div> */}
                     <img src={"data:image/jpg;base64," + this.state.refimg} style={{width: '18rem'}}/>
                     <div className="details">
-                        <p>Customer Name:{this.state.buyer}</p>
+                        {/* <p>Customer Name:{this.state.buyer}</p> */}
                         <p>Type of Art: {this.state.type}</p>
                         <p>Meduim of Paper: {this.state.paper}</p>
                         <p>Number of Art Piece: {this.state.quant}</p>
