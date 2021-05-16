@@ -47,7 +47,7 @@ const Login = (props) => {
             console.log(res);
 
             const expirationTime = new Date(
-                new Date().getTime() + 600000
+                new Date().getTime() + 90000000
             );
             authCtx.login(res.data, expirationTime.toISOString());
 

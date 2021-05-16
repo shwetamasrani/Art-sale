@@ -27,9 +27,10 @@ class CustomRequestsArtist extends Component {
         const Requests = this.state.requests.map((request) => {
             return (
                <Fragment>
-                {!request.artistDetails && 
+                {!request.artistDetails3 && 
                     <ArtRequest
                         key={request.custom_id}
+                        custom_id={request.custom_id}
                         buyer={request.userMO.first_name +" "+ request.userMO.last_name}
                         refimg={request.ref_art_image}
                         type={request.type_of_art}
@@ -38,6 +39,7 @@ class CustomRequestsArtist extends Component {
                         loc={request.art_location}
                         use={request.art_use}
                         desc={request.description}
+                        history= {this.props.history}
                     />
                 }
             </Fragment>

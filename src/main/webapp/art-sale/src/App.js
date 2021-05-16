@@ -13,6 +13,9 @@ import Profile from "./component/Profile";
 import Layout from './component/common/Layout';
 import CustomRequestsArtist from './component/CustomRequestsArtist';
 import MyCustomRequest from './component/buyer/MyCustomRequest';
+import comment from './component/comment';
+import ViewComments from './component/buyer/ViewComments';
+import MyBids from './component/buyer/MyBids';
 
 class App extends React.Component {
     // constructor(props) {
@@ -46,30 +49,21 @@ class App extends React.Component {
                                 <Route exact path='/'>
                                     <Login/>
                                 </Route>
-                                <Route path="/sign-in" >
-                                    <Login/>
-                                </Route>
-                                <Route path="/sign-up">
-                                    <SignUp/>
-                                </Route>
-                                <Route path="/dashboard">
-                                    <Dashboard/>
-                                </Route>
-                                <Route path="/custom-art">
-                                    <CustomArt/>
-                                </Route>
-                                <Route path="/register-artist">
-                                    <RegisterArtist/>
-                                </Route>
+                                <Route path="/sign-in" component={Login}/>
+                                <Route path="/sign-up" component={SignUp}/>
+                                   
+                                <Route path="/dashboard" component={Dashboard}/>
+                                <Route path="/custom-art" component={CustomArt}/>
+                                <Route path="/register-artist" component={RegisterArtist}/>
+                                    
                                 <Route path="/profile">
                                     <Profile/>
                                 </Route>
-                                <Route path="/art-request">
-                                    <CustomRequestsArtist/>
-                                </Route>
-                                <Route path="/custom-art-request">
-                                    <MyCustomRequest/>
-                                </Route>
+                                <Route path="/art-request" component={CustomRequestsArtist}/>
+                                <Route path="/comment" component={comment}/>
+                                <Route path="/my-bids" component={MyBids}/>
+                                <Route path="/custom-art-request" component={MyCustomRequest}/>
+                                <Route path="/view-comments" component={ViewComments}/>
                             </Switch>
                         
                     {/* </div> */}

@@ -46,21 +46,21 @@ export const AuthContextProvider = (props) => {
     const tokenData = retrieveStoredToken();
 
     let initialToken;
+    let flag;
     if (tokenData) {
         initialToken = tokenData.token;
+        flag = tokenData.token.user_category === "artist" ? true : false;
     }
 
     const [token, setToken] = useState(initialToken);
+    const [userIsArtist, setuserIsArtist] = useState(flag);
 
     const userIsLoggedIn = !!token;
-    let userIsArtist = false;
-    if(userIsLoggedIn)
-    {
-      userIsArtist = token;
-    }
-    
-
-
+    // const userIsArtist;
+    // if(userIsLoggedIn)
+    // {
+    //     setuserIsArtist(token.user_category === "artist" ? true : false);
+    // }
 
     const logoutHandler = useCallback(() => {
         setToken(null);
@@ -75,12 +75,14 @@ export const AuthContextProvider = (props) => {
 
     const loginHandler = (token, expirationTime) => {
         setToken(token);
-        console.log("From auth context",token);
-        console.log("userIsLoggedIn",userIsLoggedIn);
-        userIsArtist = token.user_category === "artist" ? true : false;
-        console.log("userIsArtist",userIsArtist);
+        setuserIsArtist(token.user_category === "artist" ? true : false);
+        // console.log("From auth context",token);
+        // console.log("userIsLoggedIn",userIsLoggedIn);
+        // userIsArtist = token.user_category === "artist" ? true : false;
+        // console.log("userIsArtist",userIsArtist);
         // console.log("isLoggedIn",isLoggedIn);
         //JSON.parse(localStorage.getItem('token'));
+
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('expirationTime', expirationTime);
 

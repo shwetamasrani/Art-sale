@@ -27,6 +27,7 @@ class Dashboard extends Component {
             return (
                 <Painting
                     key={painting.p_id}
+                    p_id = {painting.p_id}
                     name={painting.painting_name}
                     artist={painting.artistDetails.userDetails.first_name +" "+ painting.artistDetails.userDetails.last_name}
                     price={painting.price}
@@ -34,6 +35,7 @@ class Dashboard extends Component {
                     bidEnd = {painting.bidding_end_date}
                     category = {painting.category}
                     highestBid = {painting.highest_price}
+                    history={this.props.history}
                 />
             )
         })

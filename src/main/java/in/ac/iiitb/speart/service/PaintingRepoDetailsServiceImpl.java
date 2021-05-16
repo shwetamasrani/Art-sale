@@ -111,7 +111,6 @@ public class PaintingRepoDetailsServiceImpl implements PaintingRepoDetailsServic
 
     @Override
     public List<Object> getAllBiddingsActive(Integer bidder_id) {
-//        PaintingRepoAPI
         return paintingRepoDetailsDao.getAllBiddingsActive(bidder_id);
     }
 
