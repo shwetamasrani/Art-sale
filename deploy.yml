@@ -1,68 +1,71 @@
- 
----     
+---
+- name: Pull and run sql image
+  hosts: all
+  remote_user: remoteuser
+  tasks:
+    - name: Pull sql image
+      docker_image:
+        name: artSale-mysql
+        pull: yes
+
+    - name: "Launch database container"
+      docker_container:
+        name: "artSale-mysql"
+        image: mysql:8.0.20
+        volumes:
+          - "/var/lib/mysql:rw"
+        restart: yes
+        restart_policy: on-failure
+        networks:
+          -backend
+        exposed_ports:
+          - 8091
+
 - name: Pull and run springboot image
   hosts: all
+  remote_user: remoteuser
   tasks:
-  - name: Pull springboot image
-    docker_image:
-      name: kanchanmahajan67/spe_backend_springboot_wofrontend:latest
-      pull: yes
+    - name: Pull springboot image
+      docker_image:
+        name: kanchanmahajan67/spe-spring2:latest
+        pull: yes
 
-  - name: Running springboot image
-    docker_container:
-      name: springboot
-      image: kanchanmahajan67/spe_backend_springboot_wofrontend:latest
-      state: started
-      restart: yes
-      restart_policy : always
-      env: 
+    - name: Running springboot image
+      docker_container:
+        name: springboot
+        image: kanchanmahajan67/spe-spring2
+        state: started
+        restart: yes
+        restart_policy : on-failure
+        env:
           APP_NAME: "app"
-      exposed_ports:
-        - 8090
-      networks:
-        - name: backend
+          DATABASE_HOST: "artSale-mysql"
+        exposed_ports:
+          - 8099
+        networks:
+          - name: backend
 
 - name: Pull and run react image
   hosts: all
   remote_user: remoteuser
   tasks:
-  - name: Pull react image
-    docker_image:
-      name: kanchanmahajan67/spe_frontend_react_backwofront:latest
-      pull: yes
+    - name: Pull react image
+      docker_image:
+        name: kanchanmahajan67/spe-react2:latest
+        pull: yes
 
-  - name: Running react image
-    docker_container:
-      name: nginx
-      image: kanchanmahajan67/spe_frontend_react_backwofront:latest
-      state: started
-      restart: yes
-      restart_policy : always
-      ports:
-       - "80:80"
-      networks:
-        - name: frontend
+    - name: Running react image
+      docker_container:
+        name: nginx
+        image: kanchanmahajan67/spe_frontend_react_backwofront:latest
+        state: started
+        restart: yes
+        restart_policy : on-failure
+        ports:
+          - "80
+        networks:
+          - name: backend
 
-- name: Pull and run sql image
-  hosts: all
-  remote_user: remoteuser
-  tasks:
-  - name: Pull sql image
-    docker_image:
-      name: mysql:latest
-      pull: yes
-
-  - name: "Launch database container"
-    docker_container:
-      name: "docker-mysql"
-      image: mysql:latest
-      volumes:
-          - "/var/lib/mysql:rw"
-  restart: true
-  networks:
-    - name:
-        backend
-        frontend
 
   env:
     MYSQL_ROOT_PASSWORD: GOforkanchu@67!

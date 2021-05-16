@@ -71,7 +71,6 @@ public class PaintingRepoDetailsDaoImpl implements PaintingRepoDetailsDao{
            return null; //check what to return
        }
 
-
     }
 
     @Override

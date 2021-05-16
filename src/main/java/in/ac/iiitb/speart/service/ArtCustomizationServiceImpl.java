@@ -21,6 +21,11 @@ public class ArtCustomizationServiceImpl implements ArtCustomizationService{
     @Autowired
     ReqStatusDao reqStatusDao;
 
+    public ArtCustomizationServiceImpl(ReqStatusDao reqStatusDao, ArtCustomizationDao artCustomizationDao) {
+        this.artCustomizationDao = artCustomizationDao;
+        this.reqStatusDao = reqStatusDao;
+    }
+
     @Override
     public List<ArtCustomTrial> get(Integer artistId) {
         return artCustomizationDao.get(artistId);

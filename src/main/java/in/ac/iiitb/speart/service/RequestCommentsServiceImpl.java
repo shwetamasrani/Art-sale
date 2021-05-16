@@ -14,6 +14,10 @@ public class RequestCommentsServiceImpl implements RequestCommentsService{
     @Autowired
     RequestCommentsDao requestCommentsDao;
 
+    public RequestCommentsServiceImpl(RequestCommentsDao requestCommentsDao) {
+        this.requestCommentsDao = requestCommentsDao;
+    }
+
     @Override
     public List<ArtCustomizationCommentsTrial> getAllCommentsCustomID(Integer custom_id) {
         return requestCommentsDao.getAllCommentsCustomID(custom_id);
