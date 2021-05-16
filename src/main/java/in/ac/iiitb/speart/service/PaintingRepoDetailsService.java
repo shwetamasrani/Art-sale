@@ -36,4 +36,6 @@ public interface PaintingRepoDetailsService {
     PaintingRepoDetails getPaintingByPaintingID(Integer painting_id);
 
     List<PaintingRepoDetails> getAllBiddingConf(Integer bidder_conf_id);
+
+    List<Object> getAllBiddingsActive(Integer bidder_id);
 }

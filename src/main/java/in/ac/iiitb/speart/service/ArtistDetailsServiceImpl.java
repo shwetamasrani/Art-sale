@@ -1,7 +1,9 @@
 package in.ac.iiitb.speart.service;
 
 import in.ac.iiitb.speart.controller.ArtistDetailsController;
+import in.ac.iiitb.speart.dao.ArtCustomizationDao;
 import in.ac.iiitb.speart.dao.ArtistDetailsDao;
+import in.ac.iiitb.speart.dao.ReqStatusDao;
 import in.ac.iiitb.speart.dao.UserDetailsDao;
 import in.ac.iiitb.speart.model.ArtistDetails;
 import in.ac.iiitb.speart.model.PaintingRepoDetails;
@@ -28,6 +30,10 @@ public class ArtistDetailsServiceImpl implements ArtistDetailsService{
 
     @Autowired
     PaintingRepoDetailsService paintingRepoDetailsService;
+
+    public ArtistDetailsServiceImpl(ReqStatusDao reqStatusDao, ArtCustomizationDao artCustomizationDao) {
+    }
+
     @Transactional
     @Override
     public List<ArtistDetails> get() {

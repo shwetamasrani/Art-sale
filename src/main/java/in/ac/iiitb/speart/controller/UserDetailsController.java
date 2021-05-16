@@ -121,7 +121,7 @@ public class UserDetailsController {
            }
        }
        logger.error("User not found with details:"+ email+" and "+pass);
-       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
@@ -143,7 +143,7 @@ public class UserDetailsController {
 
         }
         logger.error("Couldn't logout the user with details:"+ email+" and "+pass);
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 

@@ -1,10 +1,12 @@
 package in.ac.iiitb.speart.controller;
 
 
+import in.ac.iiitb.speart.dao.RequestCommentsDao;
 import in.ac.iiitb.speart.model.*;
 import in.ac.iiitb.speart.service.RequestCommentsService;
 import in.ac.iiitb.speart.service.RequestCommentsServiceImpl;
 import org.junit.Before;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -19,6 +21,9 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+
 
 public class RequestCommentsControllerTest {
 
@@ -28,12 +33,12 @@ public class RequestCommentsControllerTest {
     private RequestCommentsService requestCommentsService;
 
 
+
     @BeforeMethod
     private void beforeMethod() {
         MockitoAnnotations.initMocks(this);
         this.requestCommentsController =
                 new RequestCommentsController(this.requestCommentsService);
-
 
     }
 
@@ -48,7 +53,7 @@ public class RequestCommentsControllerTest {
 
         final List<ArtCustomizationCommentsTrial> actual = requestCommentsController.getAllCommentsByCustomID(1);
 
-        Mockito.verify(this.requestCommentsService).getAllCommentsCustomID(1);
+        verify(this.requestCommentsService).getAllCommentsCustomID(1);
         Assert.assertEquals(actual, expected);
 
 
@@ -71,7 +76,7 @@ public class RequestCommentsControllerTest {
 
         final List<ArtCustomizationCommentsTrial> actual = requestCommentsController.getAllCommentsByCustomID(1);
 
-        Mockito.verify(this.requestCommentsService).getAllCommentsCustomID(1);
+        verify(this.requestCommentsService).getAllCommentsCustomID(1);
         Assert.assertNotEquals(actual, expected1);
 
 
@@ -99,30 +104,6 @@ public class RequestCommentsControllerTest {
         artistDetails.setCategory_taught("self");
         artistDetails.setType_of_art("landscape");
         return artistDetails;
-    }
-
-    @Test
-    public void happyTestPostReqController(){
-        List<ArtCustomizationCommentsTrial> expected = new ArrayList<>();
-        expected.add(this.getArtCustomizationCommentsTrial("Need it", 1));
-        expected.add(this.getArtCustomizationCommentsTrial("Need it", 2));
-        expected.add(this.getArtCustomizationCommentsTrial("Need it", 3));
-        expected.add(this.getArtCustomizationCommentsTrial("Need it", 4));
-        ArtCustomizationCommentsTrial artCustomizationCommentsTrial = new ArtCustomizationCommentsTrial();
-        artCustomizationCommentsTrial.setArtistDetails(getArtistDetails(6));
-        artCustomizationCommentsTrial.setComments("Artist 6 can do it.");
-        artCustomizationCommentsTrial.setArtCustomizationDetails(getArtCustomDetails());
-        artCustomizationCommentsTrial.setReqStatus(ReqStatus.PENDING);
-        artCustomizationCommentsTrial.setComments_id(80);
-        RequestCommentsAPI requestCommentsAPI = new RequestCommentsAPI();
-        requestCommentsAPI.setComments("Artist 6 can do it."); requestCommentsAPI.setStatus_custom_id(11);requestCommentsAPI.setStatus_artist_id(6);
-//        Mockito.when(this.requestCommentsService.saveCommentsByAnArtist(artCustomizationCommentsTrial.getComments(), 11, 6)).thenReturn(artCustomizationCommentsTrial);
-//
-//        ResponseEntity<ArtCustomizationCommentsTrial>(artCustomizationCommentsTrial, HttpStatus.ACCEPTED) = requestCommentsController.saveCommentsByArtist(requestCommentsAPI);
-//
-//        Mockito.verify(this.requestCommentsService).getAllCommentsCustomID(1);
-//        Assert.assertEquals(actual, expected);
-
     }
 
 
