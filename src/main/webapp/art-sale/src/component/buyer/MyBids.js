@@ -85,7 +85,7 @@ export default class MyBids extends Component {
         const Bids = this.state.bids.map((bid) => {
         return (
             <Fragment>
-            <h1>Your Purchases</h1>
+            
             <div className="paintbox" >
                     <div className="details">
 
@@ -120,7 +120,8 @@ export default class MyBids extends Component {
         const Purchases = this.state.purchases.map((bid) => {
             return (
                 <Fragment>
-                <h1>Current Bids</h1>  
+                    
+                
                 <div className="paintbox" >
                         <div className="details">
                                 <div>
@@ -146,13 +147,25 @@ export default class MyBids extends Component {
         return (
             <div>
                     
-                    <div className="container">
-                        {Purchases}
-                    </div>
-                      
+                    {this.state.bids.length == 0 ? null : (
+                        <div>
+                            <h1 style={{textAlign:"center"}}>Current Bids</h1>  
+                        </div>  
+                    )}  
+                    
                     <div className="container">
                         {Bids}
                     </div>
+
+                    {this.state.purchases.length == 0 ? null : (
+                        <div>
+                            <h1 style={{textAlign:"center"}}>Your Purchases</h1>  
+                        </div>  
+                    )}  
+                    <div className="container">
+                        {Purchases}
+                    </div>
+
             </div>
         )
         }

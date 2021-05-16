@@ -85,7 +85,7 @@ class CustomArt extends Component {
 
     render() {
         return(
-            <form>
+            <form onSubmit={this.handleClick}>
                 <h3>Request for a Customized Art piece</h3>
                 <div className="form-group">
                     <label className="firstLabel">Which type of Art do you want?</label>
@@ -121,10 +121,8 @@ class CustomArt extends Component {
                            className="form-control"
                            placeholder="Medium"
                            name="paper"
-                           required="True"
-                           value={this.state.paper}
-                           onChange={this.handleChange}
-                    />
+                           //value={this.state.paper}
+                           onChange={this.handleChange} required/>
                 </div>
 
                 <div className="form-group">
@@ -171,8 +169,7 @@ class CustomArt extends Component {
                            name="description"
                            required="True"
                            value={this.state.description}
-                           onChange={this.handleChange}
-                    />
+                           onChange={this.handleChange}/>
                 </div>
 
                 <div className="form-group">
@@ -180,16 +177,16 @@ class CustomArt extends Component {
                     <input type="file"
                            placeholder="Enter Image"
                            name="image"
-                           required
+                           required="True"
                            id="image"
                            accept="image/png, image/jpeg"
                            onChange={this.handleImage}
                     />
                 </div>
 
-                <button type="submit"
+                <button
                         className="btn btn-dark btn-lg btn-block"
-                        onClick={this.handleClick}
+                        //onClick={this.handleClick}
                 >Submit</button>
 
             </form>

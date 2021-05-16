@@ -79,6 +79,7 @@ class comment extends Component {
                         <p>Reference Image:</p>
                         <img src={"data:image/jpg;base64," + this.state.details.refimg} style={{width: '18rem'}}/>
                         <br></br>
+                        <form onSubmit={this.onClick}>
                         <label>Add your comment:</label>
                         <input type="text"
                             className="form-control"
@@ -89,10 +90,11 @@ class comment extends Component {
                             onChange={this.handleChange}
                         />
                         <button className="btn btn-dark btn-lg btn-block"
-                                onClick={this.onClick}
+                                // onClick={this.onClick}
                                >
                             <p>Post Comment</p>
                         </button>
+                        </form>
                     </div>
             </div>
         )

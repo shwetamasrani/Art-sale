@@ -35,6 +35,7 @@ class Dashboard extends Component {
                     bidEnd = {painting.bidding_end_date}
                     category = {painting.category}
                     highestBid = {painting.highest_price}
+                    history={this.props.history}
                 />
             )
         })

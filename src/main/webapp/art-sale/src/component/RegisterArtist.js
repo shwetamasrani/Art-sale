@@ -46,7 +46,7 @@ class RegisterArtist extends Component {
     render() {
         return(
             <div className="inner">
-            <form>
+            <form onSubmit={this.handleClick}>
                 <h3>Register Yourself as an Artist here</h3>
                     <div className="form-group">
                         <label>Are you a trained or self taught Artist?</label>
@@ -107,9 +107,10 @@ class RegisterArtist extends Component {
                         />
                     </div>
 
-                <button type="submit"
+                <button 
                         className="btn btn-dark btn-lg btn-block"
-                        onClick={this.handleClick}
+                        // onClick={this.handleClick}
+                        // type="submit"
                 >Register</button>
 
             </form>

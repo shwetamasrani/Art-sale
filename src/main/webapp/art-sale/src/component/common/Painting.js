@@ -56,7 +56,7 @@ class Painting extends Component {
         }).then(res=>{
             console.log(res.data);
             console.log(res.status)
-            //this.props.history.push({pathname:'/custom-art-request'});
+            this.props.history.push({pathname:'/my-bids'});
             
         }).catch(err=>{
             console.log(err);
@@ -87,7 +87,7 @@ class Painting extends Component {
 
                         {/* <div style={{display: this.state.bid === true ? "block" : "none"}}> */}
                         {this.state.bid && (
-                                <form>
+                                <form onSubmit={this.bid}>
                                     <div className="form-group">
                                         <label>Enter your bid price:</label>
                                         <input type="text"
@@ -102,9 +102,10 @@ class Painting extends Component {
                                             //onChange={this.handleChange}
                                         />
                                     </div>
-                                    <button type="submit"
+                                    <button 
                                             className="btn btn-dark btn-lg btn-block"
-                                            onClick={this.bid}
+                                            // onClick={this.bid}
+                                            // type="submit"
                                     >Submit</button>
                                 </form>
                             )}

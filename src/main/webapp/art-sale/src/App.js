@@ -49,19 +49,13 @@ class App extends React.Component {
                                 <Route exact path='/'>
                                     <Login/>
                                 </Route>
-                                <Route path="/sign-in" >
-                                    <Login/>
-                                </Route>
-                                <Route path="/sign-up">
-                                    <SignUp/>
-                                </Route>
-                                <Route path="/dashboard">
-                                    <Dashboard/>
-                                </Route>
+                                <Route path="/sign-in" component={Login}/>
+                                <Route path="/sign-up" component={SignUp}/>
+                                   
+                                <Route path="/dashboard" component={Dashboard}/>
                                 <Route path="/custom-art" component={CustomArt}/>
-                                <Route path="/register-artist">
-                                    <RegisterArtist/>
-                                </Route>
+                                <Route path="/register-artist" component={RegisterArtist}/>
+                                    
                                 <Route path="/profile">
                                     <Profile/>
                                 </Route>

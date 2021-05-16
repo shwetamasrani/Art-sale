@@ -73,23 +73,31 @@ const Navbar=() => {
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/dashboard'>Dashboard</Link>
                                     </li>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to='/custom-art'>CustomArt</Link>
-                                    </li>
+                                    
 
                                     {!isArtist && (
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to='/register-artist'>Register Artist</Link>
-                                    </li>
+                                        <Fragment> 
+                                            <li className="nav-item">
+                                                <Link className="nav-link" to='/custom-art'>Custom Art Request</Link>
+                                            </li>
+
+                                            <li className="nav-item">
+                                                <Link className="nav-link" to='/register-artist'>Register Artist</Link>
+                                            </li>
+
+                                            <li className="nav-item">
+                                                <Link className="nav-link" to='/custom-art-request'>My Custom Art Requests</Link>
+                                            </li>
+                                        </Fragment>
                                     )}
 
                                     <li className="nav-item">
                                         <Link className="nav-link" to='/my-bids'>My Bids</Link>
                                     </li>
 
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <Link className="nav-link" to='/profile'>Profile</Link>
-                                    </li>
+                                    </li> */}
 
                                     {isArtist && (
                                         <li className="nav-item">
@@ -97,9 +105,7 @@ const Navbar=() => {
                                         </li>
                                      )}
                                     
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to='/custom-art-request'>My Custom Art Requests</Link>
-                                    </li>
+                                    
                                     <li>
                                         <button onClick={logoutHandler}>Logout</button>
                                     </li>

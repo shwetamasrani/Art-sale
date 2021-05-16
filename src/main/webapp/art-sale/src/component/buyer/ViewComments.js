@@ -10,7 +10,8 @@ export default class ViewComments extends Component {
         {
             details: this.props.location.details,
             user_id: JSON.parse(localStorage.getItem('token')).user_id,
-            comments: []
+            comments: [],
+            noComment: false
         }
 
         console.log("From comment",this.state.details)
@@ -27,7 +28,13 @@ export default class ViewComments extends Component {
         await axios.get("http://localhost:8090/artistComments/getCommentsByCustomID/"+this.state.details.custom_id)
         .then(res=>{
             console.log(res.data);
-            console.log(res.status)
+            if(res.data.length == 0)
+            {
+                this.setState({
+                    noComment: true
+                })
+            }
+            console.log(res.data.length)
             this.setState({
                 comments: res.data
             })
@@ -42,6 +49,9 @@ export default class ViewComments extends Component {
         const AllComments = this.state.comments.map((comment) => {
             return (
                <Fragment>
+                   
+                   
+
                   <ApproveComment
                         key={comment.comments_id}
                         comments_id={comment.comments_id}
@@ -55,9 +65,17 @@ export default class ViewComments extends Component {
             )
         })
         return (
+            <Fragment>
+            {console.log(this.state.noComment)}
+                   {this.state.noComment && (
+                       <div>
+                            <h1>No Comments Yet!</h1>
+                        </div>
+                   )}
             <div className="commentContainer"> 
                {AllComments}      
             </div>
+            </Fragment>
         )
     }
 }
