@@ -68,7 +68,7 @@ const Login = (props) => {
     return (
         <div className="inner">
             {/* <Navbar/> */}
-            <form>
+            <form onSubmit={handleClick}>
 
                 <h3>Log in</h3>
 
@@ -97,9 +97,9 @@ const Login = (props) => {
                         // onChange={handleChange}
                     />
                 </div>
-                <h3 style={{display: errorMessage ? "block" : "none"}}>Incorrect
+                {/* <h3 style={{display: errorMessage ? "block" : "none"}}>Incorrect
                     Username/Password</h3>
-                <br/>
+                <br/> */}
                 {/*<div className="form-group">
                         <div className="custom-control custom-checkbox">
                             <input type="checkbox" className="custom-control-input" id="customCheck1" />
@@ -109,7 +109,7 @@ const Login = (props) => {
 
                 <button type="submit"
                         className="btn btn-dark btn-lg btn-block"
-                        onClick={handleClick}
+                        
                 >Sign in</button>
                 <p className="forgot-password text-right">
                     Forgot <a href="#">password?</a>

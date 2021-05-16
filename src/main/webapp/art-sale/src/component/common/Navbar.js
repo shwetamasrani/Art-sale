@@ -107,7 +107,7 @@ const Navbar=() => {
                                     
                                     
                                     <li>
-                                        <button onClick={logoutHandler}>Logout</button>
+                                        <li className="nav-item nav-link" onClick={logoutHandler}>Logout</li>
                                     </li>
                                 </Fragment>
                             )}

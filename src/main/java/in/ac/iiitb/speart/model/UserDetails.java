@@ -34,7 +34,7 @@ public class UserDetails implements Serializable {
     @Column
     private String password;
     @Column
-    private Integer contact_no;
+    private String contact_no;
     @Column
     private String address;
     @Column
@@ -56,7 +56,7 @@ public class UserDetails implements Serializable {
     }
 
     public UserDetails(String first_name, String last_name, String email_address,
-                       String password, Integer contact_no, String address, String user_category) {
+                       String password, String contact_no, String address, String user_category) {
 //        this.user_id = user_id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -122,11 +122,11 @@ public class UserDetails implements Serializable {
         this.password = password;
     }
 
-    public Integer getContact_no() {
+    public String getContact_no() {
         return contact_no;
     }
 
-    public void setContact_no(Integer contact_no) {
+    public void setContact_no(String contact_no) {
         this.contact_no = contact_no;
     }
 

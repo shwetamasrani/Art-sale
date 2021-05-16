@@ -100,7 +100,7 @@ class SignUp extends Component {
         return (
             <div className="inner">
                 {/* <Navbar/> */}
-                <form>
+                <form onSubmit={this.saveUser}>
                     <h3>Register</h3>
                     <div className="form-group">
                         <label className="firstLabel">Do you want a Artist account?  </label>
@@ -158,6 +158,8 @@ class SignUp extends Component {
                                name="password"
                                required="True"
                                value={this.state.password}
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                onChange={this.handleChange}
                         />
                     </div>
@@ -265,9 +267,10 @@ class SignUp extends Component {
                     </div>
 
 
-                    <button type="submit"
+                    <button 
                             className="btn btn-dark btn-lg btn-block"
-                            onClick={this.saveUser}
+                            // onClick={this.saveUser}
+                            // type="submit"
                     >Register</button>
                     <p className="forgot-password text-right">
                         Already registered <a href="#">log in?</a>

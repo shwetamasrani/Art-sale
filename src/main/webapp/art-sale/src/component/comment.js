@@ -28,6 +28,7 @@ class comment extends Component {
     }
 
     async onClick(e) {
+        e.preventDefault();
 
         this.setState({
             email: JSON.parse(localStorage.getItem('token')).email_address
@@ -69,7 +70,9 @@ class comment extends Component {
             <div>
                  
                  <div className="details">
+                 <div className="form-group">
                         <p>Customer Name:{this.state.details.buyer}</p>
+                    </div>
                         <p>Type of Art: {this.state.details.type}</p>
                         <p>Meduim of Paper: {this.state.details.paper}</p>
                         <p>Number of Art Piece: {this.state.details.quant}</p>

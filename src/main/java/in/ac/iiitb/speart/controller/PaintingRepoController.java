@@ -128,12 +128,7 @@ public class PaintingRepoController {
     }
 
     @RequestMapping(value = "/getAllBiddings/{bidder_id}", method = RequestMethod.GET)
-    public List<Object> getAllBiddingsActive(@PathVariable Integer bidder_id){
-        return paintingRepoDetailsService.getAllBiddingsActive(bidder_id);
-    }
-
-    @RequestMapping(value = "/getAllBiddings/{bidder_id}", method = RequestMethod.GET)
-    public List<Object> getAllBiddingsActive(@PathVariable Integer bidder_id){
+    public List<Object> getAllBiddingsActive(@PathVariable Integer bidder_id) {
         return paintingRepoDetailsService.getAllBiddingsActive(bidder_id);
     }
 

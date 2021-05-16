@@ -10,7 +10,7 @@ public class UserArtistAPI {
 
     private String password;
 
-    private Integer contact_no;
+    private String contact_no;
 
     private String address;
 
@@ -68,11 +68,11 @@ public class UserArtistAPI {
         this.password = password;
     }
 
-    public Integer getContact_no() {
+    public String getContact_no() {
         return contact_no;
     }
 
-    public void setContact_no(Integer contact_no) {
+    public void setContact_no(String contact_no) {
         this.contact_no = contact_no;
     }
 

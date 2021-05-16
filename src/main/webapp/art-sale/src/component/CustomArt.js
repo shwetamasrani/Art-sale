@@ -85,6 +85,7 @@ class CustomArt extends Component {
 
     render() {
         return(
+            <div className="inner">
             <form onSubmit={this.handleClick}>
                 <h3>Request for a Customized Art piece</h3>
                 <div className="form-group">
@@ -190,6 +191,7 @@ class CustomArt extends Component {
                 >Submit</button>
 
             </form>
+            </div>
         );
     }
 }

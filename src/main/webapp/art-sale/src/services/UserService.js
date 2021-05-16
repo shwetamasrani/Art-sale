@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-// const USER_API_BASE_URL="http://localhost:8095/"
-axios.defaults.baseURL = "http://localhost:8099"
+const USER_API_BASE_URL="http://localhost:8090/"
+// axios.defaults.baseURL = "http://localhost:8090"
 class UserService{
 
     getUser(user)
     {
-        return axios.post("/addUser/login",user);
+        return axios.post(USER_API_BASE_URL+"/addUser/login",user,{headers:{
+            headers: {'Content-Type': 'application/json'}
+        }});
         // {headers: {
             //     Accept: 'application/json',
             //         'Content-Type': 'application/json',
@@ -18,7 +20,9 @@ class UserService{
     createUser(user)
     {
         console.log(user);
-        return axios.post('/addUser/userDetails',user);
+        return axios.post('/addUser/userDetails',user,{headers:{
+            headers: {'Content-Type': 'application/json'}
+        }});
     }
 
     saveImage(artist){
